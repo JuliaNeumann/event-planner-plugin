@@ -1,23 +1,23 @@
 <template>
-  <div id="epp_app">
-    <EditTable/>
+  <div id="epp_app_static">
+    <StaticTable/>
   </div>
 </template>
 
 <script>
-import EditTable from './components/EditTable.vue'
+import StaticTable from './components/StaticTable.vue'
 import "./assets/css/general_styles.css"
 
 export default {
   name: 'app',
   components: {
-    EditTable
+    StaticTable
   }
 }
 </script>
 
 <style>
-#epp_app {
+#epp_app_static {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

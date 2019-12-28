@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace Epp;
 
 /**
  * Admin Pages Handler
@@ -46,8 +46,8 @@ class Admin {
      * @return void
      */
     public function enqueue_scripts() {
-        wp_enqueue_style( 'baseplugin-admin' );
-        wp_enqueue_script( 'baseplugin-admin' );
+        wp_enqueue_style( 'eventplanner-admin' );
+        wp_enqueue_script( 'eventplanner-admin' );
     }
 
     /**

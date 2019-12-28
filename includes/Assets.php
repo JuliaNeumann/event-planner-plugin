@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace Epp;
 
 /**
  * Scripts and Styles Class
@@ -36,7 +36,7 @@ class Assets {
         foreach ( $scripts as $handle => $script ) {
             $deps      = isset( $script['deps'] ) ? $script['deps'] : false;
             $in_footer = isset( $script['in_footer'] ) ? $script['in_footer'] : false;
-            $version   = isset( $script['version'] ) ? $script['version'] : BASEPLUGIN_VERSION;
+            $version   = isset( $script['version'] ) ? $script['version'] : EVENTPLANNER_VERSION;
 
             wp_register_script( $handle, $script['src'], $deps, $version, $in_footer );
         }
@@ -53,7 +53,7 @@ class Assets {
         foreach ( $styles as $handle => $style ) {
             $deps = isset( $style['deps'] ) ? $style['deps'] : false;
 
-            wp_register_style( $handle, $style['src'], $deps, BASEPLUGIN_VERSION );
+            wp_register_style( $handle, $style['src'], $deps, EVENTPLANNER_VERSION );
         }
     }
 
@@ -66,26 +66,26 @@ class Assets {
         $prefix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.min' : '';
 
         $scripts = [
-            'baseplugin-runtime' => [
-                'src'       => BASEPLUGIN_ASSETS . '/js/runtime.js',
-                'version'   => filemtime( BASEPLUGIN_PATH . '/assets/js/runtime.js' ),
+            'eventplanner-runtime' => [
+                'src'       => EVENTPLANNER_ASSETS . '/js/runtime.js',
+                'version'   => filemtime( EVENTPLANNER_PATH . '/assets/js/runtime.js' ),
                 'in_footer' => true
             ],
-            'baseplugin-vendor' => [
-                'src'       => BASEPLUGIN_ASSETS . '/js/vendors.js',
-                'version'   => filemtime( BASEPLUGIN_PATH . '/assets/js/vendors.js' ),
+            'eventplanner-vendor' => [
+                'src'       => EVENTPLANNER_ASSETS . '/js/vendors.js',
+                'version'   => filemtime( EVENTPLANNER_PATH . '/assets/js/vendors.js' ),
                 'in_footer' => true
             ],
-            'baseplugin-frontend' => [
-                'src'       => BASEPLUGIN_ASSETS . '/js/frontend.js',
-                'deps'      => [ 'jquery', 'baseplugin-vendor', 'baseplugin-runtime' ],
-                'version'   => filemtime( BASEPLUGIN_PATH . '/assets/js/frontend.js' ),
+            'eventplanner-frontend' => [
+                'src'       => EVENTPLANNER_ASSETS . '/js/frontend.js',
+                'deps'      => [ 'jquery', 'eventplanner-vendor', 'eventplanner-runtime' ],
+                'version'   => filemtime( EVENTPLANNER_PATH . '/assets/js/frontend.js' ),
                 'in_footer' => true
             ],
-            'baseplugin-admin' => [
-                'src'       => BASEPLUGIN_ASSETS . '/js/admin.js',
-                'deps'      => [ 'jquery', 'baseplugin-vendor', 'baseplugin-runtime' ],
-                'version'   => filemtime( BASEPLUGIN_PATH . '/assets/js/admin.js' ),
+            'eventplanner-admin' => [
+                'src'       => EVENTPLANNER_ASSETS . '/js/admin.js',
+                'deps'      => [ 'jquery', 'eventplanner-vendor', 'eventplanner-runtime' ],
+                'version'   => filemtime( EVENTPLANNER_PATH . '/assets/js/admin.js' ),
                 'in_footer' => true
             ]
         ];
@@ -101,14 +101,14 @@ class Assets {
     public function get_styles() {
 
         $styles = [
-            'baseplugin-style' => [
-                'src' =>  BASEPLUGIN_ASSETS . '/css/style.css'
+            'eventplanner-style' => [
+                'src' =>  EVENTPLANNER_ASSETS . '/css/style.css'
             ],
-            'baseplugin-frontend' => [
-                'src' =>  BASEPLUGIN_ASSETS . '/css/frontend.css'
+            'eventplanner-frontend' => [
+                'src' =>  EVENTPLANNER_ASSETS . '/css/frontend.css'
             ],
-            'baseplugin-admin' => [
-                'src' =>  BASEPLUGIN_ASSETS . '/css/admin.css'
+            'eventplanner-admin' => [
+                'src' =>  EVENTPLANNER_ASSETS . '/css/admin.css'
             ],
         ];
 

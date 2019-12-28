@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace Epp;
 
 use WP_REST_Controller;
 

@@ -1,7 +1,7 @@
 <template>
   <div id="vue-backend-app">
     <h1>Backend App</h1>
-
+    hello Vue
     <router-view />
   </div>
 </template>

@@ -8,7 +8,7 @@ Author: Your Name
 Author URI: https://example.com/
 License: GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: baseplugin
+Text Domain: eventplanner
 Domain Path: /languages
 */
 
@@ -42,11 +42,11 @@ Domain Path: /languages
 if ( !defined( 'ABSPATH' ) ) exit;
 
 /**
- * Base_Plugin class
+ * Event_Planner class
  *
- * @class Base_Plugin The class that holds the entire Base_Plugin plugin
+ * @class Event_Planner The class that holds the entire Event_Planner plugin
  */
-final class Base_Plugin {
+final class Event_Planner {
 
     /**
      * Plugin version
@@ -63,7 +63,7 @@ final class Base_Plugin {
     private $container = array();
 
     /**
-     * Constructor for the Base_Plugin class
+     * Constructor for the Event_Planner class
      *
      * Sets up all the appropriate hooks and actions
      * within our plugin.
@@ -79,16 +79,16 @@ final class Base_Plugin {
     }
 
     /**
-     * Initializes the Base_Plugin() class
+     * Initializes the Event_Planner() class
      *
-     * Checks for an existing Base_Plugin() instance
+     * Checks for an existing Event_Planner() instance
      * and if it doesn't find one, creates it.
      */
     public static function init() {
         static $instance = false;
 
         if ( ! $instance ) {
-            $instance = new Base_Plugin();
+            $instance = new Event_Planner();
         }
 
         return $instance;
@@ -126,12 +126,12 @@ final class Base_Plugin {
      * @return void
      */
     public function define_constants() {
-        define( 'BASEPLUGIN_VERSION', $this->version );
-        define( 'BASEPLUGIN_FILE', __FILE__ );
-        define( 'BASEPLUGIN_PATH', dirname( BASEPLUGIN_FILE ) );
-        define( 'BASEPLUGIN_INCLUDES', BASEPLUGIN_PATH . '/includes' );
-        define( 'BASEPLUGIN_URL', plugins_url( '', BASEPLUGIN_FILE ) );
-        define( 'BASEPLUGIN_ASSETS', BASEPLUGIN_URL . '/assets' );
+        define( 'EVENTPLANNER_VERSION', $this->version );
+        define( 'EVENTPLANNER_FILE', __FILE__ );
+        define( 'EVENTPLANNER_PATH', dirname( EVENTPLANNER_FILE ) );
+        define( 'EVENTPLANNER_INCLUDES', EVENTPLANNER_PATH . '/includes' );
+        define( 'EVENTPLANNER_URL', plugins_url( '', EVENTPLANNER_FILE ) );
+        define( 'EVENTPLANNER_ASSETS', EVENTPLANNER_URL . '/assets' );
     }
 
     /**
@@ -151,13 +151,13 @@ final class Base_Plugin {
      */
     public function activate() {
 
-        $installed = get_option( 'baseplugin_installed' );
+        $installed = get_option( 'eventplanner_installed' );
 
         if ( ! $installed ) {
-            update_option( 'baseplugin_installed', time() );
+            update_option( 'eventplanner_installed', time() );
         }
 
-        update_option( 'baseplugin_version', BASEPLUGIN_VERSION );
+        update_option( 'eventplanner_version', EVENTPLANNER_VERSION );
     }
 
     /**
@@ -176,21 +176,21 @@ final class Base_Plugin {
      */
     public function includes() {
 
-        require_once BASEPLUGIN_INCLUDES . '/Assets.php';
+        require_once EVENTPLANNER_INCLUDES . '/Assets.php';
 
         if ( $this->is_request( 'admin' ) ) {
-            require_once BASEPLUGIN_INCLUDES . '/Admin.php';
+            require_once EVENTPLANNER_INCLUDES . '/Admin.php';
         }
 
         if ( $this->is_request( 'frontend' ) ) {
-            require_once BASEPLUGIN_INCLUDES . '/Frontend.php';
+            require_once EVENTPLANNER_INCLUDES . '/Frontend.php';
         }
 
         if ( $this->is_request( 'ajax' ) ) {
-            // require_once BASEPLUGIN_INCLUDES . '/class-ajax.php';
+            // require_once EVENTPLANNER_INCLUDES . '/class-ajax.php';
         }
 
-        require_once BASEPLUGIN_INCLUDES . '/Api.php';
+        require_once EVENTPLANNER_INCLUDES . '/Api.php';
     }
 
     /**
@@ -214,19 +214,19 @@ final class Base_Plugin {
     public function init_classes() {
 
         if ( $this->is_request( 'admin' ) ) {
-            $this->container['admin'] = new App\Admin();
+            $this->container['admin'] = new Epp\Admin();
         }
 
         if ( $this->is_request( 'frontend' ) ) {
-            $this->container['frontend'] = new App\Frontend();
+            $this->container['frontend'] = new Epp\Frontend();
         }
 
         if ( $this->is_request( 'ajax' ) ) {
-            // $this->container['ajax'] =  new App\Ajax();
+            // $this->container['ajax'] =  new Epp\Ajax();
         }
 
-        $this->container['api'] = new App\Api();
-        $this->container['assets'] = new App\Assets();
+        $this->container['api'] = new Epp\Api();
+        $this->container['assets'] = new Epp\Assets();
     }
 
     /**
@@ -235,7 +235,7 @@ final class Base_Plugin {
      * @uses load_plugin_textdomain()
      */
     public function localization_setup() {
-        load_plugin_textdomain( 'baseplugin', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+        load_plugin_textdomain( 'eventplanner', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
     }
 
     /**
@@ -264,6 +264,6 @@ final class Base_Plugin {
         }
     }
 
-} // Base_Plugin
+} // Event_Planner
 
-$baseplugin = Base_Plugin::init();
+$eventplanner = Event_Planner::init();
