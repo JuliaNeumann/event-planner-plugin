@@ -13,7 +13,6 @@ class Api extends WP_REST_Controller {
      */
     public function __construct() {
         $this->includes();
-
         add_action( 'rest_api_init', [ $this, 'register_routes' ] );
     }
 
@@ -23,8 +22,8 @@ class Api extends WP_REST_Controller {
      * @return void
      */
     private function includes() {
-        if ( !class_exists( __NAMESPACE__ . '\Api\Example'  ) ) {
-            require_once __DIR__ . '/Api/Example.php';
+        if ( !class_exists( __NAMESPACE__ . '\Api\Frontend'  ) ) {
+            require_once __DIR__ . '/Api/Frontend.php';
         }
     }
 
@@ -34,7 +33,7 @@ class Api extends WP_REST_Controller {
      * @return void
      */
     public function register_routes() {
-        (new Api\Example())->register_routes();
+        (new Api\Frontend())->register_routes();
     }
 
 }
