@@ -1,45 +1,17 @@
-# Vue.js WordPress Starter
+# WordPress plugin for planning events
 
-A WordPress [Vue.js](https://vuejs.org/) starter plugin with required toolbelts 😎
+A WordPress plugin that allows you to create a frontend-editable table for event planning, aimed at churches to plan their services.
 
-## 📦 What it ships with?
+## Installation
+Download this repository as a zip and copy the unzipped folder to the plugins directory of your WordPress site.
+This plugin uses icons provided by FontAwesome and relies on the site to provide those, so if your theme does not contain FontAwesome, you need to install a plugin (e.g. https://de.wordpress.org/plugins/better-font-awesome/).
 
- - Pre-configured webpack config
-   - Babel loader, Vue loader, CSS and LESS loader
-   - Separate `vendor.js` with all vendor scripts
-   - Uglify JS for production
-   - Separate `frontend.js` and `admin.js`
-   - Extracted CSS/LESS to separate `frontend.css` and `admin.css` files.
-   - Auto reloading with Browser with **Browsersync** *([config](config.json))*
- - [Vue](https://vuejs.org/) and [Vue Router](https://router.vuejs.org/en/)
- - Frontend (shortcode) and Backend starter app
- - Modern PHP codebase with [namespace](http://php.net/manual/en/language.namespaces.php) support
-
-
-## 🚚 Running
-
-1. Clone this repository in your plugins folder
-1. Activate the plugin
-
-## 👨‍💻 Post Installation
-
-1. The name of the plugin class is `Base_Plugin`, change the class name with your desired class name.
-1. Replace the PHP namespace `App` with your desired name.
-1. Replace `baseplugin` or `BASEPLUGIN` reference in files.
+## Development
 1. Run `npm install`
-1. To start developing, run `npm run dev` 🤘
-1. For production build, run `npm run build` 👍
+2. To start developing, run `npm run dev` 🤘
+3. For production build, run `npm run build` 👍
 
-## 🎁 Preview
 
-![screenshot](http://tareq.in/owiyZI+)
+## Built with
 
-## ⛑ Extra Goodies
-
- 1. [Vue List Table Component](https://github.com/tareq1988/vue-wp-list-table-component) - Helps you to build WordPress list tables easily.
-
-## About
-
-Made by [Tareq Hasan](https://github.com/tareq1988) from [weDevs](https://wedevs.com).
-
-*Found anything that can be improved? You are welcome to contribute.*
+[Vue.js](https://vuejs.org/) and the [WordPress Vue.js starter plugin](https://github.com/tareq1988/vue-wp-starter) by [Tareq Hasan](https://github.com/tareq1988).

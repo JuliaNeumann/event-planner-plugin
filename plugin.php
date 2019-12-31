@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: Vue Starter Plugin
-Plugin URI: https://example.com/
-Description: A WordPress Vue.js starter plugin
-Version: 0.1
-Author: Your Name
-Author URI: https://example.com/
+Plugin Name: Event Planner Plugin
+Plugin URI: https://github.com/JuliaNeumann/event-planner-plugin
+Description: A WordPress plugin for planning events
+Version: 0.1.0
+Author: Julia Neumann
+Author URI: https://github.com/JuliaNeumann
 License: GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: eventplanner
@@ -13,7 +13,7 @@ Domain Path: /languages
 */
 
 /**
- * Copyright (c) YEAR Your Name (email: Email). All rights reserved.
+ * Copyright (c) 2019 Julia Neumann. All rights reserved.
  *
  * Released under the GPL license
  * http://www.opensource.org/licenses/gpl-license.php
