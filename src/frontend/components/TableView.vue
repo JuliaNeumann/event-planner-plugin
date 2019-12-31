@@ -4,9 +4,8 @@
         <table class="table">
             <tbody>
             <template v-for="(head, index) in activeHeads">
-                <tr class="row" :key="`group_head_${index}`">
-                  <TableGroupHeader v-if="startGroup(index)"
-                                    :text="groups[head.group_id]"
+                <tr class="row" v-if="startGroup(index)" :key="`group_head_${index}`">
+                  <TableGroupHeader :text="groups[head.group_id]"
                                     :open="activeGroups.indexOf(head.group_id) > -1"
                                     :cols="paginate ? rowsPerPage + 1 : 2"
                                     @click.native="toggleGroup(head.group_id)"/>
