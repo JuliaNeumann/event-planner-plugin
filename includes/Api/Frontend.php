@@ -96,8 +96,7 @@ class Frontend extends WP_REST_Controller {
      * API ACCESS PERMISSION CHECKS
      ****************************************************************************************/
     public function check_permission() {
-        return true;
-        // return current_user_can( 'read' );
+        return current_user_can( 'read' );
     }
     
     public function check_admin() {

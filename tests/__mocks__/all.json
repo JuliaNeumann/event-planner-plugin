@@ -1,0 +1,604 @@
+{
+  "headers": [
+    {
+      "id": "1",
+      "name": "Datum",
+      "order_id": "1",
+      "type": "date",
+      "group_id": null,
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "2",
+      "name": "Besonderes",
+      "order_id": "2",
+      "type": "icons",
+      "group_id": null,
+      "description": null,
+      "additional": "[{\"name\":\"Familiengottesdienst\",\"icon\":\"child\"},{\"name\":\"In diesem Gottesdienst feiern wir zusammen Abendmahl\",\"icon\":\"trophy\"},{\"name\":\"Gemeindecaf\u00e9 im Anschluss\",\"icon\":\"coffee\"},{\"name\":\"F\u00e4llt aus\",\"icon\":\"ban\"}]"
+    },
+    {
+      "id": "3",
+      "name": "Moderator",
+      "order_id": "3",
+      "type": "text",
+      "group_id": null,
+      "description": "Der Moderator muss alle wichtigen Informationen zum Ablauf des Gottesdienstes vorher erhalten.",
+      "additional": null
+    },
+    {
+      "id": "4",
+      "name": "Prediger",
+      "order_id": "4",
+      "type": "text",
+      "group_id": null,
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "5",
+      "name": "Predigtthema",
+      "order_id": "5",
+      "type": "text",
+      "group_id": null,
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "6",
+      "name": "Techniker",
+      "order_id": "6",
+      "type": "text",
+      "group_id": null,
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "7",
+      "name": "Beamer",
+      "order_id": "7",
+      "type": "text",
+      "group_id": null,
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "8",
+      "name": "Kindergottesdienst",
+      "order_id": "8",
+      "type": "text",
+      "group_id": null,
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "9",
+      "name": "Musiker",
+      "order_id": "9",
+      "type": "longtext",
+      "group_id": null,
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "10",
+      "name": "Musikverantwortlicher",
+      "order_id": "10",
+      "type": "text",
+      "group_id": null,
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "11",
+      "name": "Instrumente & Mikrofone",
+      "order_id": "11",
+      "type": "longtext",
+      "group_id": "1",
+      "description": "Bitte f\u00fcr die Technik angeben - welche Instrumente werden gespielt, welche Mikros gebraucht.",
+      "additional": null
+    },
+    {
+      "id": "12",
+      "name": "Intro-Lied",
+      "order_id": "12",
+      "type": "text",
+      "group_id": "1",
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "13",
+      "name": "Lobpreisteil",
+      "order_id": "13",
+      "type": "longtext",
+      "group_id": "1",
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "14",
+      "name": "Predigt-Lied",
+      "order_id": "14",
+      "type": "text",
+      "group_id": "1",
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "15",
+      "name": "Dankopfer-Lied",
+      "order_id": "15",
+      "type": "text",
+      "group_id": "1",
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "16",
+      "name": "Outro-Lied",
+      "order_id": "16",
+      "type": "text",
+      "group_id": "1",
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "17",
+      "name": "Sonstige Lieder",
+      "order_id": "17",
+      "type": "longtext",
+      "group_id": "1",
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "18",
+      "name": "Probentermin",
+      "order_id": "18",
+      "type": "text",
+      "group_id": "1",
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "19",
+      "name": "Anmerkungen",
+      "order_id": "19",
+      "type": "longtext",
+      "group_id": null,
+      "description": null,
+      "additional": null
+    },
+    {
+      "id": "20",
+      "name": "Caf\u00e9-Team",
+      "order_id": "20",
+      "type": "text",
+      "group_id": null,
+      "description": null,
+      "additional": null
+    }
+  ],
+  "header_groups": [{ "id": "1", "name": "Musik" }],
+  "header_footnotes": [
+    {
+      "id": "1",
+      "header_id": "3",
+      "text": "Moderator, Prediger, Techniker und Beamer sind (hoffentlich) immer vorgetragen."
+    },
+    {
+      "id": "2",
+      "header_id": "3",
+      "text": "Der Moderator ist f\u00fcr den ganzen Gottesdienst verantwortlich - bei Fragen an ihn wenden."
+    },
+    {
+      "id": "3",
+      "header_id": "3",
+      "text": "Kontaktdaten des Moderators und Predigers sind aus dem Dokument \u201cMitarbeiter Gottesdienst\u201d zu entnehmen."
+    },
+    {
+      "id": "4",
+      "header_id": "9",
+      "text": "Musiker und Musikverantwortliche sollen zwei Monate vor dem Gottesdienst feststehen (Ende M\u00e4rz: bis Ende Mai, Mitte Mai: bis Mitte Juli)."
+    },
+    {
+      "id": "5",
+      "header_id": "9",
+      "text": "Es ist \u00fcberhaupt nicht schlimm, wenn man einmal doch nicht kann! Aber in diesem Falle ist die Person selbst f\u00fcr Ersatz verantwortlich!"
+    },
+    {
+      "id": "6",
+      "header_id": "10",
+      "text": "Der Musikverantwortliche hat folgende Aufgaben: Ansprechpartner f\u00fcr die Musik vor dem Godi, Musikteam zusammen suchen, Liederauswahl, Probentermin finden, Probenleitung, Musikleitung im Gottesdienst, Lieder/Ablauf an Tontechnik/Beamer schicken."
+    },
+    {
+      "id": "7",
+      "header_id": "10",
+      "text": "Der Musikverantwortliche darf die Aufgaben sehr gern verteilen!"
+    },
+    {
+      "id": "8",
+      "header_id": "12",
+      "text": "Hier und in den folgenden Feldern werden alle Lieder, die an diesem Sonntag gesungen werden so kurz wie m\u00f6glich eingetragen um Dopplungen zu vermeiden."
+    },
+    {
+      "id": "9",
+      "header_id": "12",
+      "text": "Die Liederauswahl ist bitte, bis sp\u00e4testens Samstag vor dem Gottesdienst 17 Uhr, an die Ton-/Bildtechnik weiterzugeben!"
+    },
+    {
+      "id": "10",
+      "header_id": "19",
+      "text": "Hier werden Dinge, wie besondere Uhrzeiten, besondere R\u00e4umlichkeiten, \"Adventsfeier\", etc. \u2026 vermerkt sein."
+    }
+  ],
+  "events": [
+    { "id": "1", "fields": { "1": "2019-01-06" } },
+    { "id": "2", "fields": { "1": "2019-01-13" } },
+    { "id": "3", "fields": { "1": "2019-01-20" } },
+    { "id": "4", "fields": { "1": "2019-01-27" } },
+    { "id": "5", "fields": { "1": "2019-02-03" } },
+    { "id": "6", "fields": { "1": "2019-02-10" } },
+    { "id": "7", "fields": { "1": "2019-02-17" } },
+    { "id": "8", "fields": { "1": "2019-02-24" } },
+    { "id": "9", "fields": { "1": "2019-03-03" } },
+    { "id": "10", "fields": { "1": "2019-03-10" } },
+    { "id": "11", "fields": { "1": "2019-03-17" } },
+    { "id": "12", "fields": { "1": "2019-03-24" } },
+    { "id": "13", "fields": { "1": "2019-03-31" } },
+    { "id": "14", "fields": { "1": "2019-04-07" } },
+    { "id": "15", "fields": { "1": "2019-04-14" } },
+    { "id": "16", "fields": { "1": "2019-04-21" } },
+    { "id": "17", "fields": { "1": "2019-04-28" } },
+    { "id": "18", "fields": { "1": "2019-05-05" } },
+    { "id": "19", "fields": { "1": "2019-05-12" } },
+    { "id": "20", "fields": { "1": "2019-05-19" } },
+    { "id": "21", "fields": { "1": "2019-05-26" } },
+    { "id": "22", "fields": { "1": "2019-06-02" } },
+    { "id": "23", "fields": { "1": "2019-06-09" } },
+    { "id": "24", "fields": { "1": "2019-06-16" } },
+    { "id": "25", "fields": { "1": "2019-06-23" } },
+    { "id": "26", "fields": { "1": "2019-06-30" } },
+    { "id": "27", "fields": { "1": "2019-07-07" } },
+    { "id": "28", "fields": { "1": "2019-07-14" } },
+    { "id": "29", "fields": { "1": "2019-07-21" } },
+    { "id": "30", "fields": { "1": "2019-07-28" } },
+    { "id": "31", "fields": { "1": "2019-08-04" } },
+    { "id": "32", "fields": { "1": "2019-08-11" } },
+    { "id": "33", "fields": { "1": "2019-08-18" } },
+    { "id": "34", "fields": { "1": "2019-08-25" } },
+    { "id": "35", "fields": { "1": "2019-09-01" } },
+    { "id": "36", "fields": { "1": "2019-09-08" } },
+    { "id": "37", "fields": { "1": "2019-09-15" } },
+    { "id": "38", "fields": { "1": "2019-09-22" } },
+    { "id": "39", "fields": { "1": "2019-09-29" } },
+    { "id": "40", "fields": { "1": "2019-10-06" } },
+    { "id": "41", "fields": { "1": "2019-10-13" } },
+    { "id": "42", "fields": { "1": "2019-10-20" } },
+    { "id": "43", "fields": { "1": "2019-10-27" } },
+    {
+      "id": "44",
+      "fields": {
+        "1": "2019-11-03",
+        "2": "[\"trophy\"]",
+        "3": "John Doe",
+        "4": "Jane Doe",
+        "5": "Eph 3,14-21 - Was wir brauchen?",
+        "6": "Matthias",
+        "7": "Lukas",
+        "8": "Elisa, Miriam",
+        "9": "Peter\nEmilio\nSebastian",
+        "10": "Peter",
+        "11": "Cajon, Gitarre, Geige\n2x Gesangsmikro, 1x Geige",
+        "12": "Majesty (FJ3-1)",
+        "13": "H\u00f6her (FJ5-79)\nGro\u00df ist dein Name (JuF-271)\nLebensgrund (FJ5-149)",
+        "14": "Welch ein Freund ist unser Jesus (JuF-422)",
+        "15": "Ich will dir danken Herr (FJ4-54)",
+        "16": "Bleib mit deiner Gnade bei uns (FJ4-191)",
+        "17": "Segnung: Das glaube ich (FJ5-144)",
+        "19": "Segnung"
+      }
+    },
+    {
+      "id": "45",
+      "fields": {
+        "1": "2019-11-10",
+        "2": "[\"ban\"]",
+        "19": "Gemeinde WE kein Gottesdienst"
+      }
+    },
+    {
+      "id": "46",
+      "fields": {
+        "1": "2019-11-17",
+        "3": "Sophia",
+        "4": "Jane Doe",
+        "5": "Eph 4,1-6 + 11-16 Wozu sind wir da?",
+        "6": "Peter",
+        "8": "Maria, Susann",
+        "9": "Moritz\nSebastian\nMax S.\nJohannes (Cajon)\nEmilio (Bass)\n",
+        "10": "Max S",
+        "11": "3xGesang (Chris, Emilio, Max)\n1 Gitarre \nKlavier\n1 Bass (Verst\u00e4rker auf der B\u00fchne)\n1 Geige",
+        "12": "Broken Vessels FJ5/21",
+        "13": "Wohin sonst FJ4/99\nH\u00f6her FJ5/79\nMein Retter, Erl\u00f6ser FJ3/215",
+        "14": "Wir sind eins FJ5/168",
+        "15": "Wer nur den lieben Gott l\u00e4sst walten FJ4/100 Str1,2,4,7",
+        "16": "Lobe den Herrn FJ4/37",
+        "18": "Freitag 13:30 Uhr"
+      }
+    },
+    {
+      "id": "47",
+      "fields": {
+        "1": "2019-11-24",
+        "3": "Susann",
+        "4": "John Doe",
+        "5": "Eph 5,1-14",
+        "6": "Klaus",
+        "8": "Katalin, Susann",
+        "9": "Hannes\nPeter\nEmilio\nJosi",
+        "10": "Peter N.",
+        "11": "Fl\u00fcgel, Bass, 2x Gitarre, Cajon, 4x Gesang",
+        "12": "O come to the altar (FJ5-165)",
+        "13": "Wunder (FJ5-165)\nGewagte Liebe\nMittelpunkt (FJ5-119)",
+        "14": "Freiheit der Kinder Gottes (FJ4-161)",
+        "15": "Wir schauen auf dich (FJ4-76)",
+        "16": "Herr, bleib bei mir (FJ4-196, Str. 1-3)",
+        "17": "Lied zum Totensonntag: Wenn nach der Erde Leid (JuF-723)"
+      }
+    },
+    {
+      "id": "48",
+      "fields": {
+        "1": "2019-12-01",
+        "2": "[]",
+        "3": "Mirko",
+        "4": "Jane Doe",
+        "5": "Eph 6,10-20",
+        "6": "Matthias",
+        "7": "Tina",
+        "8": "Elisa, Miriam",
+        "9": "Saskia\nGabi\nNina\n",
+        "10": "Nina",
+        "11": "Zwei Gesang\nKlavier\nevt. Geige",
+        "12": "Es kommt ein Schiff geladen",
+        "13": "1. Wie soll ich dich empfangen\n2. H\u00f6her\n3. Herbei oh ihr Gl\u00e4ubigen",
+        "14": "Jesus ist kommen Grund ewiger Freude",
+        "15": "O Heiland rei\u00df die Himmel auf",
+        "16": "O komm o komm du Morgenstern",
+        "17": "VIELE ALTE ADVENTSLIEDER :D ",
+        "19": "Wichtig: 15:30Uhr  Kaffee trinken im Caf\u00e8 und im Saal -> Probe nur bis 15:15Uhr im Saal m\u00f6glich "
+      }
+    },
+    {
+      "id": "49",
+      "fields": {
+        "1": "2019-12-08",
+        "3": "Otto",
+        "4": "Jane Doe",
+        "5": "Ich steh an deiner Krippe hier",
+        "6": "Robert",
+        "7": "Johann",
+        "8": "Susann, Nina",
+        "9": "Emilio\nFrieder\nSebastian \nPeter ",
+        "10": "Emilio",
+        "11": "Cajon, Geige, E-Gitarre, A-Gitarre und/oder Bass, 2-3 x Gesang",
+        "12": "Er kommt (FJ4-4)",
+        "13": "Vor dir (FJ4-89), Meer (FJ5-108), Bahnt einen Weg (rot-850)",
+        "14": "\"Ich steh an deiner Krippe hier(JuF 59, 1-4,9)\"   \"Macht hoch die T\u00fcr(JuF 32, 1-3,5)\", \"In der Nacht von Bethlehem (FJ2-246)\" und \"mit den Hirten will ich gehen(JuF 67, 1-5)\"",
+        "15": "Du bist alles (Kopie) (FJ to go-34)",
+        "16": "Go, tell it on the mountains ",
+        "17": "Kinderlied: Ihr Kinderlein kommet (JuF-60, 1. Strophe x2); Lob Ehr und Preis sei Gott..... (JuF 246 2. Str.)",
+        "18": "07.12.2019 Uhrzeit: 9:15 Ort: LKG"
+      }
+    },
+    {
+      "id": "50",
+      "fields": {
+        "1": "2019-12-15",
+        "2": "[\"coffee\",\"child\"]",
+        "6": "Jutta",
+        "7": "Doris",
+        "8": "Miriam, ",
+        "9": "Max\nJohannes \nJanina\nChris R. ",
+        "12": "Wir sind gekommen (FJ5/5)",
+        "13": "Jesus wir hei\u00dfen dich willkommen (einfach spitze/ 51)\nAuf auf ihr Christen alle (JuF/20)\nMauern st\u00fcrzen ein",
+        "14": "Bahnt einen Weg unserm Gott (SdLdF/850)",
+        "15": "Freue dich Welt",
+        "16": "Essen, Trinken, miteinander reden",
+        "19": "Familiengottesdienst "
+      }
+    },
+    {
+      "id": "51",
+      "fields": {
+        "1": "2019-12-22",
+        "3": "Mirko",
+        "4": "Jane Doe",
+        "6": "Matthias",
+        "7": "Norbert",
+        "8": "Miriam, Katalin",
+        "9": "Anke\nMaria H.\nTimo",
+        "10": "Anke",
+        "11": "2 Gesangsmikros\nEins am Fl\u00fcgel, eins auf der B\u00fchne\n\nKlavier\nGitarre \nGeige",
+        "12": "Wir sind gekommen (Feiert Jesus 5/ Nr. 5)",
+        "13": "Freue dich Welt\nDrum ihm zur Ehre (Feiert Jesus 3/ Nr. 207)\nEs ist ein Ros entsprungen",
+        "14": "Wie soll ich dich empfangen",
+        "15": "Ich steh an deiner Krippen hier",
+        "16": "Maria ahntest du (Feiert Jesus 2/ Nr. 244",
+        "18": "22.12. 14:30 Uhr"
+      }
+    },
+    {
+      "id": "52",
+      "fields": {
+        "1": "2019-12-29",
+        "3": "Mirko",
+        "4": "Jane Doe",
+        "6": "Peter",
+        "7": "Tina",
+        "8": "Elisa, Conny",
+        "9": "Timo\nGabi",
+        "11": "Klavier + Gesang \nGesang\nGeige\nCajon + Gerassel ",
+        "12": "Alle Ehre FJ5 7",
+        "13": "Vom Himmel hoch JuF 77  1-3,8&9\nIch steh an deiner Krippen JuF 59 1,2,4,9\nAlle Ehre FJ5 7",
+        "14": "Jesus ist kommen FJ5 160 1-4  dazwischen Jesus h\u00f6chster Name FJ4 123",
+        "15": "In der Nacht von Bethlehem Fj2 246",
+        "16": "Bahnt einen Weg unserm Gott",
+        "18": "Sonntag 14 Uhr "
+      }
+    },
+    {
+      "id": "53",
+      "fields": {
+        "1": "2020-01-05",
+        "3": "Susann",
+        "6": "Klaus",
+        "7": "Lukas",
+        "9": "Nina\nSebastian\nLuisa M.",
+        "10": "Nina"
+      }
+    },
+    {
+      "id": "54",
+      "fields": {
+        "1": "2020-01-12",
+        "3": "Otto",
+        "6": "Jutta",
+        "7": "Marc",
+        "9": "Hannes\n"
+      }
+    },
+    {
+      "id": "55",
+      "fields": {
+        "1": "2020-01-19",
+        "2": "[\"ban\"]",
+        "3": "Allianz Abschluss Gottesdienst",
+        "6": "Matthias",
+        "7": "Christian",
+        "8": "Nina, ",
+        "9": "Frieder\nJosi",
+        "10": "Josi "
+      }
+    },
+    {
+      "id": "56",
+      "fields": { "1": "2020-01-26", "2": "[]", "6": "Peter", "7": "Norbert" }
+    },
+    {
+      "id": "57",
+      "fields": { "1": "2020-02-02", "6": "Robert", "9": "Luisa M." }
+    },
+    {
+      "id": "58",
+      "fields": { "1": "2020-02-09", "6": "Klaus", "9": "Sebastian" }
+    },
+    {
+      "id": "59",
+      "fields": {
+        "1": "2020-02-16",
+        "6": "Jutta",
+        "9": "Nina\nJosi",
+        "10": "Nina"
+      }
+    },
+    {
+      "id": "60",
+      "fields": {
+        "1": "2020-02-23",
+        "6": "Matthias",
+        "8": ".",
+        "9": "Hannes"
+      }
+    },
+    { "id": "61", "fields": { "1": "2020-03-01", "6": "Peter", "8": "Nina" } },
+    { "id": "62", "fields": { "1": "2020-03-08", "6": "Robert" } },
+    { "id": "63", "fields": { "1": "2020-03-15", "6": "Klaus" } },
+    { "id": "64", "fields": { "1": "2020-03-22", "6": "Jutta" } },
+    { "id": "65", "fields": { "1": "2020-03-29", "6": "Matthias" } },
+    { "id": "66", "fields": { "1": "2020-04-05", "6": "Peter" } },
+    { "id": "67", "fields": { "1": "2020-04-12", "6": "Robert" } },
+    { "id": "68", "fields": { "1": "2020-04-19" } },
+    { "id": "69", "fields": { "1": "2020-04-26" } },
+    { "id": "70", "fields": { "1": "2020-05-03" } },
+    { "id": "71", "fields": { "1": "2020-05-10" } },
+    { "id": "72", "fields": { "1": "2020-05-17" } },
+    { "id": "73", "fields": { "1": "2020-05-24" } },
+    { "id": "74", "fields": { "1": "2020-05-31" } },
+    { "id": "75", "fields": { "1": "2020-06-07" } },
+    { "id": "76", "fields": { "1": "2020-06-14" } },
+    { "id": "77", "fields": { "1": "2020-06-21" } },
+    { "id": "78", "fields": { "1": "2020-06-28" } },
+    { "id": "79", "fields": { "1": "2020-07-05" } },
+    { "id": "80", "fields": { "1": "2020-07-12" } },
+    { "id": "81", "fields": { "1": "2020-07-19" } },
+    { "id": "82", "fields": { "1": "2020-07-26" } },
+    { "id": "83", "fields": { "1": "2020-08-02" } },
+    { "id": "84", "fields": { "1": "2020-08-09" } },
+    { "id": "85", "fields": { "1": "2020-08-16" } },
+    { "id": "86", "fields": { "1": "2020-08-23" } },
+    { "id": "87", "fields": { "1": "2020-08-30" } },
+    { "id": "88", "fields": { "1": "2020-09-06" } },
+    { "id": "89", "fields": { "1": "2020-09-13" } },
+    { "id": "90", "fields": { "1": "2020-09-20" } },
+    { "id": "91", "fields": { "1": "2020-09-27" } },
+    { "id": "92", "fields": { "1": "2020-10-04" } },
+    { "id": "93", "fields": { "1": "2020-10-11" } },
+    { "id": "94", "fields": { "1": "2020-10-18" } },
+    { "id": "95", "fields": { "1": "2020-10-25" } },
+    { "id": "96", "fields": { "1": "2020-11-01" } },
+    { "id": "97", "fields": { "1": "2020-11-08" } },
+    { "id": "98", "fields": { "1": "2020-11-15" } },
+    { "id": "99", "fields": { "1": "2020-11-22" } },
+    { "id": "100", "fields": { "1": "2020-11-29" } },
+    { "id": "101", "fields": { "1": "2020-12-06" } },
+    { "id": "102", "fields": { "1": "2020-12-13" } },
+    { "id": "103", "fields": { "1": "2020-12-20" } },
+    { "id": "104", "fields": { "1": "2020-12-27" } },
+    {
+      "id": "105",
+      "fields": {
+        "1": "2019-12-24",
+        "2": "[\"child\"]",
+        "3": "Gustav / Corinna",
+        "4": "Jane Doe",
+        "6": "Peter",
+        "7": "Johann",
+        "9": "Nina B. \nJosi \nGabi  \nEmilio \nPeter N.\nLuca",
+        "10": "Nina B. ",
+        "11": "Mindestens 4 Gesangsmikros\nKlavier\nBass\nCello\nGitarre\nKlarinette",
+        "12": "O komm, o komm du Morgenstern",
+        "13": "H\u00f6rt der Engel helle Lieder - Vortragslied vom Engelchor\nIm Krippenspiel: Kommet ihr Hirten (zum Mitsingen)\nIch steh an deiner Krippen hier (zum Mitsingen)",
+        "14": "Vortragslied: Wie soll ich dich empfangen  (WO-Fassung)",
+        "15": "O du Fr\u00f6hliche",
+        "16": "Freue dich Welt",
+        "18": "Generalprobe Krippenspiel und Musiker 23.12.2019 um 17:00 Uhr",
+        "19": "16 Uhr Krippenspiel"
+      }
+    },
+    {
+      "id": "106",
+      "fields": {
+        "1": "2019-12-31",
+        "3": "Falko",
+        "4": "Jane Doe",
+        "6": "Robert",
+        "7": "Norbert",
+        "8": "Katalin ",
+        "9": "Emilio\nJosi \nEmilie\nMaria \nPeter ",
+        "10": "Josi",
+        "11": "Bass/ Gitarre /Mikro\nKlavier /Mikro \nQuerfl\u00f6te \nCajon / Mikro \nMikro ",
+        "19": "16 Uhr Silvesterandacht"
+      }
+    }
+  ],
+  "config": [
+    { "id": "1", "name": "static_fields", "data": "[1,2,4,5,19]" },
+    { "id": "2", "name": "last_filled_year", "data": "2020" },
+    { "id": "3", "name": "autofill_weekday", "data": "sunday" },
+    { "id": "4", "name": "header_for_widget", "data": "2" }
+  ]
+}
