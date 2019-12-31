@@ -31,6 +31,7 @@
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.8.0",
+    "mockdate": "^2.0.5",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "terser-webpack-plugin": "^2.2.1",
     "testcafe": "^1.7.1",

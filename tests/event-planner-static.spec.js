@@ -7,7 +7,8 @@ const mock = RequestMock()
 
 fixture `Event Planner Static`
   .page `http://127.0.0.1:8000/test-event-planner-static/`
-  .requestHooks(mock);
+  .requestHooks(mock)
+  .clientScripts([{module: 'mockdate'}, {content: "MockDate.set('2019-11-02')"}]);
 
 test('Event Planner Static Page shows table', async t => {
   await t
