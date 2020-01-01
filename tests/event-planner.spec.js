@@ -1,4 +1,4 @@
-import { RequestMock, Selector } from 'testcafe';
+import { RequestMock } from 'testcafe';
 import mockData from './__mocks__/all.json';
 import { SELECTORS } from './utils/domHelpers';
 
