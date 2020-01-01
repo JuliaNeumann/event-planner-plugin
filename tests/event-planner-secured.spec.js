@@ -1,4 +1,4 @@
-import { Selector } from 'testcafe';
+import { SELECTORS } from './utils/domHelpers';
 
 const URL = `http://127.0.0.1:8000/test-event-planner/`;
 const URL_STATIC = `http://127.0.0.1:8000/test-event-planner-static/`;
@@ -14,8 +14,8 @@ test('Event Planner Page shows an alert when no API response (user is not logged
 
   await t
           .expect(dialogHistory[0].type).eql('alert')
-          .expect(Selector('#epp_app').count).eql(1)
-          .expect(Selector('.table-view').count).eql(0);
+          .expect(SELECTORS.app.count).eql(1)
+          .expect(SELECTORS.tableView.count).eql(0);
 });
 
 test('Event Planner Static Page shows an alert when no API response (user is not logged in) and does not display table', async t => {
@@ -27,6 +27,6 @@ test('Event Planner Static Page shows an alert when no API response (user is not
       
         await t
                 .expect(dialogHistory[0].type).eql('alert')
-                .expect(Selector('#epp_app_static').count).eql(1)
-                .expect(Selector('.table').count).eql(0);
+                .expect(SELECTORS.appStatic.count).eql(1)
+                .expect(SELECTORS.table.count).eql(0);
       });

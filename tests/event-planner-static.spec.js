@@ -1,5 +1,6 @@
-import { RequestMock, Selector } from 'testcafe';
+import { RequestMock } from 'testcafe';
 import mockData from './__mocks__/all.json';
+import { SELECTORS } from './utils/domHelpers';
 
 const mock = RequestMock()
   .onRequestTo('http://127.0.0.1:8000/wp-json/event-planner/v1/all')
@@ -12,6 +13,6 @@ fixture `Event Planner Static`
 
 test('Event Planner Static Page shows table', async t => {
   await t
-          .expect(Selector('#epp_app_static').count).eql(1)
-          .expect(Selector('.table').count).gt(0);
+          .expect(SELECTORS.appStatic.count).eql(1)
+          .expect(SELECTORS.table.count).gt(0);
 });
