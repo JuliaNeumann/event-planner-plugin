@@ -20,7 +20,7 @@
               <template v-if="showQuarter(year.year + '_' + index)">
                 <tr v-for="row in quarter"
                     :key="row.fields[heads[0].id]">
-                  <td class="cell">
+                  <td class="cell cell--date">
                     <CellContent :head="heads[0]" :content="row.fields[heads[0].id]"/>
                     <EditButton :heads="getActiveHeads.slice(1)" :row="row" @updated="setData"/>
                   </td>
@@ -40,7 +40,7 @@
           <template v-else>
             <tr>
               <th v-for="head in getActiveHeads"
-                  class="cell"
+                  class="cell cell--head"
                   :key="head.id">
                 {{ head.name }}
               </th>
@@ -55,7 +55,9 @@
               <template v-if="showQuarter(year.year + '_' + index)">
                 <tr v-for="row in quarter"
                     :key="row.fields[heads[0].id]">
-                  <td v-for="(head, headIndex) in getActiveHeads" class="cell"
+                  <td v-for="(head, headIndex) in getActiveHeads"
+                      class="cell"
+                      :class="headIndex === 0 ? 'cell--date' : ''"
                       :key="head.id">
                     <CellContent :head="head" :content="row.fields[head.id]"/>
                     <EditButton v-if="headIndex === 0" :heads="getActiveHeads.slice(1)" :row="row" @updated="setData"/>

@@ -4,12 +4,14 @@ export const SELECTORS = {
   app: Selector('#epp_app'),
   appStatic: Selector('#epp_app_static'),
 
-  table: Selector('.table'),
-  tableView: Selector('.table-view'),
+  table: Selector('.table-view'),
+  tableStatic: Selector('.table'),
   tableHead: Selector('.head'),
+  tableHeadStatic: Selector('.cell--head'),
   tableRow: Selector('.row'),
 
   cellDate: Selector('.cell__content--date'),
+  cellDateStatic: Selector('.cell--date span'),
   cellIcons: Selector('.cell__content--icons'),
   cellText: Selector('.cell__content--text span'),
   cellMultilineText: Selector('.cell__content--longtext span'),
@@ -24,6 +26,7 @@ export const SELECTORS = {
   textArea: Selector(".textarea"),
 
   groupHeader: Selector('.group-header'),
+  groupHeaderOpenText: Selector('.group-header--open'),
   groupRow: Selector('.row--group'),
 
   filter: Selector('.filters__item input'),

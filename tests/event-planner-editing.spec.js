@@ -17,7 +17,7 @@ test('Event Planner Page shows table', async t => {
   await t
           .maximizeWindow()
           .expect(SELECTORS.app.count).eql(1)
-          .expect(SELECTORS.tableView.count).gt(0);
+          .expect(SELECTORS.table.count).gt(0);
 });
 
 test('Date of event can be edited', async t => {

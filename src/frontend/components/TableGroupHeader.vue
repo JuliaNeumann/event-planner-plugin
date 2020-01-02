@@ -1,5 +1,5 @@
 <template>
-    <td :colspan="cols" class="group-header">
+    <td :colspan="cols" class="group-header" :class="this.open ? 'group-header--open' : ''">
         <ArrowToggle :direction="this.open ? 'down' : 'right'"/>
         <strong>{{ text }}</strong>
     </td>

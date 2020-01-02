@@ -15,14 +15,14 @@ test('Event Planner Page shows table', async t => {
   await t
           .maximizeWindow()
           .expect(SELECTORS.app.count).eql(1)
-          .expect(SELECTORS.tableView.count).gt(0);
+          .expect(SELECTORS.table.count).gt(0);
 });
 
 test('Event Planner Page shows table rows and filters in desktop view', async t => {
   await t
           .maximizeWindow()
           // on desktop, we have one big table
-          .expect(SELECTORS.tableView.count).eql(1)
+          .expect(SELECTORS.table.count).eql(1)
           // with rows for all the headers + one for the header group
           .expect(SELECTORS.tableRow.count).eql(21)
           // there are filters for all rows, except the date
