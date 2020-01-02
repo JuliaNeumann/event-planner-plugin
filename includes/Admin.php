@@ -21,11 +21,11 @@ class Admin {
         $capability = 'manage_options';
         $slug       = 'vue-app';
 
-        $hook = add_menu_page( __( 'Vue App', 'textdomain' ), __( 'Vue App', 'textdomain' ), $capability, $slug, [ $this, 'plugin_page' ], 'dashicons-text' );
+        $hook = add_menu_page( __( 'Event Planner', 'textdomain' ), __( 'Event Planner', 'textdomain' ), $capability, $slug, [ $this, 'plugin_page' ], 'dashicons-text' );
 
         if ( current_user_can( $capability ) ) {
-            $submenu[ $slug ][] = array( __( 'App', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/' );
-            $submenu[ $slug ][] = array( __( 'Settings', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/settings' );
+            $submenu[ $slug ][] = array( __( 'Tabellenköpfe', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/' );
+            $submenu[ $slug ][] = array( __( 'Teaser', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/teaser' );
         }
 
         add_action( 'load-' . $hook, [ $this, 'init_hooks'] );
@@ -48,6 +48,13 @@ class Admin {
     public function enqueue_scripts() {
         wp_enqueue_style( 'eventplanner-admin' );
         wp_enqueue_script( 'eventplanner-admin' );
+
+        // localize data for script
+        wp_localize_script( 'eventplanner-admin', 'eventPlannerApp', array(
+            'rest_url' => esc_url_raw( rest_url() ),
+            'nonce' => wp_create_nonce( 'wp_rest' ),
+            'admin' => current_user_can('administrator')
+        ));
     }
 
     /**

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from 'admin/pages/Home.vue'
-import Settings from 'admin/pages/Settings.vue'
+import EditTableHeaders from 'admin/pages/EditTableHeaders.vue'
+import EditTeaser from 'admin/pages/EditTeaser.vue'
 
 Vue.use(Router)
 
@@ -9,13 +9,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      name: 'EditTableHeaders',
+      component: EditTableHeaders
     },
     {
-      path: '/settings',
-      name: 'Settings',
-      component: Settings
+      path: '/teaser',
+      name: 'EditTeaser',
+      component: EditTeaser
     },
   ]
 })

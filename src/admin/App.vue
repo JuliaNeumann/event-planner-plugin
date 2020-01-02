@@ -1,7 +1,6 @@
 <template>
   <div id="vue-backend-app">
-    <h1>Backend App</h1>
-    hello Vue
+    <h1>Event Planner</h1>
     <router-view />
   </div>
 </template>
