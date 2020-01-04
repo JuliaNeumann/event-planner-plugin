@@ -25,6 +25,9 @@ class Api extends WP_REST_Controller {
         if ( !class_exists( __NAMESPACE__ . '\Api\Frontend'  ) ) {
             require_once __DIR__ . '/Api/Frontend.php';
         }
+        if ( !class_exists( __NAMESPACE__ . '\Api\Admin'  ) ) {
+            require_once __DIR__ . '/Api/Admin.php';
+        }
     }
 
     /**
@@ -34,6 +37,7 @@ class Api extends WP_REST_Controller {
      */
     public function register_routes() {
         (new Api\Frontend())->register_routes();
+        (new Api\Admin())->register_routes();
     }
 
 }

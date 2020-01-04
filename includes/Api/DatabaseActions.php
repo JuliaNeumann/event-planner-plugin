@@ -186,4 +186,36 @@ class DatabaseActions {
             return $result_list[0];
         }
     }
+
+    public function updateHeader($parameters) {
+        global $wpdb;
+
+        $result = $wpdb->update("wp_epp_headers", array(
+            'name' => $parameters["name"],
+            'order_id' => $parameters["order_id"],
+            'type' => $parameters["type"],
+            'description' => $parameters["description"],
+            'additional' => $parameters["additional"]
+        ), array('id' => $parameters["id"]));
+
+        if ($wpdb->last_error) {
+            return array("error" => $wpdb->last_error);
+        }
+        return array("success" => "Änderungen gespeichert!", "result" => $result);
+    }
+
+    public function deleteHeader($id) {
+        global $wpdb;
+        $header_delete = $wpdb->delete( 'wp_epp_headers', array( 'id' => $id ) );
+        if ($header_delete !== false) {
+            $lookup_delete = $wpdb->delete( 'wp_epp_events2headers', array( 'header_id' => $id ) );
+            if ($lookup_delete !== false) {
+                return array("success" => "Der Header und zugehörige Daten wurden gelöscht!");
+            }
+        }
+        if ($wpdb->last_error) {
+            return array("error" => $wpdb->last_error);
+        }
+        return array("error" => "Datenbank-Fehler: Header konnte nicht gelöscht werden!");
+    }
 }
