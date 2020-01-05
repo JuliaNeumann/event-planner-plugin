@@ -18,7 +18,17 @@
     ],
     computed: {
       cleanIcons () {
-        return this.icons ? JSON.parse(this.icons) : []
+        const parsedIcons = this.icons ? JSON.parse(this.icons) : []
+        return parsedIcons.filter(icon => {
+          let exists = false;
+          // check in the header config that this icon exists
+          JSON.parse(this.additional).forEach(iconInfo => {
+            if (iconInfo.icon === icon) {
+              exists = true;
+            }
+          })
+          return exists;
+        });
       },
       descriptions () {
         const map = {}

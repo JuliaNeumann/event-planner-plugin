@@ -1,7 +1,7 @@
 <template>
   <form class="table-header-form">
     <div class="table-header-form__field table-header-form__field--block" v-if="isFirst">
-      <i class="fa fa-info-circle"></i>&nbsp; <strong>Der erste Header muss immer das Datum der Veranstaltung enthalten. Deswegen kann hier nur der Name und die Beschreibung geändert werden.</strong>
+      <i class="fa fa-info-circle"></i>&nbsp; <strong>Der erste Tabellenkopf muss immer das Datum der Veranstaltung enthalten. Deswegen kann hier nur der Name und die Beschreibung geändert werden.</strong>
     </div>
     <div class="table-header-form__field">
       <label class="table-header-form__label" :for="`header_name_${id}`">Name: </label>
@@ -37,7 +37,7 @@
       <label class="table-header-form__label" :for="`header_description_${id}`">
         Icons:
       </label>
-      <IconsForm :icons="JSON.parse(additional || '[]')"/>
+      <IconsForm ref="icons" :icons="JSON.parse(additional || '[]')"/>
     </div>
     <div class="table-header-form__field table-header-form__field--block">
       <button class="table-header-form__button" type="button" @click="saveHeader">
@@ -88,7 +88,7 @@ export default {
         name: this.modelName,
         order_id: this.modelOrderId,
         type: this.modelType,
-        additional: this.additional,
+        additional: this.modelType === "icons" ? JSON.stringify(this.$refs.icons.modeledIcons) : "",
         description: this.modelDescription
       })
       if (apiResult && apiResult.error) {
@@ -104,20 +104,20 @@ export default {
     },
     async deleteHeader() {
       const confirmed = window.confirm('Dieser Tabellenkopf und alle zugehörigen Tabbellendaten werden endgültig gelöscht. ' +
-          'Dies kann nicht rueckgängig gemacht werden. Bist du sicher?')
-        if (confirmed) {
-          const apiResult = await deleteHeader(this.id)
-          if (apiResult && apiResult.success) {
-            alert("Tabellenkopf und zueghörige Daten wurden gelöscht!");
-            this.$emit('delete')
-            return
-          }
-          if (apiResult && apiResult.error) {
-            alert(`Beim Löschen ist ein Fehler aufgetreten: ${apiResult.error}`)
-            return
-          }
-          alert(`Beim Löschen ist ein unbekannter Fehler aufgetreten`)
+        'Dies kann nicht rueckgängig gemacht werden. Bist du sicher?')
+      if (confirmed) {
+        const apiResult = await deleteHeader(this.id)
+        if (apiResult && apiResult.success) {
+          alert("Tabellenkopf und zueghörige Daten wurden gelöscht!");
+          this.$emit('delete')
+          return
         }
+        if (apiResult && apiResult.error) {
+          alert(`Beim Löschen ist ein Fehler aufgetreten: ${apiResult.error}`)
+          return
+        }
+        alert(`Beim Löschen ist ein unbekannter Fehler aufgetreten`)
+      }
     }
   }
 
