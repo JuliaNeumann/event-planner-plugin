@@ -187,6 +187,23 @@ class DatabaseActions {
         }
     }
 
+    public function addHeader($parameters) {
+        global $wpdb;
+
+        $result = $wpdb->insert("wp_epp_headers", array(
+            'name' => $parameters["name"],
+            'order_id' => $parameters["order_id"],
+            'type' => $parameters["type"],
+            'description' => $parameters["description"],
+            'additional' => $parameters["additional"]
+        ));
+
+        if ($wpdb->last_error) {
+            return array("error" => $wpdb->last_error);
+        }
+        return array("success" => "Neuer Header gespeichert!", "result" => $result);
+    }
+
     public function updateHeader($parameters) {
         global $wpdb;
 

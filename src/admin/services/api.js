@@ -11,6 +11,20 @@ export async function getHeaders () {
   })
 }
 
+export async function addHeader (name, orderId) {
+  return await safeRequest({
+    method: 'post',
+    url: `${baseUrl}add-header`,
+    data: {
+      name: name,
+      order_id: orderId,
+      type: "text",
+      additional: "",
+      description: ""
+    }
+  })
+}
+
 export async function updateHeader (header) {
   if (header.id) {
     return await safeRequest({

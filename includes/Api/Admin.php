@@ -33,6 +33,12 @@ class Admin extends WP_REST_Controller {
      * @return void
      */
     public function register_routes() {
+        register_rest_route($this->namespace, '/add-header', array(
+            'methods' => \WP_REST_Server::CREATABLE,
+            'callback' => array( $this, 'handle_add_header'),
+            'permission_callback' => array( $this, 'check_admin')
+        ));
+
         register_rest_route($this->namespace, '/update-header', array(
             'methods' => \WP_REST_Server::CREATABLE,
             'callback' => array( $this, 'handle_update_header'),
@@ -56,7 +62,16 @@ class Admin extends WP_REST_Controller {
     /****************************************************************************************
      * DATA PROCESSING METHODS
      ****************************************************************************************/
-    public function handle_update_header($data) {
+    public function handle_add_header($data) {
+        $parameters = $data->get_params();
+        if ($parameters["name"] && $parameters["type"] && $parameters["order_id"]) {
+            $db = new DatabaseActions();
+            return $db->addHeader($parameters);
+        }
+        return array("error" => "Bitte geben Sie mindestens den Namen, den Type und die Reihenfolge für den Header an!");
+    }
+    
+     public function handle_update_header($data) {
         $parameters = $data->get_params();
         if ($parameters["id"]) {
             $db = new DatabaseActions();

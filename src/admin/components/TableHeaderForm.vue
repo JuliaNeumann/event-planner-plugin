@@ -95,6 +95,7 @@ export default {
         alert(`Beim Bearbeiten ist ein Fehler aufgetreten: ${apiResult.error}`)
       } else if (apiResult && apiResult.success) {
         alert("Änderungen gespeichert!");
+        this.$emit('delete')
       } else {
         console.error(apiResult);
         alert("Es ist ein unbekannter Fehler aufgetreten!");
@@ -107,6 +108,7 @@ export default {
         if (confirmed) {
           const apiResult = await deleteHeader(this.id)
           if (apiResult && apiResult.success) {
+            alert("Tabellenkopf und zueghörige Daten wurden gelöscht!");
             this.$emit('delete')
             return
           }
@@ -127,6 +129,7 @@ export default {
     border: 1px solid gray;
     padding: 10px;
     margin-bottom: 15px;
+    max-width: 1000px;
 
     &__field {
       display: inline-block;
