@@ -26,6 +26,7 @@ class Admin {
         if ( current_user_can( $capability ) ) {
             $submenu[ $slug ][] = array( __( 'Tabellenköpfe', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/' );
             $submenu[ $slug ][] = array( __( 'Teaser', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/teaser' );
+            $submenu[ $slug ][] = array( __( 'Tabellengruppen', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/table-groups' );
         }
 
         add_action( 'load-' . $hook, [ $this, 'init_hooks'] );

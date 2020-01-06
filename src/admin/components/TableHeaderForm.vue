@@ -42,10 +42,10 @@
     <div class="table-header-form__field table-header-form__field--block">
       <button class="table-header-form__button" type="button" @click="saveHeader">
         <i class="fa fa-fw fa-save"></i>&nbsp;Speichern
-        </button>
-      <button class="table-header-form__button" type="button" @click="deleteHeader">
+      </button>
+      <button class="table-header-form__button" v-if="!isFirst" type="button" @click="deleteHeader">
         <i class="fa fa-fw fa-trash"></i>&nbsp;Löschen
-        </button>
+      </button>
     </div>
   </form>
 </template>
@@ -103,12 +103,12 @@ export default {
 
     },
     async deleteHeader() {
-      const confirmed = window.confirm('Dieser Tabellenkopf und alle zugehörigen Tabbellendaten werden endgültig gelöscht. ' +
+      const confirmed = window.confirm('Dieser Tabellenkopf und alle zugehörigen Tabellendaten werden endgültig gelöscht. ' +
         'Dies kann nicht rueckgängig gemacht werden. Bist du sicher?')
       if (confirmed) {
         const apiResult = await deleteHeader(this.id)
         if (apiResult && apiResult.success) {
-          alert("Tabellenkopf und zueghörige Daten wurden gelöscht!");
+          alert("Tabellenkopf und zugehörige Daten wurden gelöscht!");
           this.$emit('delete')
           return
         }

@@ -153,32 +153,21 @@ class DatabaseActions {
      * Headers
      *****************************************************************************************************************/
 
-    public function getAllHeaders()
-    {
+    public function getAllHeaders() {
         global $wpdb;
         $query = "SELECT * FROM `wp_epp_headers`";
         $list = $wpdb->get_results($query);
         return $list;
     }
 
-    public function getAllHeaderGroups()
-    {
-        global $wpdb;
-        $query = "SELECT * FROM `wp_epp_header_groups`";
-        $list = $wpdb->get_results($query);
-        return $list;
-    }
-
-    public function getAllHeaderFootnotes()
-    {
+    public function getAllHeaderFootnotes() {
         global $wpdb;
         $query = "SELECT * FROM `wp_epp_header_footnotes`";
         $list = $wpdb->get_results($query);
         return $list;
     }
 
-    public function getHeaderById($id)
-    {
+    public function getHeaderById($id) {
         global $wpdb;
         $query = "SELECT * FROM `wp_epp_headers` WHERE id = '%s'";
         $result_list = $wpdb->get_results($wpdb->prepare($query, $id));
@@ -234,5 +223,73 @@ class DatabaseActions {
             return array("error" => $wpdb->last_error);
         }
         return array("error" => "Datenbank-Fehler: Header konnte nicht gelöscht werden!");
+    }
+
+    /******************************************************************************************************************
+     * Header Groups
+     *****************************************************************************************************************/
+
+    public function getAllHeaderGroups() {
+        global $wpdb;
+        $query = "SELECT * FROM `wp_epp_header_groups`";
+        $list = $wpdb->get_results($query);
+        return $list;
+    }
+
+    public function addHeaderGroup($parameters) {
+        global $wpdb;
+
+        $result = $wpdb->insert("wp_epp_header_groups", array(
+            'name' => $parameters["name"]
+        ));
+
+        if ($wpdb->last_error) {
+            return array("error" => $wpdb->last_error);
+        }
+        return array("success" => "Neue Tabellengruppe gespeichert!", "result" => $result);
+    }
+
+    public function updateHeaderGroup($parameters) {
+        global $wpdb;
+
+        $result = $wpdb->update("wp_epp_header_groups", array(
+            'name' => $parameters["name"]
+        ), array('id' => $parameters["id"]));
+
+        if (!$wpdb->last_error && $parameters["added"]) {
+            foreach ($parameters["added"] as $addedId) {
+                $wpdb->update("wp_epp_headers", array(
+                    'group_id' => $parameters["id"]
+                ), array('id' => $addedId));
+            }
+        }
+
+        if (!$wpdb->last_error && $parameters["deleted"]) {
+            foreach ($parameters["deleted"] as $deletedId) {
+                $wpdb->update("wp_epp_headers", array(
+                    'group_id' => null
+                ), array('id' => $deletedId));
+            }
+        }
+
+        if ($wpdb->last_error) {
+            return array("error" => $wpdb->last_error);
+        }
+        return array("success" => "Änderungen gespeichert!", "result" => $result);
+    }
+
+    public function deleteHeaderGroup($id) {
+        global $wpdb;
+        $header_delete = $wpdb->delete( 'wp_epp_header_groups', array( 'id' => $id ) );
+        if ($header_delete === false) {
+            return array("error" => "Datenbank-Fehler: Tabellengruppe konnte nicht gelöscht werden!");
+        }
+        $result = $wpdb->update("wp_epp_headers", array(
+            'group_id' => null
+        ), array('group_id' => $id));
+        if ($wpdb->last_error) {
+            return array("error" => $wpdb->last_error);
+        }
+        return array("success" => "Tabellengruppe gelöscht!", "result" => $result);
     }
 }

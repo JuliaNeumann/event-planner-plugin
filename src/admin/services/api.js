@@ -47,7 +47,55 @@ export async function deleteHeader (id) {
     })
   } else {
     console.error("deleteHeader failed because no header id was given!")
-    return {error: "Es fehlen Daten, um den Header zu löschen!"}
+    return {error: "Es fehlen Daten, um den Tabellenkopf zu löschen!"}
+  }
+}
+
+export async function getHeaderGroups () {
+  return await safeRequest({
+     method: 'get',
+     url: `${baseUrl}header-groups`
+  })
+}
+
+export async function addHeaderGroup (name) {
+  return await safeRequest({
+    method: 'post',
+    url: `${baseUrl}add-header-group`,
+    data: {
+      name: name
+    }
+  })
+}
+
+export async function updateHeaderGroup (id, name, addedHeaders, deletedHeaders) {
+  if (id && name) {
+    return await safeRequest({
+      method: 'post',
+      url: `${baseUrl}update-header-group`,
+      data: {
+        id: id,
+        name: name,
+        added: addedHeaders,
+        deleted: deletedHeaders
+      }
+    })
+  } else {
+    console.error("updateHeaderGroup failed because not enough data was given!")
+    return {error: "Es fehlen Daten, um die Änderungen zu speichern!"}
+  }
+}
+
+export async function deleteHeaderGroup (id) {
+  if (id) {
+    return await safeRequest({
+      method: 'delete',
+      url: `${baseUrl}delete-header-group`,
+      data: {id: id}
+    })
+  } else {
+    console.error("deleteHeaderGroup failed because no header group id was given!")
+    return {error: "Es fehlen Daten, um die Tabellengruppe zu löschen!"}
   }
 }
 

@@ -1,19 +1,22 @@
 <template>
   <div class="edit-table-headers">
     <h2>Tabellenköpfe bearbeiten</h2>
-    <TableHeaderForm v-for="(header, index) in orderedHeaders"
+    <TableHeaderForm v-for="header in orderedHeaders"
                      :key="`header_${header.id}`"
                      v-bind="header"
-                     :isFirst="index === 0"
+                     :isFirst="header.order_id === '1'"
                      @delete="loadHeaders"
                      @update="loadHeaders" />
-    <button class="edit-table-headers__add" type="button" @click="addNewHeader">Tabellenkopf hinzufügen</button>                 
+    <button class="edit-table-headers__add" type="button" @click="addNewHeader">
+      <i class="fa fa-fw fa-plus"></i>&nbsp;Tabellenkopf hinzufügen
+    </button>                 
   </div>
 </template>
 
 <script>
 import TableHeaderForm from '../components/TableHeaderForm.vue'
 import { getHeaders, addHeader } from '../services/api'
+import { sortByOrderId } from '../utils/helpers'
 
 export default {
   name: 'EditTableHeaders',
@@ -35,14 +38,7 @@ export default {
   computed: {
     orderedHeaders () {
       return this.headers
-                 .sort(function (head1, head2) {
-                          const head1OrderId = parseInt(head1.order_id)
-                          const head2OrderId = parseInt(head2.order_id)
-                          if (head1OrderId < head2OrderId) {
-                            return -1
-                          }
-                          return (head1OrderId > head2OrderId) ? 1 : 0
-                 });
+                 .sort(sortByOrderId);
     }
   },
 

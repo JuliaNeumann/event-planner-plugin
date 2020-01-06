@@ -50,6 +50,24 @@ class Admin extends WP_REST_Controller {
             'callback' => array( $this, 'handle_delete_header'),
             'permission_callback' => array( $this, 'check_admin')
         ));
+
+        register_rest_route($this->namespace, '/update-header-group', array(
+            'methods' => \WP_REST_Server::CREATABLE,
+            'callback' => array( $this, 'handle_update_header_group'),
+            'permission_callback' => array( $this, 'check_admin')
+        ));
+
+        register_rest_route($this->namespace, '/add-header-group', array(
+            'methods' => \WP_REST_Server::CREATABLE,
+            'callback' => array( $this, 'handle_add_header_group'),
+            'permission_callback' => array( $this, 'check_admin')
+        ));
+
+        register_rest_route($this->namespace, '/delete-header-group', array(
+            'methods' => \WP_REST_Server::DELETABLE,
+            'callback' => array( $this, 'handle_delete_header_group'),
+            'permission_callback' => array( $this, 'check_admin')
+        ));
     }
 
     /****************************************************************************************
@@ -68,16 +86,16 @@ class Admin extends WP_REST_Controller {
             $db = new DatabaseActions();
             return $db->addHeader($parameters);
         }
-        return array("error" => "Bitte geben Sie mindestens den Namen, den Type und die Reihenfolge für den Header an!");
+        return array("error" => "Bitte geben Sie mindestens den Namen, den Type und die Reihenfolge für den Tabellenkopf an!");
     }
     
-     public function handle_update_header($data) {
+    public function handle_update_header($data) {
         $parameters = $data->get_params();
         if ($parameters["id"]) {
             $db = new DatabaseActions();
             return $db->updateHeader($parameters);
         }
-        return array("error" => "Es fehlt eine ID, um einen Header zu bearbeiten.");
+        return array("error" => "Es fehlt eine ID, um einen Tabellenkopf zu bearbeiten.");
     }
 
     public function handle_delete_header($data) {
@@ -86,6 +104,33 @@ class Admin extends WP_REST_Controller {
             $db = new DatabaseActions();
             return $db->deleteHeader($parameters["id"]);
         }
-        return array("error" => "Es fehlt eine ID, um eine Veranstaltung zu löschen");
+        return array("error" => "Es fehlt eine ID, um einen Tabellenkopf zu löschen");
+    }
+
+    public function handle_add_header_group($data) {
+        $parameters = $data->get_params();
+        if ($parameters["name"]) {
+            $db = new DatabaseActions();
+            return $db->addHeaderGroup($parameters);
+        }
+        return array("error" => "Bitte geben Sie mindestens den Namen für die Tabellengruppe an!");
+    }
+
+    public function handle_delete_header_group($data) {
+        $parameters = $data->get_params();
+        if ($parameters["id"]) {
+            $db = new DatabaseActions();
+            return $db->deleteHeaderGroup($parameters["id"]);
+        }
+        return array("error" => "Es fehlt eine ID, um eine Tabellengruppe zu löschen");
+    }
+
+    public function handle_update_header_group($data) {
+        $parameters = $data->get_params();
+        if ($parameters["id"] && $parameters["name"]) {
+            $db = new DatabaseActions();
+            return $db->updateHeaderGroup($parameters);
+        }
+        return array("error" => "Es fehlt eine ID oder ein Name, um eine Tabellengruppe zu bearbeiten.");
     }
 }
