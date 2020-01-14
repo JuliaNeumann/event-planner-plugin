@@ -1,7 +1,8 @@
 
-.table-header-form[data-v-977b5e2a] {
+.footnotes-form {
   border: 1px solid gray;
-  padding: 5px;
-  margin-bottom: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+  max-width: 1000px;
 }
 

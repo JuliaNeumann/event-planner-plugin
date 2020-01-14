@@ -68,6 +68,24 @@ class Admin extends WP_REST_Controller {
             'callback' => array( $this, 'handle_delete_header_group'),
             'permission_callback' => array( $this, 'check_admin')
         ));
+
+        register_rest_route($this->namespace, '/update-header-footnote', array(
+            'methods' => \WP_REST_Server::CREATABLE,
+            'callback' => array( $this, 'handle_update_header_footnote'),
+            'permission_callback' => array( $this, 'check_admin')
+        ));
+
+        register_rest_route($this->namespace, '/add-header-footnote', array(
+            'methods' => \WP_REST_Server::CREATABLE,
+            'callback' => array( $this, 'handle_add_header_footnote'),
+            'permission_callback' => array( $this, 'check_admin')
+        ));
+
+        register_rest_route($this->namespace, '/delete-header-footnote', array(
+            'methods' => \WP_REST_Server::DELETABLE,
+            'callback' => array( $this, 'handle_delete_header_footnote'),
+            'permission_callback' => array( $this, 'check_admin')
+        ));
     }
 
     /****************************************************************************************
@@ -132,5 +150,32 @@ class Admin extends WP_REST_Controller {
             return $db->updateHeaderGroup($parameters);
         }
         return array("error" => "Es fehlt eine ID oder ein Name, um eine Tabellengruppe zu bearbeiten.");
+    }
+
+    public function handle_add_header_footnote($data) {
+        $parameters = $data->get_params();
+        if ($parameters["text"] && $parameters["header_id"]) {
+            $db = new DatabaseActions();
+            return $db->addHeaderFootnote($parameters);
+        }
+        return array("error" => "Bitte geben Sie mindestens den Text und die Tabellenkopf-ID für die Fußnote an!");
+    }
+    
+    public function handle_update_header_footnote($data) {
+        $parameters = $data->get_params();
+        if ($parameters["id"]) {
+            $db = new DatabaseActions();
+            return $db->updateHeaderFootnote($parameters);
+        }
+        return array("error" => "Es fehlt eine ID, um eine Fußnote zu bearbeiten.");
+    }
+
+    public function handle_delete_header_footnote($data) {
+        $parameters = $data->get_params();
+        if ($parameters["id"]) {
+            $db = new DatabaseActions();
+            return $db->deleteHeaderFootnote($parameters["id"]);
+        }
+        return array("error" => "Es fehlt eine ID, um eine Fußnote zu löschen");
     }
 }

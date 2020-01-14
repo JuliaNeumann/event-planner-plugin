@@ -160,13 +160,6 @@ class DatabaseActions {
         return $list;
     }
 
-    public function getAllHeaderFootnotes() {
-        global $wpdb;
-        $query = "SELECT * FROM `wp_epp_header_footnotes`";
-        $list = $wpdb->get_results($query);
-        return $list;
-    }
-
     public function getHeaderById($id) {
         global $wpdb;
         $query = "SELECT * FROM `wp_epp_headers` WHERE id = '%s'";
@@ -291,5 +284,52 @@ class DatabaseActions {
             return array("error" => $wpdb->last_error);
         }
         return array("success" => "Tabellengruppe gelöscht!", "result" => $result);
+    }
+
+    /******************************************************************************************************************
+     * Footnotes
+     *****************************************************************************************************************/
+
+    public function getAllHeaderFootnotes() {
+        global $wpdb;
+        $query = "SELECT * FROM `wp_epp_header_footnotes`";
+        $list = $wpdb->get_results($query);
+        return $list;
+    }
+
+    public function addHeaderFootnote($parameters) {
+        global $wpdb;
+
+        $result = $wpdb->insert("wp_epp_header_footnotes", array(
+            'text' => $parameters["text"],
+            'header_id' => $parameters["header_id"]
+        ));
+
+        if ($wpdb->last_error) {
+            return array("error" => $wpdb->last_error);
+        }
+        return array("success" => "Neue Fußnote gespeichert!", "result" => $result);
+    }
+
+    public function updateHeaderFootnote($parameters) {
+        global $wpdb;  
+        $result = $wpdb->update("wp_epp_header_footnotes", array(
+            'text' => $parameters["text"],
+            'header_id' => $parameters["header_id"]
+        ), array('id' => $parameters["id"]));
+
+        if ($wpdb->last_error) {
+            return array("error" => $wpdb->last_error);
+        }
+        return array("success" => "Änderungen gespeichert!", "result" => $result);
+    }
+
+    public function deleteHeaderFootnote($id) {
+        global $wpdb;
+        $result = $wpdb->delete( 'wp_epp_header_footnotes', array( 'id' => $id ) );
+        if ($wpdb->last_error) {
+            return array("error" => $wpdb->last_error);
+        }
+        return array("success" => "Fußnote gelöscht!", "result" => $result);
     }
 }

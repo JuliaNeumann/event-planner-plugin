@@ -28,7 +28,7 @@
       </button>
     </div>
     <div class="table-group-form__field">
-      <button class="table-header-form__button" type="button" @click="saveGroup">
+      <button class="table-group-form__button" type="button" @click="saveGroup">
         <i class="fa fa-fw fa-save"></i>&nbsp;Speichern
       </button>
       <button class="table-group-form__button" type="button" @click="deleteGroup">

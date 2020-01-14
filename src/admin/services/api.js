@@ -99,6 +99,47 @@ export async function deleteHeaderGroup (id) {
   }
 }
 
+export async function getFootnotes () {
+  return await safeRequest({
+     method: 'get',
+     url: `${baseUrl}header-footnotes`
+  })
+}
+
+export async function addFootnote (footnote) {
+  return await safeRequest({
+    method: 'post',
+    url: `${baseUrl}add-header-footnote`,
+    data: footnote
+  })
+}
+
+export async function updateFootnote (footnote) {
+  if (footnote.id && footnote.text && footnote.header_id) {
+    return await safeRequest({
+      method: 'post',
+      url: `${baseUrl}update-header-footnote`,
+      data: footnote
+    })
+  } else {
+    console.error("updateFootnote failed because not enough data was given!")
+    return {error: "Es fehlen Daten, um die Änderungen zu speichern!"}
+  }
+}
+
+export async function deleteFootnote (id) {
+  if (id) {
+    return await safeRequest({
+      method: 'delete',
+      url: `${baseUrl}delete-header-footnote`,
+      data: {id: id}
+    })
+  } else {
+    console.error("deleteFootnote failed because no footnote id was given!")
+    return {error: "Es fehlen Daten, um die Fußnote zu löschen!"}
+  }
+}
+
 async function safeRequest(axiosConfig) {
   try {
     const response = await axios(axiosConfig)
