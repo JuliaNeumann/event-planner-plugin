@@ -14,6 +14,8 @@ class DatabaseActions {
         $this->config_last_filled_year = "last_filled_year";
         $this->config_autofill_weekday = "autofill_weekday";
         $this->config_header_for_widget = "header_for_widget";
+        $this->config_teaser_main_text = "teaser_main_text";
+        $this->config_teaser_cancel_text = "teaser_cancel_text";
     }
 
     /******************************************************************************************************************
@@ -331,5 +333,28 @@ class DatabaseActions {
             return array("error" => $wpdb->last_error);
         }
         return array("success" => "Fußnote gelöscht!", "result" => $result);
+    }
+
+    /******************************************************************************************************************
+     * Config
+     *****************************************************************************************************************/
+    public function updateTeaserTexts($parameters) {
+        global $wpdb;  
+        $result = $wpdb->update("wp_epp_config", array(
+            'data' => wp_filter_post_kses($parameters["teaser_main_text"])
+        ), array('name' => $this->config_teaser_main_text));
+
+        if ($wpdb->last_error) {
+            return array("error" => $wpdb->last_error);
+        }
+
+        $result = $wpdb->update("wp_epp_config", array(
+            'data' => wp_filter_post_kses($parameters["teaser_cancel_text"])
+        ), array('name' => $this->config_teaser_cancel_text));
+
+        if ($wpdb->last_error) {
+            return array("error" => $wpdb->last_error);
+        }
+        return array("success" => "Änderungen gespeichert!", "result" => $result);
     }
 }

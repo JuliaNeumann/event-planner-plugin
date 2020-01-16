@@ -140,6 +140,29 @@ export async function deleteFootnote (id) {
   }
 }
 
+export async function getConfig () {
+  return await safeRequest({
+     method: 'get',
+     url: `${baseUrl}config`
+  })
+}
+
+export async function updateTeaserTexts (teaserMainText, teaserCancelText) {
+  if (teaserMainText && teaserCancelText) {
+    return await safeRequest({
+      method: 'post',
+      url: `${baseUrl}update-teaser-texts`,
+      data: {
+        teaser_main_text: teaserMainText,
+        teaser_cancel_text: teaserCancelText
+      }
+    })
+  } else {
+    console.error("updateTeasers failed because at least one text was not given!")
+    return {error: "Es fehlen Daten, um die Änderungen zu speichern!"}
+  }
+}
+
 async function safeRequest(axiosConfig) {
   try {
     const response = await axios(axiosConfig)

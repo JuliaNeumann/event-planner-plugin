@@ -69,6 +69,8 @@ class Frontend {
         
         $headerId = $db->getConfigValue($db->config_header_for_widget);
         $eventInfo = $db->getEventInfoByDateAndHeader($date->format('Y-m-d'), $headerId);
+        $mainText = $db->getConfigValue($db->config_teaser_main_text);
+        $cancelText = $db->getConfigValue($db->config_teaser_cancel_text);
 
         $features = array();
         if (!empty($eventInfo)) {
@@ -76,12 +78,10 @@ class Frontend {
         }
 
         if (!empty($eventInfo) &&  (count($features) > 0) && in_array('ban', $features)) {
-            $text = "<p>Am kommenden Sonntag, den ". $date->format('d.m.') . ", findet bei uns leider <strong>kein</strong> Gottesdienst statt.</p>";
+            $text = str_replace("%date%", $date->format('d.m.'), $cancelText);
         }
         else {
-            $text = '<p>Wir feiern Gottesdienst, am kommenden <strong>Sonntag, den ' . $date->format('d.m.') . ', um 17 Uhr</strong> in der Comeniusstraße 28.
-                    Jeder ist herzlich eingeladen!<br>
-                    Parallel findet ein Kinderprogramm (ab 4 Jahre) statt.</p>';
+            $text = str_replace("%date%", $date->format('d.m.'), $mainText);
             if (!empty($eventInfo) &&  (count($features) > 0)) {
                 $header = $db->getHeaderById($headerId);
 

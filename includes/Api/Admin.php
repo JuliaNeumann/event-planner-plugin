@@ -86,6 +86,12 @@ class Admin extends WP_REST_Controller {
             'callback' => array( $this, 'handle_delete_header_footnote'),
             'permission_callback' => array( $this, 'check_admin')
         ));
+    
+        register_rest_route($this->namespace, '/update-teaser-texts', array(
+            'methods' => \WP_REST_Server::CREATABLE,
+            'callback' => array( $this, 'handle_update_teaser_texts'),
+            'permission_callback' => array( $this, 'check_admin')
+        ));
     }
 
     /****************************************************************************************
@@ -177,5 +183,14 @@ class Admin extends WP_REST_Controller {
             return $db->deleteHeaderFootnote($parameters["id"]);
         }
         return array("error" => "Es fehlt eine ID, um eine Fußnote zu löschen");
+    }
+
+    public function handle_update_teaser_texts($data) {
+        $parameters = $data->get_params();
+        if ($parameters["teaser_main_text"] && $parameters["teaser_cancel_text"]) {
+            $db = new DatabaseActions();
+            return $db->updateTeaserTexts($parameters);
+        }
+        return array("error" => "Es fehlen Texte, um den Teaser zu bearbeiten.");
     }
 }
