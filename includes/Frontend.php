@@ -71,13 +71,14 @@ class Frontend {
         $eventInfo = $db->getEventInfoByDateAndHeader($date->format('Y-m-d'), $headerId);
         $mainText = $db->getConfigValue($db->config_teaser_main_text);
         $cancelText = $db->getConfigValue($db->config_teaser_cancel_text);
+        $banIcon = $db->getConfigValue($db->config_icon_for_cancel);
 
         $features = array();
         if (!empty($eventInfo)) {
             $features = json_decode($eventInfo);
         }
 
-        if (!empty($eventInfo) &&  (count($features) > 0) && in_array('ban', $features)) {
+        if (!empty($eventInfo) &&  (count($features) > 0) && in_array($banIcon, $features)) {
             $text = str_replace("%date%", $date->format('d.m.'), $cancelText);
         }
         else {

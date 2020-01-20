@@ -87,9 +87,9 @@ class Admin extends WP_REST_Controller {
             'permission_callback' => array( $this, 'check_admin')
         ));
     
-        register_rest_route($this->namespace, '/update-teaser-texts', array(
+        register_rest_route($this->namespace, '/update-config', array(
             'methods' => \WP_REST_Server::CREATABLE,
-            'callback' => array( $this, 'handle_update_teaser_texts'),
+            'callback' => array( $this, 'handle_update_config'),
             'permission_callback' => array( $this, 'check_admin')
         ));
     }
@@ -185,12 +185,18 @@ class Admin extends WP_REST_Controller {
         return array("error" => "Es fehlt eine ID, um eine Fußnote zu löschen");
     }
 
-    public function handle_update_teaser_texts($data) {
+    public function handle_update_config($data) {
         $parameters = $data->get_params();
-        if ($parameters["teaser_main_text"] && $parameters["teaser_cancel_text"]) {
+        if (sizeof($parameters) > 0) {
             $db = new DatabaseActions();
-            return $db->updateTeaserTexts($parameters);
+            foreach ($parameters as $key => $value) {
+                $result = $db->updateConfig($key, $value);
+                if (!$result) {
+                    return array("error" => "Fehler während des Speicherns der Konfiguration.");
+                }
+            }
+            return array("success" => "Konfiguration erfolgreich gespeichert.");
         }
-        return array("error" => "Es fehlen Texte, um den Teaser zu bearbeiten.");
+        return array("error" => "Es fehlen Werte, um die Konfiguration zu bearbeiten.");
     }
 }

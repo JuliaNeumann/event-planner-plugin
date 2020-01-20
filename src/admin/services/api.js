@@ -147,18 +147,15 @@ export async function getConfig () {
   })
 }
 
-export async function updateTeaserTexts (teaserMainText, teaserCancelText) {
-  if (teaserMainText && teaserCancelText) {
+export async function updateConfig (config) {
+  if (config) {
     return await safeRequest({
       method: 'post',
-      url: `${baseUrl}update-teaser-texts`,
-      data: {
-        teaser_main_text: teaserMainText,
-        teaser_cancel_text: teaserCancelText
-      }
+      url: `${baseUrl}update-config`,
+      data: config
     })
   } else {
-    console.error("updateTeasers failed because at least one text was not given!")
+    console.error("updateConfig failed because no config was not given!")
     return {error: "Es fehlen Daten, um die Änderungen zu speichern!"}
   }
 }
