@@ -21,8 +21,8 @@
         welches ausgewählt werden muss, wenn eine Veranstaltung ausfällt.
       </p>
       <p class="teaser-form__text">
-        Wähle hier den entsprechenden Tabellenkopf aus:
-        <select v-model="modelIconHeader">
+        <label for="icon-header">Wähle hier den entsprechenden Tabellenkopf aus:</label>
+        <select v-model="modelIconHeader" id="icon-header">
           <option value="">--Auswählen--</option>
           <option v-for="header in iconHeaders" :key="`icon_header_${header.id}`" :value="header.id">
             {{ header.name }}
@@ -30,16 +30,16 @@
         </select>
       </p>
       <p class="teaser-form__text">
-        Gib hier den Namen des entsprechenden Icons an (Fontawesome Icon Name):
-        <input type="text" v-model="modelCancelIcon" />
+        <label for="cancel-icon">Gib hier den Namen des entsprechenden Icons an (Fontawesome Icon Name):</label>
+        <input type="text" v-model="modelCancelIcon" id="cancel-icon"/>
       </p>
       <p class="teaser-form__text">
         Sollen die anderen Icons aus dem Tabellenkopf unter dem Teasertext angezeigt werden?
-        <input type="checkbox" value="true" v-model="modelShowIcons"> Ja
+        <input type="checkbox" value="true" v-model="modelShowIcons" id="show-icons"><label for="show-icons">Ja</label>
       </p>
       <p class="teaser-form__text">
-        Wenn über den Icons noch eine Überschrift ("Besonderheiten" o.ä.) erscheinen soll, dann gib diese hier an:
-        <input type="text" v-model="modelIconsHeadline" />
+        <label for="icons-headline">Wenn über den Icons noch eine Überschrift ("Besonderheiten" o.ä.) erscheinen soll, dann gib diese hier an:</label>
+        <input type="text" v-model="modelIconsHeadline" id="icons-headline"/>
       </p>
     </div>
     <div>

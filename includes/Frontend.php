@@ -62,9 +62,10 @@ class Frontend {
     public function render_current_snippet( $atts = [], $content = '' ) {
         $db = new Api\DatabaseActions();
 
+        $autofillWeekday = $db->getConfigValue($db->config_autofill_weekday);
         $date = new \DateTime();
-        if (date('N') !== "7") { // today is sunday
-            $date->modify('next sunday');
+        if (date('l') !== strtolower($autofillWeekday)) { // today is not the weekday in question
+            $date->modify('next ' . $autofillWeekday);
         }
         
         $headerId = $db->getConfigValue($db->config_header_for_widget);
