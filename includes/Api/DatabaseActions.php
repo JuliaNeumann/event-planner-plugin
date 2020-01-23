@@ -17,6 +17,8 @@ class DatabaseActions {
         $this->config_icon_for_cancel = "icon_for_cancel";
         $this->config_teaser_main_text = "teaser_main_text";
         $this->config_teaser_cancel_text = "teaser_cancel_text";
+        $this->config_teaser_show_icons = "teaser_show_icons";
+        $this->config_teaser_icons_headline = "teaser_icons_headline";
     }
 
     /******************************************************************************************************************

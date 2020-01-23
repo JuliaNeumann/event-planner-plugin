@@ -28,6 +28,7 @@ class Admin {
             $submenu[ $slug ][] = array( __( 'Teaser', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/teaser' );
             $submenu[ $slug ][] = array( __( 'Tabellengruppen', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/table-groups' );
             $submenu[ $slug ][] = array( __( 'Fußnoten', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/footnotes' );
+            $submenu[ $slug ][] = array( __( 'Einstellungen', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/settings' );
         }
 
         add_action( 'load-' . $hook, [ $this, 'init_hooks'] );

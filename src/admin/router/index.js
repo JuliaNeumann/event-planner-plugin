@@ -4,6 +4,7 @@ import EditTableHeaders from 'admin/pages/EditTableHeaders.vue'
 import EditTableGroups from 'admin/pages/EditTableGroups.vue'
 import EditTeaser from 'admin/pages/EditTeaser.vue'
 import EditFootnotes from 'admin/pages/EditFootnotes.vue'
+import EditSettings from 'admin/pages/EditSettings.vue'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/footnotes',
       name: 'EditFootnotes',
       component: EditFootnotes
+    },
+    {
+      path: '/settings',
+      name: 'EditSettings',
+      component: EditSettings
     }
   ]
 })

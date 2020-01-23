@@ -18,7 +18,7 @@
     <div class="teaser-form__field">
       <p class="teaser-form__text">
         Damit du angeben kannst, dass eine Veranstaltung ausfällt, musst du in der Tabelle einen Tabellenkopf vom Typ "Icons" anlegen und dort ein Icon hinzufügen,
-        dass ausgewählt werden muss, wenn eine Veranstaltung ausfällt.
+        welches ausgewählt werden muss, wenn eine Veranstaltung ausfällt.
       </p>
       <p class="teaser-form__text">
         Wähle hier den entsprechenden Tabellenkopf aus:
@@ -30,8 +30,16 @@
         </select>
       </p>
       <p class="teaser-form__text">
-        Gib hier den Namen des entsprechenden Icons an:
+        Gib hier den Namen des entsprechenden Icons an (Fontawesome Icon Name):
         <input type="text" v-model="modelCancelIcon" />
+      </p>
+      <p class="teaser-form__text">
+        Sollen die anderen Icons aus dem Tabellenkopf unter dem Teasertext angezeigt werden?
+        <input type="checkbox" value="true" v-model="modelShowIcons"> Ja
+      </p>
+      <p class="teaser-form__text">
+        Wenn über den Icons noch eine Überschrift ("Besonderheiten" o.ä.) erscheinen soll, dann gib diese hier an:
+        <input type="text" v-model="modelIconsHeadline" />
       </p>
     </div>
     <div>
@@ -53,7 +61,9 @@ export default {
       config: [],
       headers: [],
       modelIconHeader: "",
-      modelCancelIcon: ""
+      modelCancelIcon: "",
+      modelShowIcons: false,
+      modelIconsHeadline: ""
     }
   },
 
@@ -73,6 +83,8 @@ export default {
     this.config = await getConfig();
     this.modelIconHeader = this.getConfigValue("header_for_widget");
     this.modelCancelIcon = this.getConfigValue("icon_for_cancel");
+    this.modelShowIcons = this.getConfigValue("teaser_show_icons") === "1";
+    this.modelIconsHeadline = this.getConfigValue("teaser_icons_headline");
     setTimeout(() => {
       wp.editor.initialize('editor-main-text');
       wp.editor.initialize('editor-cancel-text');
@@ -86,7 +98,9 @@ export default {
         teaser_main_text: wp.editor.getContent('editor-main-text'),
         teaser_cancel_text: wp.editor.getContent('editor-cancel-text'),
         header_for_widget: this.modelIconHeader,
-        icon_for_cancel: this.modelCancelIcon
+        icon_for_cancel: this.modelCancelIcon,
+        teaser_show_icons: this.modelShowIcons,
+        teaser_icons_headline: this.modelIconsHeadline
       });
       if (apiResult && apiResult.success) {
         alert("Änderungen wurden gespeichert!");

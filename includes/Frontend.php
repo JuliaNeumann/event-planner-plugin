@@ -72,6 +72,8 @@ class Frontend {
         $mainText = $db->getConfigValue($db->config_teaser_main_text);
         $cancelText = $db->getConfigValue($db->config_teaser_cancel_text);
         $banIcon = $db->getConfigValue($db->config_icon_for_cancel);
+        $teaserShowIcons = $db->getConfigValue($db->config_teaser_show_icons);
+        $teaserIconsHeadline = $db->getConfigValue($db->config_teaser_icons_headline);
 
         $features = array();
         if (!empty($eventInfo)) {
@@ -83,13 +85,16 @@ class Frontend {
         }
         else {
             $text = str_replace("%date%", $date->format('d.m.'), $mainText);
-            if (!empty($eventInfo) &&  (count($features) > 0)) {
+            if (!empty($eventInfo) &&  (count($features) > 0) && $teaserShowIcons === "1") {
                 $header = $db->getHeaderById($headerId);
 
                 if (!empty($header) && !empty($header->additional)) {
                     $icons = json_decode($header->additional);
 
                     $text .= "<p>";
+                    if (!empty($teaserIconsHeadline)) {
+                        $text .= "<strong>" . $teaserIconsHeadline . "</strong><br/>";
+                    }
                     foreach ($icons as $icon) {
                         if (in_array($icon->icon, $features)) {
                             $text .= '<i class="fa fa-fw fa-' . $icon->icon . '"></i> ' . $icon->name . '<br/>';
