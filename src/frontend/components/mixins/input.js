@@ -9,7 +9,6 @@ export const inputMixin = {
   },
   methods: {
     saveNewValue: function () {
-      this.inputContent = this.inputContent || this.value
       this.$emit('input', this.inputContent)
     }
   },

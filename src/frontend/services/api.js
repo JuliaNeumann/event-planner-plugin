@@ -105,7 +105,7 @@ export async function addEvent (newDate) {
 }
 
 export async function updateEvent (eventId, headerId, content, type) {
-  if (eventId && headerId && content) {
+  if (eventId && headerId && typeof(content) !== "undefined") {
     if (type === 'date') {
       content = formatDate(content)
     }

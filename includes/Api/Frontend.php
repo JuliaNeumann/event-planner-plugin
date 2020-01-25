@@ -139,7 +139,7 @@ class Frontend extends WP_REST_Controller {
     {
         $db = new DatabaseActions();
 
-        $useAutofill = $db->getConfigValue($db->use_autofill);
+        $useAutofill = $db->getConfigValue($db->config_use_autofill);
         if ($useAutofill === "1") {
             $autoFiller = new AutoFiller();
             $autoFiller->autoFill();
@@ -168,7 +168,7 @@ class Frontend extends WP_REST_Controller {
     public function handle_update_event($data)
     {
         $parameters = $data->get_params();
-        if ($parameters["event_id"] && $parameters["header_id"] && $parameters["content"]) {
+        if ($parameters["event_id"] && $parameters["header_id"] && array_key_exists("content", $parameters)) {
             $db = new DatabaseActions();
             return $db->updateEvent($parameters);
         }
