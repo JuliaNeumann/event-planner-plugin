@@ -24,11 +24,11 @@ class Admin {
         $hook = add_menu_page( __( 'Event Planner', 'textdomain' ), __( 'Event Planner', 'textdomain' ), $capability, $slug, [ $this, 'plugin_page' ], 'dashicons-text' );
 
         if ( current_user_can( $capability ) ) {
-            $submenu[ $slug ][] = array( __( 'Tabellenköpfe', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/' );
-            $submenu[ $slug ][] = array( __( 'Teaser', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/teaser' );
+            $submenu[ $slug ][] = array( __( 'Allgemeines', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/' );
+            $submenu[ $slug ][] = array( __( 'Tabellenköpfe', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/table-headers' );
             $submenu[ $slug ][] = array( __( 'Tabellengruppen', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/table-groups' );
             $submenu[ $slug ][] = array( __( 'Fußnoten', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/footnotes' );
-            $submenu[ $slug ][] = array( __( 'Einstellungen', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/settings' );
+            $submenu[ $slug ][] = array( __( 'Teaser', 'textdomain' ), $capability, 'admin.php?page=' . $slug . '#/teaser' );
         }
 
         add_action( 'load-' . $hook, [ $this, 'init_hooks'] );

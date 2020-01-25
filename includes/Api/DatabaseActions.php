@@ -19,6 +19,7 @@ class DatabaseActions {
         $this->config_teaser_cancel_text = "teaser_cancel_text";
         $this->config_teaser_show_icons = "teaser_show_icons";
         $this->config_teaser_icons_headline = "teaser_icons_headline";
+        $this->config_use_autofill = "use_autofill";
     }
 
     /******************************************************************************************************************

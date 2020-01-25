@@ -71,10 +71,6 @@ final class Event_Planner {
     public function __construct() {
 
         $this->define_constants();
-        
-        include_once( plugin_dir_path( __FILE__ ) . 'includes/db_setup.php' );
-        register_activation_hook( __FILE__, 'epp_install' ); // TODO: move to activate
-        register_activation_hook( __FILE__, 'epp_install_data' ); // TODO: remove when BE is finished
 
         register_activation_hook( __FILE__, array( $this, 'activate' ) );
         register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
@@ -158,6 +154,9 @@ final class Event_Planner {
         $installed = get_option( 'eventplanner_installed' );
 
         if ( ! $installed ) {
+            include_once( plugin_dir_path( __FILE__ ) . 'includes/db_setup.php' );
+            register_activation_hook( __FILE__, 'epp_install' );
+            register_activation_hook( __FILE__, 'epp_install_data' );
             update_option( 'eventplanner_installed', time() );
         }
 

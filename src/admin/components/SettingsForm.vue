@@ -1,14 +1,12 @@
 <template>
   <form class="settings-form">
     <div class="settings-form__field">
-      Hier kannst du auswählen, welche Tabellenköpfe bei der Übersichtstabelle (shortcode: [eventplanner static="true"]) standardmäßig angezeigt werden sollen:<br/>
-      (Die Nutzer können dann trotzdem über Filter alle Tabellenköpfe ein- und ausblenden)<br/>
-      <div>
-        <div v-for="header in headers" :key="`header_${header.id}`" class="settings-form__header">
-          <input :id="`header_${header.id}`" type="checkbox" :value="header.id" v-model.number="modelHeaders" :disabled="header.order_id === '1'">
-          <label :for="`header_${header.id}`">{{ header.name }}</label>
-        </div>
-      </div>
+      <input id="autofill" type="checkbox" v-model="modelAutofill">
+      <label for="autofill">Tabelle automatisch befüllen</label>
+      <br>
+      <small>Wenn du diese Option auswählst, werden immer automatisch Veranstaltungen für deinen gewählten Wochentag (siehe unten) für das laufende und das kommende Jahr angelegt.
+        Du kannst diese dann trotzdem manuell löschen bzw. Veranstaltungen an anderen Wochentagen manuell hinzufügen.
+      </small>
     </div>
     <div class="settings-form__field">
       <label for="weekday">Wähle hier aus, an welchem Wochentag deine regelmäßige Veranstaltung (z.B. Gottesdienst) stattfindet.</label>
@@ -25,10 +23,18 @@
       <small>Diese Einstellungen wird für das automatische Befüllen der Tabelle verwendet und für die Anzeige des Teasers.</small>
     </div>
     <div class="settings-form__field">
-      <button class="settings-form__button" type="button" @click="save">
-        <i class="fa fa-fw fa-save"></i>&nbsp;Speichern
-      </button>
+      Hier kannst du auswählen, welche Tabellenköpfe bei der Übersichtstabelle (Shortcode: [eventplanner static="true"]) standardmäßig angezeigt werden sollen:<br/>
+      (Die Nutzer können dann trotzdem über Filter alle Tabellenköpfe ein- und ausblenden)<br/>
+      <div>
+        <div v-for="header in headers" :key="`header_${header.id}`" class="settings-form__header">
+          <input :id="`header_${header.id}`" type="checkbox" :value="header.id" v-model.number="modelHeaders" :disabled="header.order_id === '1'">
+          <label :for="`header_${header.id}`">{{ header.name }}</label>
+        </div>
+      </div>
     </div>
+    <button class="settings-form__button" type="button" @click="save">
+      <i class="fa fa-fw fa-save"></i>&nbsp;Speichern
+    </button>
   </form>
 </template>
 
@@ -43,7 +49,8 @@ export default {
       modelWeekday: 'sunday',
       modelHeaders: [],
       config: [],
-      headers: []
+      headers: [],
+      modelAutofill: false
     }
   },
 
@@ -51,6 +58,7 @@ export default {
     this.config = await getConfig();
     this.headers = await getHeaders();
     this.modelWeekday = this.getConfigValue("autofill_weekday");
+    this.modelAutofill = this.getConfigValue("use_autofill") === "1";
     const initialHeaders = this.getConfigValue("static_fields");
     if (initialHeaders) {
       this.modelHeaders = JSON.parse(initialHeaders);
@@ -61,7 +69,8 @@ export default {
     async save() {
       const apiResult = await updateConfig({
         autofill_weekday: this.modelWeekday,
-        static_fields: JSON.stringify(this.modelHeaders)
+        static_fields: JSON.stringify(this.modelHeaders),
+        use_autofill: this.modelAutofill
       });
       if (apiResult && apiResult.success) {
         alert("Änderungen wurden gespeichert!");

@@ -137,10 +137,14 @@ class Frontend extends WP_REST_Controller {
     
     public function handle_get_all_events()
     {
-        $autoFiller = new AutoFiller();
-        $autoFiller->autoFill();
-    
         $db = new DatabaseActions();
+
+        $useAutofill = $db->getConfigValue($db->use_autofill);
+        if ($useAutofill === "1") {
+            $autoFiller = new AutoFiller();
+            $autoFiller->autoFill();
+        }
+    
         return $db->getAllEvents();
     }
     

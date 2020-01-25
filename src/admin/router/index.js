@@ -12,6 +12,11 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'EditSettings',
+      component: EditSettings
+    },
+    {
+      path: '/table-headers',
       name: 'EditTableHeaders',
       component: EditTableHeaders
     },
@@ -29,11 +34,6 @@ export default new Router({
       path: '/footnotes',
       name: 'EditFootnotes',
       component: EditFootnotes
-    },
-    {
-      path: '/settings',
-      name: 'EditSettings',
-      component: EditSettings
     }
   ]
 })
