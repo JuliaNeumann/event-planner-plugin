@@ -1,18 +1,20 @@
 <template>
     <div class="filters">
-        <div class="filters__title" @click="show = !show">
-          <ArrowToggle :direction="show ? 'down': 'right'" />
-          <strong>Filter</strong>
+        <div class="filters__title"
+             @click="show = !show">
+            <ArrowToggle :direction="show ? 'down': 'right'" />
+            <strong>Filter</strong>
         </div>
-        <ul class="filters__list" v-show="show">
+        <ul v-show="show"
+            class="filters__list">
             <li v-for="(head, index) in heads"
                 :key="index"
                 class="filters__item">
                 <input v-if="index > 0"
-                       type="checkbox"
-                       name="filter"
                        :id="`filter_${index}`"
-                       v-model="actives[index]" />
+                       v-model="actives[index]"
+                       type="checkbox"
+                       name="filter">
                 <label v-if="index > 0"
                        :for="`filter_${index}`">
                     {{ head.name }}
@@ -23,41 +25,46 @@
 </template>
 
 <script>
-import ArrowToggle from './ArrowToggle.vue'
+import ArrowToggle from "./ArrowToggle.vue";
 
 export default {
-  name: 'RowFilters',
-  components: {
-    ArrowToggle
-  },
-  props: {
-    heads: {
-      type: Array,
-      required: true
+    name: "RowFilters",
+
+    components: {
+        ArrowToggle
     },
-    value: {
-      type: Array,
-      required: true
-    }
-  },
-  data () {
-    return {
-      show: false,
-      actives: []
-    }
-  },
-  watch: {
-    actives: function () {
-      this.$emit('input', this.actives)
+
+    props: {
+        heads: {
+            type: Array,
+            required: true
+        },
+        value: {
+            type: Array,
+            required: true
+        }
     },
-    value: function () {
-      this.actives = this.value
+
+    data() {
+        return {
+            show: false,
+            actives: []
+        };
+    },
+
+    watch: {
+        actives: function() {
+            this.$emit("input", this.actives);
+        },
+        value: function() {
+            this.actives = this.value;
+        }
+    },
+
+    mounted() {
+        this.actives = this.value;
     }
-  },
-  mounted () {
-    this.actives = this.value
-  }
-}
+};
 </script>
 
 <style scoped>

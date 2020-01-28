@@ -1,23 +1,36 @@
 <template>
-    <td :colspan="cols" class="group-header" :class="this.open ? 'group-header--open' : ''">
-        <ArrowToggle :direction="this.open ? 'down' : 'right'"/>
+    <td :colspan="cols"
+        class="group-header"
+        :class="open ? 'group-header--open' : ''">
+        <ArrowToggle :direction="open ? 'down' : 'right'" />
         <strong>{{ text }}</strong>
     </td>
 </template>
 
 <script>
-  import ArrowToggle from './ArrowToggle.vue'
-  export default {
-    name: 'TableGroupHeader',
+import ArrowToggle from "./ArrowToggle.vue";
+export default {
+    name: "TableGroupHeader",
+
     components: {
-      ArrowToggle
+        ArrowToggle
     },
-    props: [
-      'text',
-      'open',
-      'cols'
-    ]
-  }
+
+    props: {
+        text: {
+            type: String,
+            default: ""
+        },
+        open: {
+            type: Boolean,
+            default: false
+        },
+        cols: {
+            type: Number,
+            default: 2
+        }
+    }
+};
 </script>
 
 <style scoped>

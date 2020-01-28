@@ -1,97 +1,121 @@
 <template>
-  <form class="footnotes-form">
-    <strong>{{ header.name }}</strong>
-    <div class="footnotes-form__field" v-for="(footnote, index) in modeledFootnotesFiltered" :key="`footnote_${footnote.id}`">
-      <input type="text" class="footnotes-form__input" v-model="footnote.text"/>
-      <button type="button" class="footnotes-form__button" @click="deleteFootnote(index)">
-        <i class="fa fa-fw fa-trash"></i>&nbsp;Löschen
-      </button>
-    </div>
-    <div class="footnotes-form__field">
-      <button class="footnotes-form__button" type="button" v-if="modeledFootnotes.length" @click="save">
-        <i class="fa fa-fw fa-save"></i>&nbsp;Speichern
-      </button>
-      <button class="footnotes-form__button" type="button" @click="addFootnote">
-        <i class="fa fa-fw fa-plus"></i>&nbsp;Fußnote hinzufügen
-      </button>
-    </div>
-  </form>
+    <form class="footnotes-form">
+        <strong>{{ header.name }}</strong>
+        <div v-for="(footnote, index) in modeledFootnotesFiltered"
+             :key="`footnote_${footnote.id}`"
+             class="footnotes-form__field">
+            <input v-model="footnote.text"
+                   type="text"
+                   class="footnotes-form__input">
+            <button type="button"
+                    class="footnotes-form__button"
+                    @click="deleteFootnote(index)">
+                <i class="fa fa-fw fa-trash" />&nbsp;Löschen
+            </button>
+        </div>
+        <div class="footnotes-form__field">
+            <button v-if="modeledFootnotes.length"
+                    class="footnotes-form__button"
+                    type="button"
+                    @click="save">
+                <i class="fa fa-fw fa-save" />&nbsp;Speichern
+            </button>
+            <button class="footnotes-form__button"
+                    type="button"
+                    @click="addFootnote">
+                <i class="fa fa-fw fa-plus" />&nbsp;Fußnote hinzufügen
+            </button>
+        </div>
+    </form>
 </template>
 
 <script>
-import { updateFootnote, addFootnote, deleteFootnote } from '../services/api';
+import { updateFootnote, addFootnote, deleteFootnote } from "../services/api";
 
 export default {
-  name: 'FootnotesForm',
+    name: "FootnotesForm",
 
-  props: {
-    header: Object,
-    footnotes: Array
-  },
-
-  data () {
-    return {
-      modeledFootnotes: this.footnotes.map(footnote => Object.assign({deleted: false}, footnote)),
-      countNew: 0,
-      newPrefix: "NEW"
-    }
-  },
-
-  computed: {
-    modeledFootnotesFiltered () {
-      return this.modeledFootnotes.filter(footnote => footnote.deleted !== true);
-    }
-  },
-
-  methods: {
-    deleteFootnote (index) {
-      const confirmed = window.confirm('Diese Fußnote wirklich loeschen? (Wird erst endgültig gespeichert, wenn du auf "Speichern" geklickt hast.)');
-      if (confirmed) {
-        const footnote = this.modeledFootnotes[index];
-        if (footnote.id.indexOf(this.newPrefix) === 0) {
-          // footnote was added before without being saved, so can be just removed from the modeled array...
-          this.modeledFootnotes.splice(index, 1);
-        } else {
-          // ... otherwise we need to update in DB later, so we save the status instead of removing 
-          this.modeledFootnotes[index].deleted = true;
+    props: {
+        header: {
+            type: Object,
+            default: () => {}
+        },
+        footnotes: {
+            type: Array,
+            default: () => []
         }
-      }
     },
 
-    addFootnote () {
-      const text = prompt("Gib den Text für die Fußnote an: ");
-      if (text) {
-        this.modeledFootnotes.push({text: text, header_id: this.header.id, id: `${this.newPrefix}_${this.countNew}`});
-        this.countNew++;      
-      } else if (text !== null) {
-        alert("Du musst einen Text für die neue Fußnote angeben!");
-      }
+    data() {
+        return {
+            modeledFootnotes: this.footnotes.map(footnote => Object.assign({deleted: false}, footnote)),
+            countNew: 0,
+            newPrefix: "NEW"
+        };
     },
 
-    async save () {
-      let hasError = false;
-      await this.modeledFootnotes.forEach(async (footnote) => {
-        let result;
-        if (footnote.deleted) {
-          result = await deleteFootnote(footnote.id);
-        } else if (footnote.id.indexOf(this.newPrefix) === 0) {
-          result = await addFootnote(footnote);
-        } else {
-          result = await updateFootnote(footnote);
+    computed: {
+        modeledFootnotesFiltered() {
+            return this.modeledFootnotes.filter(footnote => footnote.deleted !== true);
         }
-        if (result.error) {
-          hasError = true;
-          alert(result.error);
-          return;
+    },
+
+    methods: {
+        deleteFootnote(index) {
+            const confirmed = window.confirm(
+                "Diese Fußnote wirklich loeschen? " +
+                "(Wird erst endgültig gespeichert, wenn du auf \"Speichern\" geklickt hast.)"
+            );
+            if (confirmed) {
+                const footnote = this.modeledFootnotes[index];
+                if (footnote.id.indexOf(this.newPrefix) === 0) {
+                    // footnote was added before without being saved, so can be just removed from the modeled array...
+                    this.modeledFootnotes.splice(index, 1);
+                } else {
+                    // ... otherwise we need to update in DB later, so we save the status instead of removing
+                    this.modeledFootnotes[index].deleted = true;
+                }
+            }
+        },
+
+        addFootnote() {
+            const text = prompt("Gib den Text für die Fußnote an: ");
+            if (text) {
+                this.modeledFootnotes.push({
+                    text: text,
+                    header_id: this.header.id,
+                    id: `${this.newPrefix}_${this.countNew}`
+                });
+                this.countNew++;
+            } else if (text !== null) {
+                alert("Du musst einen Text für die neue Fußnote angeben!");
+            }
+        },
+
+        async save() {
+            let hasError = false;
+            await this.modeledFootnotes.forEach(async(footnote) => {
+                let result;
+                if (footnote.deleted) {
+                    result = await deleteFootnote(footnote.id);
+                } else if (footnote.id.indexOf(this.newPrefix) === 0) {
+                    result = await addFootnote(footnote);
+                } else {
+                    result = await updateFootnote(footnote);
+                }
+                if (result.error) {
+                    hasError = true;
+                    alert(result.error);
+                    return;
+                }
+            });
+            if (!hasError) {
+                alert("Änderungen gespeichert!");
+                this.$emit("update");
+            }
         }
-      });
-      if (!hasError) {
-        alert("Änderungen gespeichert!");
-        this.$emit("update");
-      }
     }
-  }
-}
+};
 </script>
 
 <style lang="less" scoped>

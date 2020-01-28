@@ -1,20 +1,26 @@
 <template>
     <div>
-        <button @click="showOverlay = true">+ Gottesdienst hinzufügen</button>
+        <button @click="showOverlay = true">
+            + Gottesdienst hinzufügen
+        </button>
         <b-modal :active.sync="showOverlay">
             <div class="add">
                 Bitte Datum auswählen:
-                <datepicker :language="datepickerTranslations" :inline="true" v-model="date" :open-date="lastDate" class="add__datepicker"></datepicker>
+                <datepicker v-model="date"
+                            :language="datepickerTranslations"
+                            :inline="true"
+                            :open-date="lastDate"
+                            class="add__datepicker" />
                 <div class="add__date">
                     {{ formatDate }}
                 </div>
                 <button class="add__button"
-                        :disabled="this.date ? false : 'disabled'"
+                        :disabled="date ? false : 'disabled'"
                         @click="addDate">
                     Hinzufügen
                 </button>
                 <button class="add__button"
-                        :disabled="this.date ? false : 'disabled'"
+                        :disabled="date ? false : 'disabled'"
                         @click="addDateAndClose">
                     Hinzufügen & schließen
                 </button>
@@ -24,44 +30,48 @@
 </template>
 
 <script>
-  import Datepicker from 'vuejs-datepicker'
-  import de from '../../../node_modules/vuejs-datepicker/src/locale/translations/de'
+import Datepicker from "vuejs-datepicker";
+import de from "../../../node_modules/vuejs-datepicker/src/locale/translations/de";
 
-  export default {
-    name: 'AddButton',
+export default {
+    name: "AddButton",
+
     components: {
-      Datepicker
+        Datepicker
     },
-    data: function () {
-      return {
-        datepickerTranslations: de,
-        showOverlay: false,
-        date: '',
-        lastDate: new Date()
-      }
+
+    data: function() {
+        return {
+            datepickerTranslations: de,
+            showOverlay: false,
+            date: "",
+            lastDate: new Date()
+        };
     },
+
     computed: {
-      formatDate () {
-        if (this.date) {
-          const dateObj = new Date(this.date)
-          return dateObj.toLocaleDateString()
+        formatDate() {
+            if (this.date) {
+                const dateObj = new Date(this.date);
+                return dateObj.toLocaleDateString();
+            }
+            return "";
         }
-        return '';
-      }
     },
+
     methods: {
-      addDate () {
-        this.$emit('addDate', this.date)
-        this.lastDate = this.date
-        this.date = ''
-      },
-      addDateAndClose () {
-        this.addDate()
-        this.date = ''
-        this.showOverlay = false
-      }
+        addDate() {
+            this.$emit("addDate", this.date);
+            this.lastDate = this.date;
+            this.date = "";
+        },
+        addDateAndClose() {
+            this.addDate();
+            this.date = "";
+            this.showOverlay = false;
+        }
     }
-  }
+};
 </script>
 
 <style scoped>

@@ -1,57 +1,70 @@
 <template>
-  <div v-click-outside="saveNewValue"
-       class="options">
-    <div v-for="option in options"
-         :key="option.name"
-         class="option">
-      <input type="checkbox" :value="option.icon" :id="option.icon" v-model="inputContent"/>
-      <label :for="option.icon">
-        <i class="fa"
-           :class="`fa-${option.icon}`">
-        </i>
-        {{ option.name }}
-      </label>
+    <div v-click-outside="saveNewValue"
+         class="options">
+        <div v-for="option in options"
+             :key="option.name"
+             class="option">
+            <input :id="option.icon"
+                   v-model="inputContent"
+                   type="checkbox"
+                   :value="option.icon">
+            <label :for="option.icon">
+                <i class="fa"
+                   :class="`fa-${option.icon}`" />
+                {{ option.name }}
+            </label>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-  import ClickOutside from 'vue-click-outside'
-  import {inputMixin} from '../mixins/input'
+import ClickOutside from "vue-click-outside";
+import {inputMixin} from "../mixins/input";
 
-  export default {
-    name: 'IconInput',
-    data: () => {
-      return {
-        firstClick: true
-      }
-    },
-    props: [
-      'additional'
-    ],
+export default {
+    name: "IconInput",
+
     directives: {
-      ClickOutside
+        ClickOutside
     },
+
     mixins: [inputMixin],
-    methods: {
-      saveNewValue: function () {
-        if (this.firstClick) {
-          this.firstClick = false;
-          return;
+
+    props: {
+        additional: {
+            type: String,
+            default: "[]"
         }
-        this.inputContent = this.inputContent && this.inputContent.length > 0 ? JSON.stringify(this.inputContent) : '[]'
-        inputMixin.methods.saveNewValue.call(this)
-      }
     },
+
+    data: () => {
+        return {
+            firstClick: true
+        };
+    },
+
     computed: {
-      options () {
-        return JSON.parse(this.additional)
-      }
+        options() {
+            return JSON.parse(this.additional);
+        }
     },
-    created: function () {
-      this.inputContent = this.value ? JSON.parse(this.value) : []
+
+    created: function() {
+        this.inputContent = this.value ? JSON.parse(this.value) : [];
+    },
+
+    methods: {
+        saveNewValue: function() {
+            if (this.firstClick) {
+                this.firstClick = false;
+                return;
+            }
+            this.inputContent = this.inputContent && this.inputContent.length > 0 ?
+                JSON.stringify(this.inputContent) : "[]";
+            inputMixin.methods.saveNewValue.call(this);
+        }
     }
-  }
+};
 </script>
 
 <style scoped>

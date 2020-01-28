@@ -3,17 +3,24 @@
         <button @click="showOverlay = true">
             Bearbeiten
         </button>
-        <b-modal :active.sync="showOverlay" @close="handleClose">
+        <b-modal :active.sync="showOverlay"
+                 @close="handleClose">
             <div class="edit">
-                <div ref="intro" class="edit__intro">Zum Bearbeiten auf die Felder klicken.</div>
+                <div ref="intro"
+                     class="edit__intro">
+                    Zum Bearbeiten auf die Felder klicken.
+                </div>
                 <div v-for="head in heads"
                      :key="head.id">
-                    <strong>{{head.name}}:</strong><br>
-                    <TableCell :head="head" :row="row" tag="div" class="edit__cell" />
+                    <strong>{{ head.name }}:</strong><br>
+                    <TableCell :head="head"
+                               :row="row"
+                               tag="div"
+                               class="edit__cell" />
                 </div>
                 <div class="edit__button-wrapper">
                     <button class="edit__button"
-                        @click="saveAndClose">
+                            @click="saveAndClose">
                         Speichern & Schließen
                     </button>
                 </div>
@@ -23,31 +30,41 @@
 </template>
 
 <script>
-  import TableCell from './TableCell.vue'
+import TableCell from "./TableCell.vue";
 
-  export default {
-    name: 'EditButton',
+export default {
+    name: "EditButton",
+
     components: {TableCell},
-    data: function () {
-      return {
-        showOverlay: false
-      }
+
+    props: {
+        row: {
+            type: Object,
+            default: () => {}
+        },
+        heads: {
+            type: Array,
+            default: () => []
+        }
     },
-    props: [
-      'row',
-      'heads'
-    ],
+
+    data: function() {
+        return {
+            showOverlay: false
+        };
+    },
+
     methods: {
-      handleClose () {
-          this.$emit('updated');
-      },
-      saveAndClose () {
-        this.$refs.intro.click();  
-        this.showOverlay = false;
-        this.handleClose();
-      }
+        handleClose() {
+            this.$emit("updated");
+        },
+        saveAndClose() {
+            this.$refs.intro.click();
+            this.showOverlay = false;
+            this.handleClose();
+        }
     }
-  }
+};
 </script>
 
 <style scoped>
@@ -75,7 +92,7 @@
         max-width: 450px;
         margin-top: 15px;
     }
-    
+
     .edit__button-wrapper {
         text-align: center;
     }

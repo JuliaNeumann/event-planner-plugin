@@ -1,19 +1,19 @@
 <template>
-  <div id="epp_app_static">
-    <StaticTable/>
-  </div>
+    <div id="epp_app_static">
+        <StaticTable />
+    </div>
 </template>
 
 <script>
-import StaticTable from './components/StaticTable.vue'
-import "./assets/css/general_styles.css"
+import StaticTable from "./components/StaticTable.vue";
+import "./assets/css/general_styles.css";
 
 export default {
-  name: 'app',
-  components: {
-    StaticTable
-  }
-}
+    name: "App",
+    components: {
+        StaticTable
+    }
+};
 </script>
 
 <style>

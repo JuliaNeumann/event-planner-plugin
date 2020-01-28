@@ -16,6 +16,7 @@ module.exports = {
         "allowFirstLine": true
       }
     }],
+    "vue/prop-name-casing": [0],
     "comma-dangle": [1, "never"],
     "comma-spacing": [1, { "before": false, "after": true }],
     "key-spacing": [1, { "beforeColon": false, "afterColon": true }],

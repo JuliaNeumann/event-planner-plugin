@@ -3,37 +3,40 @@
          class="table-view">
         <table class="table">
             <tbody>
-            <template v-for="(head, index) in activeHeads">
-                <tr class="row" v-if="startGroup(index)" :key="`group_head_${index}`">
-                  <TableGroupHeader :text="groups[head.group_id]"
-                                    :open="activeGroups.indexOf(head.group_id) > -1"
-                                    :cols="paginate ? rowsPerPage + 1 : 2"
-                                    @click.native="toggleGroup(head.group_id)"/>
+                <template v-for="(head, index) in activeHeads">
+                    <tr v-if="startGroup(index)"
+                        :key="`group_head_${index}`"
+                        class="row">
+                        <TableGroupHeader :text="groups[head.group_id]"
+                                          :open="activeGroups.indexOf(head.group_id) > -1"
+                                          :cols="paginate ? rowsPerPage + 1 : 2"
+                                          @click.native="toggleGroup(head.group_id)" />
+                    </tr>
+                    <tr v-show="showRow(head)"
+                        :key="head.id"
+                        class="row"
+                        :class="rowClass(head)">
+                        <TableHead :text="head.name"
+                                   :description="head.description"
+                                   :footnotes="head.footnotes" />
+                        <TableCell v-for="(row, rowIndex) in rowsToShow"
+                                   :key="`row_${row.id}_${rowIndex}`"
+                                   :head="head"
+                                   :row="row" />
+                    </tr>
+                </template>
+                <tr v-if="showActions"
+                    class="row">
+                    <TableHead text="Aktionen" />
+                    <td v-for="(row, rowIndex) in rowsToShow"
+                        :key="row.id"
+                        class="table__cell">
+                        <button :key="`delete_${row.id}_${rowIndex}`"
+                                @click="deleteRow(row.id)">
+                            Löschen
+                        </button>
+                    </td>
                 </tr>
-                <tr :key="head.id"
-                    v-show="showRow(head)"
-                    class="row"
-                    :class="rowClass(head)">
-                    <TableHead :text="head.name"
-                               :description="head.description"
-                               :footnotes="head.footnotes" />
-                    <TableCell v-for="(row, rowIndex) in rowsToShow"
-                               :head="head"
-                               :row="row"
-                               :key="`row_${row.id}_${rowIndex}`" />
-                </tr>
-            </template>
-            <tr v-if="showActions" class="row">
-              <TableHead text="Aktionen" />
-              <td v-for="(row, rowIndex) in rowsToShow"
-                  :key="row.id"
-                  class="table__cell">
-                <button :key="`delete_${row.id}_${rowIndex}`"
-                        @click="deleteRow(row.id)">
-                    Löschen
-                </button>
-              </td>
-            </tr>
             </tbody>
         </table>
         <b-pagination v-if="paginate"
@@ -41,101 +44,120 @@
                       :current.sync="page"
                       :simple="false"
                       :rounded="false"
-                      :per-page="rowsPerPage">
-        </b-pagination>
+                      :per-page="rowsPerPage" />
     </div>
 </template>
 
 <script>
-  import TableHead from './TableHead.vue'
-  import TableCell from './TableCell.vue'
-  import TableGroupHeader from './TableGroupHeader.vue'
-  import _debounce from 'lodash.debounce'
+import TableHead from "./TableHead.vue";
+import TableCell from "./TableCell.vue";
+import TableGroupHeader from "./TableGroupHeader.vue";
+import _debounce from "lodash.debounce";
 
-  const COL_WIDTH = 305
-  const HEAD_COL_WIDTH = 197
+const COL_WIDTH = 305;
+const HEAD_COL_WIDTH = 197;
 
-  export default {
-    name: 'TableView',
+export default {
+    name: "TableView",
+
     components: {
-      TableHead,
-      TableCell,
-      TableGroupHeader
+        TableHead,
+        TableCell,
+        TableGroupHeader
     },
-    props: [
-      'heads',
-      'groups',
-      'rows',
-      'paginate'
-    ],
-    data () {
-      return {
-        activeGroups: [],
-        page: 1,
-        rowsPerPage: 2,
-        showActions: window.eventPlannerApp && window.eventPlannerApp.admin
-      }
+
+    props: {
+        heads: {
+            type: Array,
+            default: () => []
+        },
+        groups: {
+            type: Object,
+            default: () => {}
+        },
+        rows: {
+            type: Array,
+            default: () => []
+        },
+        paginate: {
+            type: Boolean,
+            default: false
+        }
     },
+
+    data() {
+        return {
+            activeGroups: [],
+            page: 1,
+            rowsPerPage: 2,
+            showActions: window.eventPlannerApp && window.eventPlannerApp.admin
+        };
+    },
+
     computed: {
-      rowsToShow: function () {
-        if (this.paginate) {
-          const startRow = (this.page - 1) * this.rowsPerPage
-          const endRow = startRow + this.rowsPerPage
-          return this.rows.slice(startRow, endRow)
+        rowsToShow: function() {
+            if (this.paginate) {
+                const startRow = (this.page - 1) * this.rowsPerPage;
+                const endRow = startRow + this.rowsPerPage;
+                return this.rows.slice(startRow, endRow);
+            }
+            return this.rows;
+        },
+        tableViewClass: function() {
+            return {
+                "table--view-small": this.rowsToShow.length < 2
+            };
+        },
+        activeHeads: function() {
+            return this.heads.filter((head) => head.active);
         }
-        return this.rows
-      },
-      tableViewClass: function () {
-        return {
-          'table--view-small': this.rowsToShow.length < 2
-        }
-      },
-      activeHeads: function () {
-        return this.heads.filter((head) => head.active)
-      }
     },
+
     watch: {
-      activeGroups: function () {
-        localStorage.setItem('activeGroups', JSON.stringify(this.activeGroups))
-      }
+        activeGroups: function() {
+            localStorage.setItem("activeGroups", JSON.stringify(this.activeGroups));
+        }
     },
-    mounted: function () {
-      if (localStorage.getItem('activeGroups')) {
-        this.activeGroups = JSON.parse(localStorage.getItem('activeGroups'))
-      }
-      this.calcColNum()
-      window.addEventListener('resize', _debounce(this.calcColNum, 500))
+    mounted: function() {
+        if (localStorage.getItem("activeGroups")) {
+            this.activeGroups = JSON.parse(localStorage.getItem("activeGroups"));
+        }
+        this.calcColNum();
+        window.addEventListener("resize", _debounce(this.calcColNum, 500));
     },
+
     methods: {
-      startGroup: function (headIndex) {
-        return this.activeHeads[headIndex].group_id &&                       // current head belongs to a group and ...
-          (headIndex === 0 || !this.activeHeads[headIndex - 1].group_id)     // ... is the first head or the head before it does not belong to a group
-      },
-      toggleGroup: function (groupID) {
-        const index = this.activeGroups.indexOf(groupID)
-        if (index === -1) {
-          this.activeGroups.push(groupID)
-          return
+        startGroup: function(headIndex) {
+            // current head belongs to a group and ...
+            return this.activeHeads[headIndex].group_id &&
+                // ... is the first head or the head before it does not belong to a group
+                (headIndex === 0 || !this.activeHeads[headIndex - 1].group_id);
+        },
+        toggleGroup: function(groupID) {
+            const index = this.activeGroups.indexOf(groupID);
+            if (index === -1) {
+                this.activeGroups.push(groupID);
+                return;
+            }
+            this.activeGroups.splice(index, 1);
+        },
+        showRow: function(head) {
+            return !head.group_id || (this.activeGroups.indexOf(head.group_id) > -1);
+        },
+        rowClass: function(head) {
+            return {
+                "row--group": head.group_id,
+                "row--highlight": head.id === "1"
+            };
+        },
+        calcColNum: function() {
+            this.rowsPerPage = Math.floor((this.$el.clientWidth - HEAD_COL_WIDTH) / COL_WIDTH);
+        },
+        deleteRow: function(rowId) {
+            this.$emit("deleteRow", rowId);
         }
-        this.activeGroups.splice(index, 1)
-      },
-      showRow: function (head) {
-        return !head.group_id || (this.activeGroups.indexOf(head.group_id) > -1)
-      },
-      rowClass: function (head) {
-        return {
-          'row--group': head.group_id,
-          'row--highlight': head.id === '1'
-        }
-      },
-      calcColNum: function () {
-        this.rowsPerPage = Math.floor((this.$el.clientWidth - HEAD_COL_WIDTH) / COL_WIDTH)
-      },
-      deleteRow: function (rowId) {
-        this.$emit('deleteRow', rowId)
-      }
     }
-  }
+};
 </script>
 
 <style scoped>

@@ -1,75 +1,88 @@
 <template>
-    <component :is="htmlTag"
-        class="cell"
-        :style="inlineStyles"
-        @click="startEdit"
-        @focus="startEdit">
-        <div class="cell__content"
-             :class="`cell__content--${head.type}`"
-             v-if="!editMode">
-             <CellContent :head="head" :content="cellContent" />
+    <component :is="tag"
+               class="cell"
+               :style="inlineStyles"
+               @click="startEdit"
+               @focus="startEdit">
+        <div v-if="!editMode"
+             class="cell__content"
+             :class="`cell__content--${head.type}`">
+            <CellContent :head="head"
+                         :content="cellContent" />
         </div>
-        <InputField @stopEditMode="stopEdit"
-                    v-else
+        <InputField v-else
                     v-model="cellContent"
                     :type="head.type"
-                    :additional="head.additional"/>
+                    :additional="head.additional"
+                    @stopEditMode="stopEdit" />
     </component>
 </template>
 
 <script>
-  import InputField from './InputField.vue'
-  import CellContent from './CellContent.vue'
-  import {updateEvent} from '../services/api'
+import InputField from "./InputField.vue";
+import CellContent from "./CellContent.vue";
+import {updateEvent} from "../services/api";
 
-  export default {
-    name: 'TableCell',
+export default {
+    name: "TableCell",
+
     components: {
-      InputField,
-      CellContent
+        InputField,
+        CellContent
     },
-    props: [
-      'head',
-      'row',
-      'tag'
-    ],
-    data: function () {
-      return {
-        editMode: false,
-        currentHeight: false,
-        cellContent: ''
-      }
+
+    props: {
+        head: {
+            type: Object,
+            default: () => {}
+        },
+        row: {
+            type: Object,
+            default: () => {}
+        },
+        tag: {
+            type: String,
+            default: "td"
+        }
     },
+
+    data: function() {
+        return {
+            editMode: false,
+            currentHeight: false,
+            cellContent: ""
+        };
+    },
+
     computed: {
-      htmlTag () {
-        return this.tag || 'td'
-      },
-      inlineStyles () {
-        return this.currentHeight ? {
-          height: this.head.type !== 'icons' ? `${this.currentHeight}px` : 'auto'
-        } : {}
-      }
+        inlineStyles() {
+            return this.currentHeight ? {
+                height: this.head.type !== "icons" ? `${this.currentHeight}px` : "auto"
+            } : {};
+        }
     },
+
+    created: function() {
+        this.cellContent = this.row.fields[this.head.id];
+    },
+
     methods: {
-      startEdit: function () {
-        if (!this.editMode) {
-          this.currentHeight = this.$el.clientHeight
-          this.editMode = true
+        startEdit: function() {
+            if (!this.editMode) {
+                this.currentHeight = this.$el.clientHeight;
+                this.editMode = true;
+            }
+        },
+        stopEdit: async function() {
+            this.editMode = false;
+            this.currentHeight = false;
+            const apiResult = await updateEvent(this.row.id, this.head.id, this.cellContent, this.head.type);
+            if (apiResult && apiResult.error) {
+                alert(`Beim Bearbeiten ist ein Fehler aufgetreten: ${apiResult.error}`);
+            }
         }
-      },
-      stopEdit: async function () {
-        this.editMode = false
-        this.currentHeight = false
-        const apiResult = await updateEvent(this.row.id, this.head.id, this.cellContent, this.head.type)
-        if (apiResult && apiResult.error) {
-          alert(`Beim Bearbeiten ist ein Fehler aufgetreten: ${apiResult.error}`)
-        }
-      }
-    },
-    created: function () {
-      this.cellContent = this.row.fields[this.head.id]
     }
-  }
+};
 </script>
 
 <style scoped>

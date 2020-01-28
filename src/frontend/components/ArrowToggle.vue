@@ -1,14 +1,19 @@
-<template>
-    <i class="arrow" :class="`arrow--${direction}`"></i>
+<template functional>
+    <i class="arrow"
+       :class="`arrow--${props.direction}`" />
 </template>
 
 <script>
-  export default {
-    name: 'ArrowToggle',
-    props: [
-      'direction'
-    ]
-  }
+export default {
+    name: "ArrowToggle",
+
+    props: {
+        direction: {
+            type: String,
+            default: "right"
+        }
+    }
+};
 </script>
 
 <style scoped>

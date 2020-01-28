@@ -1,26 +1,19 @@
 <template>
-  <div class="app-settings">
-    <h2>Teaser bearbeiten</h2>
-    <TeaserForm></TeaserForm>
-  </div>
+    <div class="app-settings">
+        <h2>Teaser bearbeiten</h2>
+        <TeaserForm />
+    </div>
 </template>
 
 <script>
 import TeaserForm from "../components/TeaserForm.vue";
 
 export default {
+    name: "EditTeaser",
 
-  name: 'EditTeaser',
-
-  components: {
-    TeaserForm
-  },
-
-  data () {
-    return {
-
-    };
-  }
+    components: {
+        TeaserForm
+    }
 };
 </script>
 

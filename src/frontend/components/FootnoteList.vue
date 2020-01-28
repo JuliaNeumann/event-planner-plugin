@@ -1,39 +1,44 @@
 <template>
-  <div v-if="footnotes.length > 0"
-       class="footnotes">
-    <h3>Anmerkungen:</h3>
-    <ol class="footnote__list">
-      <li v-for="footnote in footnotes"
-          :key="footnote.number"
-          :id="`footnote_${footnote.number}`"
-          class="footnote__item">
-          <sup>
-            {{ footnote.number }}
-          </sup>
-          {{ footnote.text }}
-      </li>
-    </ol>
-  </div>
+    <div v-if="footnotes.length > 0"
+         class="footnotes">
+        <h3>Anmerkungen:</h3>
+        <ol class="footnote__list">
+            <li v-for="footnote in footnotes"
+                :id="`footnote_${footnote.number}`"
+                :key="footnote.number"
+                class="footnote__item">
+                <sup>
+                    {{ footnote.number }}
+                </sup>
+                {{ footnote.text }}
+            </li>
+        </ol>
+    </div>
 </template>
 
 <script>
-    export default {
-      name: 'FootnoteList',
-      props: [
-        'heads'
-      ],
-      computed: {
-        footnotes: function () {
-          let footnotes = []
-          this.heads.forEach((head) => {
-            head.footnotes.forEach((footnote) => {
-              footnotes.push(footnote)
-            })
-          })
-          return footnotes
+export default {
+    name: "FootnoteList",
+
+    props: {
+        heads: {
+            type: Array,
+            default: () => []
         }
-      }
+    },
+
+    computed: {
+        footnotes: function() {
+            let footnotes = [];
+            this.heads.forEach((head) => {
+                head.footnotes.forEach((footnote) => {
+                    footnotes.push(footnote);
+                });
+            });
+            return footnotes;
+        }
     }
+};
 </script>
 
 <style scoped>

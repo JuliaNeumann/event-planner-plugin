@@ -1,19 +1,25 @@
 <template>
-    <textarea class="textarea" @blur="saveNewValue" @keydown.tab="saveNewValue" ref="inputField" v-model="inputContent"></textarea>
+    <textarea ref="inputField"
+              v-model="inputContent"
+              class="textarea"
+              @blur="saveNewValue"
+              @keydown.tab="saveNewValue" />
 </template>
 
 <script>
-  import {inputMixin} from '../mixins/input'
+import {inputMixin} from "../mixins/input";
 
-  export default {
-    name: 'MultiLineInput',
-    data: function () {
-      return {
-        focusOnStart: true
-      }
-    },
-    mixins: [inputMixin]
-  }
+export default {
+    name: "MultiLineInput",
+
+    mixins: [inputMixin],
+
+    data: function() {
+        return {
+            focusOnStart: true
+        };
+    }
+};
 </script>
 
 <style scoped>

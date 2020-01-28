@@ -1,19 +1,26 @@
 <template>
-    <input class="input" @blur="saveNewValue" @keydown.enter.tab="saveNewValue" ref="inputField" type="text" v-model="inputContent" />
+    <input ref="inputField"
+           v-model="inputContent"
+           class="input"
+           type="text"
+           @blur="saveNewValue"
+           @keydown.enter.tab="saveNewValue">
 </template>
 
 <script>
-  import {inputMixin} from '../mixins/input'
+import {inputMixin} from "../mixins/input";
 
-  export default {
-    name: 'SingleLineInput',
-    data: function () {
-      return {
-        focusOnStart: true
-      }
-    },
-    mixins: [inputMixin]
-  }
+export default {
+    name: "SingleLineInput",
+
+    mixins: [inputMixin],
+
+    data: function() {
+        return {
+            focusOnStart: true
+        };
+    }
+};
 </script>
 
 <style scoped>

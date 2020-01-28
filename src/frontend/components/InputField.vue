@@ -1,45 +1,57 @@
 <script>
-  import DateInput from './inputs/DateInput.vue'
-  import SingleLineInput from './inputs/SingleLineInput.vue'
-  import MultiLineInput from './inputs/MultiLineInput.vue'
-  import IconInput from './inputs/IconInput.vue'
+import DateInput from "./inputs/DateInput.vue";
+import SingleLineInput from "./inputs/SingleLineInput.vue";
+import MultiLineInput from "./inputs/MultiLineInput.vue";
+import IconInput from "./inputs/IconInput.vue";
 
-  const mapTypeToComponent = {
-    'date': DateInput,
-    'text': SingleLineInput,
-    'longtext': MultiLineInput,
-    'icons': IconInput
-  }
+const mapTypeToComponent = {
+    "date": DateInput,
+    "text": SingleLineInput,
+    "longtext": MultiLineInput,
+    "icons": IconInput
+};
 
-  export default {
+export default {
+    name: "InputField",
+
     components: {
-      DateInput,
-      SingleLineInput,
-      MultiLineInput
+        DateInput,
+        SingleLineInput,
+        MultiLineInput
     },
-    name: 'InputField',
-    props: [
-      'value',
-      'type',
-      'additional'
-    ],
-    render: function (h) {
-      const self = this
-      return h(mapTypeToComponent[this.type], {
-        props: {
-          value: this.value,
-          additional: this.additional
+
+    props: {
+        value: {
+            type: String,
+            default: ""
         },
-        on: {
-          input: function (payload) {
-            self.$emit('input', payload)
-            self.$emit('stopEditMode')
-          }
+        type: {
+            type: String,
+            default: "text"
         },
-        domProps: {
-          value: self.value
+        additional: {
+            type: String,
+            default: "[]"
         }
-      })
+    },
+
+    render: function(h) {
+        const self = this;
+        return h(mapTypeToComponent[this.type], {
+            props: {
+                value: this.value,
+                additional: this.additional
+            },
+            on: {
+                input: function(payload) {
+                    self.$emit("input", payload);
+                    self.$emit("stopEditMode");
+                }
+            },
+            domProps: {
+                value: self.value
+            }
+        });
     }
-  }
+};
 </script>

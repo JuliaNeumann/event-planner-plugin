@@ -1,14 +1,14 @@
 <template>
-  <div id="vue-backend-app">
-    <h1>Event Planner</h1>
-    <router-view />
-  </div>
+    <div id="vue-backend-app">
+        <h1>Event Planner</h1>
+        <router-view />
+    </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
-}
+    name: "App"
+};
 </script>
 
 <style>

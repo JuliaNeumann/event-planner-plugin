@@ -1,19 +1,19 @@
 <template>
-  <div id="epp_app">
-    <EditTable/>
-  </div>
+    <div id="epp_app">
+        <EditTable />
+    </div>
 </template>
 
 <script>
-import EditTable from './components/EditTable.vue'
-import "./assets/css/general_styles.css"
+import EditTable from "./components/EditTable.vue";
+import "./assets/css/general_styles.css";
 
 export default {
-  name: 'app',
-  components: {
-    EditTable
-  }
-}
+    name: "App",
+    components: {
+        EditTable
+    }
+};
 </script>
 
 <style>

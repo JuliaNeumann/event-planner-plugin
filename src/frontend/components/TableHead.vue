@@ -2,28 +2,39 @@
     <th class="head">
         {{ text }}
         <sup v-if="footnotes">
-          <a v-for="footnote in footnotes"
-             :key="footnote.number"
-             :href="`#footnote_${footnote.number}`"
-             class="head__footnote">
-            {{ footnote.number }}
-          </a>
+            <a v-for="footnote in footnotes"
+               :key="footnote.number"
+               :href="`#footnote_${footnote.number}`"
+               class="head__footnote">
+                {{ footnote.number }}
+            </a>
         </sup>
-        <small v-if="description" class="head__tooltip">
-          {{ description }}
+        <small v-if="description"
+               class="head__tooltip">
+            {{ description }}
         </small>
     </th>
 </template>
 
 <script>
-  export default {
-    name: 'TableHead',
-    props: [
-      'text',
-      'description',
-      'footnotes'
-    ]
-  }
+export default {
+    name: "TableHead",
+
+    props: {
+        text: {
+            type: String,
+            default: ""
+        },
+        description: {
+            type: String,
+            default: ""
+        },
+        footnotes: {
+            type: Array,
+            default: () => []
+        }
+    }
+};
 </script>
 
 <style scoped>
