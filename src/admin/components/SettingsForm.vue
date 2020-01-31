@@ -64,6 +64,19 @@
                 </div>
             </div>
         </div>
+        <div class="settings-form__field">
+            <input id="fontawesome"
+                   v-model="modelFontawesome"
+                   type="checkbox">
+            <label for="fontawesome">Fontawesome laden</label>
+            <br>
+            <small>
+                Wenn du diese Option auswählst, wird das CSS für die Icons von Fontawesome durch das Plugin geladen.
+                (Es kann sein, dass dein Theme oder ein anderes Plugin bereits Fontawesome Icons lädt und es deswegen
+                zu Konflikten kommt, bzw. unnötig zweimal die gleichen Icons geladen werden - im Zweifelsfall, einfach
+                mal ausprobieren, ob die Icons noch korrekt funktionieren, wenn du hier den Haken nicht setzt.)
+            </small>
+        </div>
         <button class="settings-form__button"
                 type="button"
                 @click="save">
@@ -84,7 +97,8 @@ export default {
             modelHeaders: [],
             config: [],
             headers: [],
-            modelAutofill: false
+            modelAutofill: false,
+            modelFontawesome: true
         };
     },
 
@@ -93,6 +107,7 @@ export default {
         this.headers = await getHeaders();
         this.modelWeekday = this.getConfigValue("autofill_weekday");
         this.modelAutofill = this.getConfigValue("use_autofill") === "1";
+        this.modelFontawesome = this.getConfigValue("use_fontawesome") === "1";
         const initialHeaders = this.getConfigValue("static_fields");
         if (initialHeaders) {
             this.modelHeaders = JSON.parse(initialHeaders);
@@ -104,7 +119,8 @@ export default {
             const apiResult = await updateConfig({
                 autofill_weekday: this.modelWeekday,
                 static_fields: JSON.stringify(this.modelHeaders),
-                use_autofill: this.modelAutofill
+                use_autofill: this.modelAutofill,
+                use_fontawesome: this.modelFontawesome
             });
             if (apiResult && apiResult.success) {
                 alert("Änderungen wurden gespeichert!");

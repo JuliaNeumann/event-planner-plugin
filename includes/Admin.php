@@ -7,7 +7,19 @@ namespace Epp;
 class Admin {
 
     public function __construct() {
+        $this->includes();
         add_action( 'admin_menu', [ $this, 'admin_menu' ] );
+    }
+
+    /**
+     * Include the necessary classes
+     *
+     * @return void
+     */
+    private function includes() {
+        if ( !class_exists( __NAMESPACE__ . '\Api\DatabaseActions'  ) ) {
+            require_once __DIR__ . '/Api/DatabaseActions.php';
+        }
     }
 
     /**
@@ -56,6 +68,12 @@ class Admin {
     public function enqueue_scripts() {
         wp_enqueue_style( 'eventplanner-admin' );
         wp_enqueue_script( 'eventplanner-admin' );
+
+        $db = new Api\DatabaseActions();
+        $useFontawesome = $db->getConfigValue($db->config_use_fontawesome) === '1';
+        if ($useFontawesome) {
+            wp_enqueue_style( 'eventplanner-fa' );
+        }
 
         // localize data for script
         wp_localize_script( 'eventplanner-admin', 'eventPlannerApp', array(

@@ -99,7 +99,6 @@ class Assets {
      * @return array
      */
     public function get_styles() {
-
         $styles = [
             'eventplanner-style' => [
                 'src' =>  EVENTPLANNER_ASSETS . '/css/style.css'
@@ -110,6 +109,9 @@ class Assets {
             'eventplanner-admin' => [
                 'src' =>  EVENTPLANNER_ASSETS . '/css/admin.css'
             ],
+            'eventplanner-fa' => [
+                'src' => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css"
+            ]
         ];
 
         return $styles;

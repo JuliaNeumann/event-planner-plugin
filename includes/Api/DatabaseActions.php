@@ -20,6 +20,7 @@ class DatabaseActions {
         $this->config_teaser_show_icons = "teaser_show_icons";
         $this->config_teaser_icons_headline = "teaser_icons_headline";
         $this->config_use_autofill = "use_autofill";
+        $this->config_use_fontawesome = "use_fontawesome";
     }
 
     /******************************************************************************************************************

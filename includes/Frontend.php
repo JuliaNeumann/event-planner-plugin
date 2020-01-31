@@ -35,6 +35,12 @@ class Frontend {
         wp_enqueue_style( 'eventplanner-frontend' );
         wp_enqueue_script( 'eventplanner-frontend' );
 
+        $db = new Api\DatabaseActions();
+        $useFontawesome = $db->getConfigValue($db->config_use_fontawesome) === '1';
+        if ($useFontawesome) {
+            wp_enqueue_style( 'eventplanner-fa' );
+        }
+
         // localize data for script
         wp_localize_script( 'eventplanner-frontend', 'eventPlannerApp', array(
             'rest_url' => esc_url_raw( rest_url() ),
@@ -61,6 +67,11 @@ class Frontend {
      */
     public function render_current_snippet( $atts = [], $content = '' ) {
         $db = new Api\DatabaseActions();
+
+        $useFontawesome = $db->getConfigValue($db->config_use_fontawesome) === '1';
+        if ($useFontawesome) {
+            wp_enqueue_style( 'eventplanner-fa' );
+        }
 
         $autofillWeekday = $db->getConfigValue($db->config_autofill_weekday);
         $date = new \DateTime();
