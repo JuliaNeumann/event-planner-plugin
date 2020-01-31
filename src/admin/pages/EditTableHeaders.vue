@@ -7,11 +7,9 @@
                          :is-first="header.order_id === '1'"
                          @delete="loadHeaders"
                          @update="loadHeaders" />
-        <button class="edit-table-headers__add"
-                type="button"
-                @click="addNewHeader">
-            <i class="fa fa-fw fa-plus" />&nbsp;Tabellenkopf hinzufügen
-        </button>
+        <AddButton class="edit-table-headers__add"
+                   text="Tabellenkopf hinzufügen"
+                   @click.native="addNewHeader" />
     </div>
 </template>
 

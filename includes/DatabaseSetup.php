@@ -155,6 +155,14 @@ function epp_install_data() {
         )
     );
 
+    $wpdb->insert(
+        $wpdb->prefix . 'epp_config',
+        array(
+            'name' => 'use_fontawesome',
+            'data' => '1',
+        )
+    );
+
     // HEADERS:
 
     $wpdb->insert(

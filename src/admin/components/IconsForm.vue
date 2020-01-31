@@ -6,15 +6,10 @@
             <i :class="`fa fa-fw fa-${icon.icon}`" />&nbsp;
             <input v-model="icon.name"
                    type="text">&nbsp;
-            <button type="button"
-                    @click="deleteIcon(index)">
-                <i class="fa fa-fw fa-trash" />&nbsp;Löschen
-            </button>
+            <DeleteButton @click.native="deleteIcon(index)" />
         </div>
-        <button type="button"
-                @click="addIcon">
-            <i class="fa fa-fw fa-plus" />&nbsp;Icon hinzufügen
-        </button>
+        <AddButton text="Icon hinzufügen"
+                   @click.native="addIcon" />
         <a href="https://fontawesome.com/icons?d=gallery&m=free"
            target="_blank">Hier kannst du sehen, welche Icons es gibt.</a>
     </div>

@@ -7,24 +7,17 @@
             <input v-model="footnote.text"
                    type="text"
                    class="footnotes-form__input">
-            <button type="button"
-                    class="footnotes-form__button"
-                    @click="deleteFootnote(index)">
-                <i class="fa fa-fw fa-trash" />&nbsp;Löschen
-            </button>
+            <DeleteButton class="footnotes-form__button"
+                          @click.native="deleteFootnote(index)" />
         </div>
         <div class="footnotes-form__field">
-            <button v-if="modeledFootnotes.length"
-                    class="footnotes-form__button"
-                    type="button"
-                    @click="save">
-                <i class="fa fa-fw fa-save" />&nbsp;Speichern
-            </button>
-            <button class="footnotes-form__button"
-                    type="button"
-                    @click="addFootnote">
-                <i class="fa fa-fw fa-plus" />&nbsp;Fußnote hinzufügen
-            </button>
+            <SaveButton v-if="modeledFootnotes.length"
+                        class="footnotes-form__button"
+                        @click.native="save" />
+
+            <AddButton class="footnotes-form__button"
+                       text="Fußnote hinzufügen"
+                       @click.native="addFootnote" />
         </div>
     </form>
 </template>

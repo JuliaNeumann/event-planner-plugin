@@ -77,11 +77,8 @@
                 mal ausprobieren, ob die Icons noch korrekt funktionieren, wenn du hier den Haken nicht setzt.)
             </small>
         </div>
-        <button class="settings-form__button"
-                type="button"
-                @click="save">
-            <i class="fa fa-fw fa-save" />&nbsp;Speichern
-        </button>
+        <SaveButton class="settings-form__button"
+                    @click.native="save" />
     </form>
 </template>
 

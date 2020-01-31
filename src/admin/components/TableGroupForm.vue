@@ -16,11 +16,8 @@
                 <li v-for="header in groupHeaders"
                     :key="`group_header_${header.id}`">
                     {{ header.name }}&nbsp;
-                    <button class="table-group-form__button"
-                            type="button"
-                            @click="deleteHeader(header.id)">
-                        <i class="fa fa-fw fa-trash" />&nbsp;Löschen
-                    </button>
+                    <DeleteButton class="table-group-form__button"
+                                  @click.native="deleteHeader(header.id)" />
                 </li>
             </ul>
         </div>
@@ -36,23 +33,14 @@
                     {{ header.name }}
                 </option>
             </select>
-            <button class="table-group-form__button"
-                    type="button"
-                    @click="addHeader">
-                <i class="fa fa-fw fa-plus" />&nbsp;Hinzufügen
-            </button>
+            <AddButton class="table-group-form__button"
+                       @click.native="addHeader" />
         </div>
         <div class="table-group-form__field">
-            <button class="table-group-form__button"
-                    type="button"
-                    @click="saveGroup">
-                <i class="fa fa-fw fa-save" />&nbsp;Speichern
-            </button>
-            <button class="table-group-form__button"
-                    type="button"
-                    @click="deleteGroup">
-                <i class="fa fa-fw fa-trash" />&nbsp;Löschen
-            </button>
+            <SaveButton class="table-group-form__button"
+                        @click.native="saveGroup" />
+            <DeleteButton class="table-group-form__DeleteButton"
+                          @click.native="deleteGroup" />
         </div>
     </form>
 </template>

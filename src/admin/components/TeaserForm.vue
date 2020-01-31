@@ -70,11 +70,8 @@
             </p>
         </div>
         <div>
-            <button class="teaser-form__button"
-                    type="button"
-                    @click="save">
-                <i class="fa fa-fw fa-save" />&nbsp;Speichern
-            </button>
+            <SaveButton class="teaser-form__button"
+                        @click.native="save" />
         </div>
     </div>
 </template>

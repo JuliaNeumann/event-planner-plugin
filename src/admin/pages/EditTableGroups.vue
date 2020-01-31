@@ -15,11 +15,9 @@
                         :headers="headers.filter(header => header.order_id !== '1')"
                         @update-group="load"
                         @delete-group="loadHeaderGroups" />
-        <button class="edit-table-groups__add"
-                type="button"
-                @click="addNewGroup">
-            <i class="fa fa-fw fa-plus" />&nbsp;Tabellengruppe hinzufügen
-        </button>
+        <AddButton class="edit-table-groups__add"
+                   text="Tabellengruppe hinzufügen"
+                   @click.native="addNewGroup" />
     </div>
 </template>
 

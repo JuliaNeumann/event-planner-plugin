@@ -53,8 +53,7 @@
             <label class="table-header-form__label"
                    :for="`header_description_${id}`">
                 Beschreibung: <i class="fa fa-info-circle"
-                                 title="Die Beschreibung wird - wenn vorhanden - angezeigt,
-                                        wenn sich die Maus über dem Tabellenkopf befindet." />&nbsp;
+                                 :title="infoForDescription" />&nbsp;
             </label>
             <input :id="`header_description_${id}`"
                    v-model="modelDescription"
@@ -71,17 +70,11 @@
                        :icons="JSON.parse(additional || '[]')" />
         </div>
         <div class="table-header-form__field table-header-form__field--block">
-            <button class="table-header-form__button"
-                    type="button"
-                    @click="saveHeader">
-                <i class="fa fa-fw fa-save" />&nbsp;Speichern
-            </button>
-            <button v-if="!isFirst"
-                    class="table-header-form__button"
-                    type="button"
-                    @click="deleteHeader">
-                <i class="fa fa-fw fa-trash" />&nbsp;Löschen
-            </button>
+            <SaveButton class="table-header-form__button"
+                        @click.native="saveHeader" />
+            <DeleteButton v-if="!isFirst"
+                          class="table-header-form__button"
+                          @click.native="deleteHeader" />
         </div>
     </form>
 </template>
@@ -140,7 +133,9 @@ export default {
             modelDescription: this.description,
             infoTextForType: "Da je nach Typ unterschiedliche Daten in der Tabelle gespeichert werden, " +
                 "kann das Ändern des Typs zu unvorhergesehen Ergebnissen führen. " +
-                "Also am Besten nur ändern, wenn du weißt, was du tust."
+                "Also am Besten nur ändern, wenn du weißt, was du tust.",
+            infoForDescription: "Die Beschreibung wird - wenn vorhanden - angezeigt, " +
+                                "wenn sich die Maus über dem Tabellenkopf befindet."
         };
     },
 

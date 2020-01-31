@@ -154,7 +154,7 @@ final class Event_Planner {
         $installed = get_option( 'eventplanner_installed' );
 
         if ( ! $installed ) {
-            include_once( plugin_dir_path( __FILE__ ) . 'includes/db_setup.php' );
+            include_once( plugin_dir_path( __FILE__ ) . 'includes/DatabaseSetup.php' );
             register_activation_hook( __FILE__, 'epp_install' );
             register_activation_hook( __FILE__, 'epp_install_data' );
             update_option( 'eventplanner_installed', time() );

@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import menuFix from "./utils/admin-menu-fix";
+import "./components/buttons";
 
 Vue.config.productionTip = false;
 
