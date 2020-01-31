@@ -18,9 +18,7 @@
             <label class="table-header-form__label"
                    :for="`header_type_${id}`">
                 Typ: <i class="fa fa-info-circle"
-                        title="Da je nach Typ unterschiedliche Daten in der Tabelle gespeichert werden,
-                               kann das Ändern des Typs zu unvorhergesehen Ergebnissen führen.
-                               Also am Besten nur ändern, wenn du weißt, was du tust." />&nbsp;
+                        :title="infoTextForType" />&nbsp;
             </label>
             <select :id="`header_type_${id}`"
                     v-model="modelType"
@@ -139,7 +137,10 @@ export default {
             modelName: this.name,
             modelOrderId: this.order_id,
             modelType: this.type,
-            modelDescription: this.description
+            modelDescription: this.description,
+            infoTextForType: "Da je nach Typ unterschiedliche Daten in der Tabelle gespeichert werden, " +
+                "kann das Ändern des Typs zu unvorhergesehen Ergebnissen führen. " +
+                "Also am Besten nur ändern, wenn du weißt, was du tust."
         };
     },
 
