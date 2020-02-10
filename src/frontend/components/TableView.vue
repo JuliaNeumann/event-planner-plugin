@@ -180,6 +180,7 @@ export default {
         flex-direction: column;
         border: 1px solid grey;
         border-bottom: none;
+        overflow: visible;
     }
     .row {
         display: flex;
