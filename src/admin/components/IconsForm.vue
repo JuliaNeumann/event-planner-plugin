@@ -36,7 +36,7 @@ export default {
         addIcon() {
             const iconName = prompt("Gib den Fontawesome Icon Name an: ");
             if (iconName) {
-                this.modeledIcons.push({icon: iconName, name: iconName});
+                this.modeledIcons.push({icon: iconName, name: "[Beschreibung]"});
             } else if (iconName !== null) {
                 alert("Du musst einen Icon Namen für das neue Icon angeben!");
             }

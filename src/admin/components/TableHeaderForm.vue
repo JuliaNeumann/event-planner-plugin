@@ -60,10 +60,9 @@
                    class="table-header-form__input"
                    type="text">
         </div>
-        <div v-if="type === 'icons'"
+        <div v-if="modelType === 'icons'"
              class="table-header-form__field table-header-form__field--block">
-            <label class="table-header-form__label"
-                   :for="`header_description_${id}`">
+            <label class="table-header-form__label">
                 Icons:
             </label>
             <IconsForm ref="icons"
@@ -132,7 +131,7 @@ export default {
             modelType: this.type,
             modelDescription: this.description,
             infoTextForType: "Da je nach Typ unterschiedliche Daten in der Tabelle gespeichert werden, " +
-                "kann das Ändern des Typs zu unvorhergesehen Ergebnissen führen. " +
+                "kann das nachträgliche Ändern des Typs zu unvorhergesehen Ergebnissen führen. " +
                 "Also am Besten nur ändern, wenn du weißt, was du tust.",
             infoForDescription: "Die Beschreibung wird - wenn vorhanden - angezeigt, " +
                                 "wenn sich die Maus über dem Tabellenkopf befindet."
