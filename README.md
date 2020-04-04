@@ -1,6 +1,7 @@
 # WordPress plugin for planning events
 
 A WordPress plugin that allows you to create a frontend-editable table for event planning, aimed at churches to plan their services.
+For now, only available in German.
 
 ## Installation
 
@@ -18,7 +19,7 @@ Find the entry for "Event Planner" in your plugin list and activate it.
 ## Tests
 
 [Testcafe](https://devexpress.github.io/testcafe/) is used for testing. Run the tests with `npm run test`.
-This assumes you have a WordPress instance running on port 8000, with two example pages set up (test-event-planner & test-event-planner-static).
+This assumes you have a WordPress instance running on port 8000, with two example pages set up (test-event-planner & test-event-planner-static, the last one must include the year 2019 - see instructions in the plugin dashboard).
 
 ## Built with
 
