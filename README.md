@@ -5,10 +5,11 @@ A WordPress plugin that allows you to create a frontend-editable table for event
 ## Installation
 
 Download this repository as a zip and copy the unzipped folder to the plugins directory of your WordPress site.
-This plugin uses icons provided by FontAwesome and relies on the site to provide those, so if your theme does not contain FontAwesome, you need to install a plugin (e.g. https://de.wordpress.org/plugins/better-font-awesome/).
+Find the entry for "Event Planner" in your plugin list and activate it.
 
 ## Development
 
+(Requires to be run in the context of a WordPress instance)
 1. Run `npm install`
 2. To start developing, run `npm run dev`
 3. For production build, run `npm run build`
