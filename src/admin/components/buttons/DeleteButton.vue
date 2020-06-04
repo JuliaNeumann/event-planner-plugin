@@ -1,5 +1,5 @@
 <template>
-    <button type="button">
+    <button class="button button-secondary" type="button">
         <i class="fa fa-fw fa-trash" />&nbsp;{{ text }}
     </button>
 </template>

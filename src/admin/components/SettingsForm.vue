@@ -1,82 +1,110 @@
 <template>
     <form class="settings-form">
-        <div class="settings-form__field">
-            <input id="autofill"
-                   v-model="modelAutofill"
-                   type="checkbox">
-            <label for="autofill">Tabelle automatisch befüllen</label>
-            <br>
-            <small>
-                Wenn du diese Option auswählst, werden immer automatisch Veranstaltungen für deinen gewählten Wochentag
-                (siehe unten) für das laufende und das kommende Jahr angelegt.
-                Du kannst diese dann trotzdem manuell löschen bzw. Veranstaltungen an anderen Wochentagen
-                manuell hinzufügen.
-            </small>
-        </div>
-        <div class="settings-form__field">
-            <label for="weekday">
-                Wähle hier aus, an welchem Wochentag deine regelmäßige Veranstaltung (z.B. Gottesdienst) stattfindet.
-            </label>
-            <select id="weekday"
-                    v-model="modelWeekday">
-                <option value="sunday">
-                    Sonntag
-                </option>
-                <option value="monday">
-                    Montag
-                </option>
-                <option value="tuesday">
-                    Dienstag
-                </option>
-                <option value="wednesday">
-                    Mittwoch
-                </option>
-                <option value="thursday">
-                    Donnerstag
-                </option>
-                <option value="friday">
-                    Freitag
-                </option>
-                <option value="saturday">
-                    Samstag
-                </option>
-            </select>
-            <br>
-            <small>
-                Diese Einstellungen wird für das automatische Befüllen der Tabelle verwendet
-                und für die Anzeige des Teasers.
-            </small>
-        </div>
-        <div class="settings-form__field">
-            Hier kannst du auswählen, welche Tabellenköpfe bei der Übersichtstabelle
-            (Shortcode: [eventplanner static="true"]) standardmäßig angezeigt werden sollen:<br>
-            (Die Nutzer können dann trotzdem über Filter alle Tabellenköpfe ein- und ausblenden)<br>
-            <div>
-                <div v-for="header in headers"
-                     :key="`header_${header.id}`"
-                     class="settings-form__header">
-                    <input :id="`header_${header.id}`"
-                           v-model.number="modelHeaders"
-                           type="checkbox"
-                           :value="header.id"
-                           :disabled="header.order_id === '1'">
-                    <label :for="`header_${header.id}`">{{ header.name }}</label>
-                </div>
-            </div>
-        </div>
-        <div class="settings-form__field">
-            <input id="fontawesome"
-                   v-model="modelFontawesome"
-                   type="checkbox">
-            <label for="fontawesome">Fontawesome laden</label>
-            <br>
-            <small>
-                Wenn du diese Option auswählst, wird das CSS für die Icons von Fontawesome durch das Plugin geladen.
-                (Es kann sein, dass dein Theme oder ein anderes Plugin bereits Fontawesome Icons lädt und es deswegen
-                zu Konflikten kommt, bzw. unnötig zweimal die gleichen Icons geladen werden - im Zweifelsfall, einfach
-                mal ausprobieren, ob die Icons noch korrekt funktionieren, wenn du hier den Haken nicht setzt.)
-            </small>
-        </div>
+        <table class="form-table"
+               role="presentation">
+            <tr>
+                <th scope="row">
+                    Automatisch befüllen
+                </th>
+                <td>
+                    <input id="autofill"
+                           v-model="modelAutofill"
+                           type="checkbox">
+                    <label for="autofill">Tabelle automatisch befüllen</label>
+                    <p class="description">
+                        Wenn du diese Option auswählst, werden immer automatisch
+                        Veranstaltungen für deinen gewählten Wochentag (siehe unten) für das
+                        laufende und das kommende Jahr angelegt. Du kannst diese dann
+                        trotzdem manuell löschen bzw. Veranstaltungen an anderen Wochentagen
+                        manuell hinzufügen.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="weekday">Wochentag
+                    </label>
+                </th>
+                <td>
+                    <select id="weekday"
+                            v-model="modelWeekday">
+                        <option value="sunday">
+                            Sonntag
+                        </option>
+                        <option value="monday">
+                            Montag
+                        </option>
+                        <option value="tuesday">
+                            Dienstag
+                        </option>
+                        <option value="wednesday">
+                            Mittwoch
+                        </option>
+                        <option value="thursday">
+                            Donnerstag
+                        </option>
+                        <option value="friday">
+                            Freitag
+                        </option>
+                        <option value="saturday">
+                            Samstag
+                        </option>
+                    </select><p class="description">
+                        Wähle hier aus, an welchem Wochentag deine regelmäßige Veranstaltung
+                        (z.B. Gottesdienst) stattfindet.
+                    </p><p class="description">
+                        Diese Einstellungen wird für das automatische Befüllen der Tabelle
+                        verwendet und für die Anzeige des Teasers.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    Tabellenköpfe
+                </th>
+                <td>
+                    <div
+                        v-for="header in headers"
+                        :key="`header_${header.id}`">
+                        <input
+                            :id="`header_${header.id}`"
+                            v-model.number="modelHeaders"
+                            type="checkbox"
+                            :value="header.id"
+                            :disabled="header.order_id === '1'">
+                        <label :for="`header_${header.id}`">{{ header.name }}</label>
+                    </div>
+                    <p class="description">
+                        Hier kannst du auswählen, welche Tabellenköpfe bei der Übersichtstabelle
+                        (Shortcode: [eventplanner static="true"]) standardmäßig angezeigt werden
+                        sollen.
+                    </p>
+                    <p class="description">
+                        Die Nutzer können dann trotzdem über Filter alle Tabellenköpfe ein- und
+                        ausblenden.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    Icons
+                </th>
+                <td>
+                    <input id="fontawesome"
+                           v-model="modelFontawesome"
+                           type="checkbox">
+                    <label for="fontawesome">Fontawesome laden</label>
+                    <p class="description">
+                        Wenn du diese Option auswählst, wird das CSS für die Icons von
+                        Fontawesome durch das Plugin geladen. (Es kann sein, dass dein Theme
+                        oder ein anderes Plugin bereits Fontawesome Icons lädt und es deswegen
+                        zu Konflikten kommt, bzw. unnötig zweimal die gleichen Icons geladen
+                        werden - im Zweifelsfall, einfach mal ausprobieren, ob die Icons noch
+                        korrekt funktionieren, wenn du hier den Haken nicht setzt.)
+                    </p>
+                </td>
+            </tr>
+        </table>
         <SaveButton class="settings-form__button"
                     @click.native="save" />
     </form>
@@ -140,16 +168,16 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .settings-form {
-    &__field {
-      padding: 10px;
-      max-width: 1000px;
-      border: 1px solid gray;
-      margin-bottom: 15px;
-    }
-
-    &__header:first-child {
-      padding-top: 10px;
-    }
+.settings-form {
+  &__field {
+    padding: 10px;
+    max-width: 1000px;
+    border: 1px solid gray;
+    margin-bottom: 15px;
   }
+
+  &__header:first-child {
+    padding-top: 10px;
+  }
+}
 </style>

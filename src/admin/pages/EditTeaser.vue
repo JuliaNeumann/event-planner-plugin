@@ -1,6 +1,6 @@
 <template>
     <div class="app-settings">
-        <h2>Teaser bearbeiten</h2>
+        <h1>Teaser bearbeiten</h1>
         <TeaserForm />
     </div>
 </template>

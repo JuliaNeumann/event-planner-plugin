@@ -1,6 +1,6 @@
 <template>
     <div class="edit-table-groups">
-        <h2>Tabellengruppen bearbeiten</h2>
+        <h1>Tabellengruppen bearbeiten</h1>
         <strong class="edit-table-groups__hint">
             Tabellenköpfe in einer Gruppe sollten möglichst in der Reihenfolge direkt nacheinander stehen
             (das macht die Tabelle übersichtlicher).<br>
