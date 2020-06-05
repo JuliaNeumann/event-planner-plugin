@@ -5,7 +5,7 @@ import EditTableGroups from "admin/pages/EditTableGroups.vue";
 import EditTeaser from "admin/pages/EditTeaser.vue";
 import EditFootnotes from "admin/pages/EditFootnotes.vue";
 import EditSettings from "admin/pages/EditSettings.vue";
-import About from "admin/pages/About.vue";
+import GeneralInformation from "admin/pages/GeneralInformation.vue";
 
 Vue.use(Router);
 
@@ -13,8 +13,8 @@ export default new Router({
     routes: [
         {
             path: "/",
-            name: "About",
-            component: About
+            name: "GeneralInformation",
+            component: GeneralInformation
         },
         {
             path: "/settings",

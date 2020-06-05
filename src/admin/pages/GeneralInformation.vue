@@ -1,8 +1,8 @@
 <template>
-    <div class="edit-settings">
+    <div class="general-information">
         <h1>Allgemeine Informationen</h1>
         <p>Der Event Planner funktioniert folgendermaßen:</p>
-        <ul class="edit-settings__list">
+        <ul class="general-information__list">
             <li>
                 Lege hier in den Einstellungen unter "Tabellenköpfe" fest,
                 welche Daten in der Planungstabelle erfasst werden sollen (z.B. Ort der Veranstaltung, Prediger usw.).
@@ -34,12 +34,12 @@
 <script>
 
 export default {
-    name: "About"
+    name: "GeneralInformation"
 };
 </script>
 
 <style lang="less" scoped>
-  .edit-settings {
+  .general-information {
     &__list {
       list-style: disc;
       padding-inline-start: 40px;

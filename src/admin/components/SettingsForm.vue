@@ -1,5 +1,5 @@
 <template>
-    <form class="settings-form">
+    <form>
         <table class="form-table"
                role="presentation">
             <tr>
@@ -7,10 +7,10 @@
                     Automatisch befüllen
                 </th>
                 <td>
-                    <input id="autofill"
+                    <input id="epp-autofill"
                            v-model="modelAutofill"
                            type="checkbox">
-                    <label for="autofill">Tabelle automatisch befüllen</label>
+                    <label for="epp-autofill">Tabelle automatisch befüllen</label>
                     <p class="description">
                         Wenn du diese Option auswählst, werden immer automatisch
                         Veranstaltungen für deinen gewählten Wochentag (siehe unten) für das
@@ -22,11 +22,11 @@
             </tr>
             <tr>
                 <th scope="row">
-                    <label for="weekday">Wochentag
+                    <label for="epp-weekday">Wochentag
                     </label>
                 </th>
                 <td>
-                    <select id="weekday"
+                    <select id="epp-weekday"
                             v-model="modelWeekday">
                         <option value="sunday">
                             Sonntag
@@ -49,11 +49,13 @@
                         <option value="saturday">
                             Samstag
                         </option>
-                    </select><p class="description">
+                    </select>
+                    <p class="description">
                         Wähle hier aus, an welchem Wochentag deine regelmäßige Veranstaltung
                         (z.B. Gottesdienst) stattfindet.
-                    </p><p class="description">
-                        Diese Einstellungen wird für das automatische Befüllen der Tabelle
+                    </p>
+                    <p class="description">
+                        Diese Einstellung wird für das automatische Befüllen der Tabelle
                         verwendet und für die Anzeige des Teasers.
                     </p>
                 </td>
@@ -90,10 +92,10 @@
                     Icons
                 </th>
                 <td>
-                    <input id="fontawesome"
+                    <input id="epp-fontawesome"
                            v-model="modelFontawesome"
                            type="checkbox">
-                    <label for="fontawesome">Fontawesome laden</label>
+                    <label for="epp-fontawesome">Fontawesome laden</label>
                     <p class="description">
                         Wenn du diese Option auswählst, wird das CSS für die Icons von
                         Fontawesome durch das Plugin geladen. (Es kann sein, dass dein Theme
@@ -166,18 +168,3 @@ export default {
     }
 };
 </script>
-
-<style lang="less" scoped>
-.settings-form {
-  &__field {
-    padding: 10px;
-    max-width: 1000px;
-    border: 1px solid gray;
-    margin-bottom: 15px;
-  }
-
-  &__header:first-child {
-    padding-top: 10px;
-  }
-}
-</style>

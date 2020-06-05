@@ -1,5 +1,5 @@
 <template>
-    <div class="edit-settings">
+    <div>
         <h1>Allgemeine Einstellungen</h1>
         <SettingsForm />
     </div>
@@ -16,12 +16,3 @@ export default {
     }
 };
 </script>
-
-<style lang="less" scoped>
-  .edit-settings {
-    &__list {
-      list-style: disc;
-      padding-inline-start: 40px;
-    }
-  }
-</style>
