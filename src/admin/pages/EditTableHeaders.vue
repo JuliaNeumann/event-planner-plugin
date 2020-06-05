@@ -1,6 +1,6 @@
 <template>
     <div class="edit-table-headers">
-        <h2>Tabellenköpfe bearbeiten</h2>
+        <h1>Tabellenköpfe bearbeiten</h1>
         <TableHeaderForm v-for="header in orderedHeaders"
                          :key="`header_${header.id}`"
                          v-bind="header"

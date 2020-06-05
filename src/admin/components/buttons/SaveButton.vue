@@ -1,5 +1,6 @@
 <template>
-    <button type="button">
+    <button class="button button-primary"
+            type="button">
         <i class="fa fa-fw fa-save" />&nbsp;{{ text }}
     </button>
 </template>

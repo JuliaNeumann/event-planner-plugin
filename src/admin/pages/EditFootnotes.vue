@@ -1,6 +1,6 @@
 <template>
     <div class="edit-footnotes">
-        <h2>Fußnoten bearbeiten</h2>
+        <h1>Fußnoten bearbeiten</h1>
         <FootnotesForm v-for="header in headers"
                        :key="`header_${header.id}`"
                        :header="header"
