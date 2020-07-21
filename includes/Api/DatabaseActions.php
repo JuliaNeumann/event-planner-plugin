@@ -30,7 +30,8 @@ class DatabaseActions {
     public function getConfig() {
         global $wpdb;
 
-        $query = "SELECT * FROM `wp_epp_config`";
+        $table_name = $wpdb->prefix . 'epp_config';
+        $query = "SELECT * FROM $table_name";
         $list = $wpdb->get_results($query);
         return $list;
     }
@@ -38,7 +39,8 @@ class DatabaseActions {
     public function getConfigValue($name) {
         global $wpdb;
 
-        $select_query = "SELECT * FROM `wp_epp_config` WHERE name = '%s'";
+        $table_name = $wpdb->prefix . 'epp_config';
+        $select_query = "SELECT * FROM $table_name WHERE name = '%s'";
         $result = $wpdb->get_results($wpdb->prepare($select_query, $name));
         if (count($result) == 1) {
             return $result[0]->data;
@@ -49,11 +51,12 @@ class DatabaseActions {
     public function updateConfig($name, $newData) {
         global $wpdb;
 
-        $select_query = "SELECT * FROM `wp_epp_config` WHERE name = '%s'";
+        $table_name = $wpdb->prefix . 'epp_config';
+        $select_query = "SELECT * FROM $table_name WHERE name = '%s'";
         $result = $wpdb->get_results($wpdb->prepare($select_query, $name));
 
         if (count($result) == 1) {
-            $result = $wpdb->update("wp_epp_config", array(
+            $result = $wpdb->update($table_name, array(
                 'data' => wp_filter_post_kses($newData)
             ), array('name' => $name));
 
@@ -72,12 +75,14 @@ class DatabaseActions {
     public function getAllEvents() {
         global $wpdb;
 
-        $query = "SELECT * FROM `wp_epp_events`";
+        $table_name = $wpdb->prefix . 'epp_events';
+        $query = "SELECT * FROM $table_name";
         $list = $wpdb->get_results($query);
         $full_list = [];
+        $table_name_headers = $wpdb->prefix . 'epp_events2headers';
         foreach ($list as $event) {
             $full_list[] = array('id' => $event->id, 'fields' => []);
-            $event2headers_query = "SELECT * FROM `wp_epp_events2headers` WHERE event_id = " . $event->id;
+            $event2headers_query = "SELECT * FROM $table_name_headers WHERE event_id = " . $event->id;
             $event2headers_list = $wpdb->get_results($event2headers_query);
             foreach ($event2headers_list as $lookup) {
                 $full_list[count($full_list) - 1]['fields'][$lookup->header_id] = $lookup->content;
@@ -89,11 +94,12 @@ class DatabaseActions {
     public function getEventInfoByDateAndHeader($date, $headerId) {
         global $wpdb;
 
-        $date_query = "SELECT * FROM `wp_epp_events2headers` WHERE header_id = 1 AND content = '%s'";
+        $table_name = $wpdb->prefix . 'epp_events2headers';
+        $date_query = "SELECT * FROM $table_name WHERE header_id = 1 AND content = '%s'";
         $result_date = $wpdb->get_results($wpdb->prepare($date_query, $date));
 
         if (count($result_date) > 0) {
-            $event_query = "SELECT * FROM `wp_epp_events2headers` WHERE event_id = %s AND header_id = %s";
+            $event_query = "SELECT * FROM $table_name WHERE event_id = %s AND header_id = %s";
             $result_event = $wpdb->get_results($wpdb->prepare($event_query, $result_date[0]->event_id, $headerId));
             if (count($result_event) > 0) {
                 return $result_event[0]->content;
@@ -107,13 +113,16 @@ class DatabaseActions {
         if ($this->checkIfDateExists($date)) {
             return array("error" => "Zu diesem Datum existiert bereits ein Eintrag!");
         }
-        $query = "INSERT INTO `wp_epp_events` (id) values (null)";
+        
+        $table_name = $wpdb->prefix . 'epp_events';
+        $table_name_headers = $wpdb->prefix . 'epp_events2headers';
+        $query = "INSERT INTO $table_name (id) values (null)";
         $wpdb->get_results($query);
         $id_query = "SELECT LAST_INSERT_ID()";
         $id_result = $wpdb->get_results($id_query);
         if (count($id_result) == 1 && property_exists($id_result[0], "LAST_INSERT_ID()")) {
             $new_id = $id_result[0]->{"LAST_INSERT_ID()"};
-            $date_query = "INSERT INTO `wp_epp_events2headers` (header_id, event_id, content) values(1, %s, %s)";
+            $date_query = "INSERT INTO $table_name_headers (header_id, event_id, content) values(1, %s, %s)";
             $wpdb->get_results($wpdb->prepare($date_query, $new_id, $date));
             if ($wpdb->last_error) {
                 return array("error" => $wpdb->last_error);
@@ -125,7 +134,9 @@ class DatabaseActions {
 
     private function checkIfDateExists($date) {
         global $wpdb;
-        $date_query = "SELECT * FROM `wp_epp_events2headers` WHERE header_id = 1 AND content = '%s'";
+
+        $table_name = $wpdb->prefix . 'epp_events2headers';
+        $date_query = "SELECT * FROM $table_name WHERE header_id = 1 AND content = '%s'";
         $result_list = $wpdb->get_results($wpdb->prepare($date_query, $date));
         return count($result_list) > 0;
     }
@@ -133,7 +144,8 @@ class DatabaseActions {
     public function updateEvent($parameters) {
         global $wpdb;
 
-        $query = "INSERT INTO `wp_epp_events2headers` (header_id, event_id, content) values(%s, %s, %s)
+        $table_name = $wpdb->prefix . 'epp_events2headers';
+        $query = "INSERT INTO $table_name (header_id, event_id, content) values(%s, %s, %s)
                   ON DUPLICATE KEY UPDATE content = %s";
         $wpdb->get_results($wpdb->prepare($query, $parameters["header_id"], $parameters["event_id"], $parameters["content"], $parameters["content"]));
         if ($wpdb->last_error) {
@@ -144,9 +156,12 @@ class DatabaseActions {
 
     public function deleteEvent($id) {
         global $wpdb;
-        $event_delete = $wpdb->delete( 'wp_epp_events', array( 'id' => $id ) );
+
+        $table_name = $wpdb->prefix . 'epp_events';
+        $table_name_headers = $wpdb->prefix . 'epp_events2headers';
+        $event_delete = $wpdb->delete( $table_name, array( 'id' => $id ) );
         if ($event_delete !== false) {
-            $lookup_delete = $wpdb->delete( 'wp_epp_events2headers', array( 'event_id' => $id ) );
+            $lookup_delete = $wpdb->delete( $table_name_headers, array( 'event_id' => $id ) );
             if ($lookup_delete !== false) {
                 return array("success" => "Der Eintrag wurde gelöscht!");
             }
@@ -163,14 +178,18 @@ class DatabaseActions {
 
     public function getAllHeaders() {
         global $wpdb;
-        $query = "SELECT * FROM `wp_epp_headers`";
+
+        $table_name = $wpdb->prefix . 'epp_headers';
+        $query = "SELECT * FROM $table_name";
         $list = $wpdb->get_results($query);
         return $list;
     }
 
     public function getHeaderById($id) {
         global $wpdb;
-        $query = "SELECT * FROM `wp_epp_headers` WHERE id = '%s'";
+
+        $table_name = $wpdb->prefix . 'epp_headers';
+        $query = "SELECT * FROM $table_name WHERE id = '%s'";
         $result_list = $wpdb->get_results($wpdb->prepare($query, $id));
         if (count($result_list) > 0) {
             return $result_list[0];
@@ -180,7 +199,8 @@ class DatabaseActions {
     public function addHeader($parameters) {
         global $wpdb;
 
-        $result = $wpdb->insert("wp_epp_headers", array(
+        $table_name = $wpdb->prefix . 'epp_headers';
+        $result = $wpdb->insert($table_name, array(
             'name' => $parameters["name"],
             'order_id' => $parameters["order_id"],
             'type' => $parameters["type"],
@@ -197,7 +217,8 @@ class DatabaseActions {
     public function updateHeader($parameters) {
         global $wpdb;
 
-        $result = $wpdb->update("wp_epp_headers", array(
+        $table_name = $wpdb->prefix . 'epp_headers';
+        $result = $wpdb->update($table_name, array(
             'name' => $parameters["name"],
             'order_id' => $parameters["order_id"],
             'type' => $parameters["type"],
@@ -213,9 +234,12 @@ class DatabaseActions {
 
     public function deleteHeader($id) {
         global $wpdb;
-        $header_delete = $wpdb->delete( 'wp_epp_headers', array( 'id' => $id ) );
+
+        $table_name = $wpdb->prefix . 'epp_headers';
+        $table_name_headers = $wpdb->prefix . 'epp_events2headers';
+        $header_delete = $wpdb->delete( $table_name, array( 'id' => $id ) );
         if ($header_delete !== false) {
-            $lookup_delete = $wpdb->delete( 'wp_epp_events2headers', array( 'header_id' => $id ) );
+            $lookup_delete = $wpdb->delete( $table_name_headers, array( 'header_id' => $id ) );
             if ($lookup_delete !== false) {
                 return array("success" => "Der Header und zugehörige Daten wurden gelöscht!");
             }
@@ -232,7 +256,9 @@ class DatabaseActions {
 
     public function getAllHeaderGroups() {
         global $wpdb;
-        $query = "SELECT * FROM `wp_epp_header_groups`";
+
+        $table_name = $wpdb->prefix . 'epp_header_groups';
+        $query = "SELECT * FROM $table_name";
         $list = $wpdb->get_results($query);
         return $list;
     }
@@ -240,7 +266,8 @@ class DatabaseActions {
     public function addHeaderGroup($parameters) {
         global $wpdb;
 
-        $result = $wpdb->insert("wp_epp_header_groups", array(
+        $table_name = $wpdb->prefix . 'epp_header_groups';
+        $result = $wpdb->insert($table_name, array(
             'name' => $parameters["name"]
         ));
 
@@ -253,13 +280,15 @@ class DatabaseActions {
     public function updateHeaderGroup($parameters) {
         global $wpdb;
 
-        $result = $wpdb->update("wp_epp_header_groups", array(
+        $table_name = $wpdb->prefix . 'epp_header_groups';
+        $table_name_headers = $wpdb->prefix . 'epp_headers';
+        $result = $wpdb->update($table_name, array(
             'name' => $parameters["name"]
         ), array('id' => $parameters["id"]));
 
         if (!$wpdb->last_error && $parameters["added"]) {
             foreach ($parameters["added"] as $addedId) {
-                $wpdb->update("wp_epp_headers", array(
+                $wpdb->update($table_name_headers, array(
                     'group_id' => $parameters["id"]
                 ), array('id' => $addedId));
             }
@@ -267,7 +296,7 @@ class DatabaseActions {
 
         if (!$wpdb->last_error && $parameters["deleted"]) {
             foreach ($parameters["deleted"] as $deletedId) {
-                $wpdb->update("wp_epp_headers", array(
+                $wpdb->update($table_name_headers, array(
                     'group_id' => null
                 ), array('id' => $deletedId));
             }
@@ -281,11 +310,14 @@ class DatabaseActions {
 
     public function deleteHeaderGroup($id) {
         global $wpdb;
-        $header_delete = $wpdb->delete( 'wp_epp_header_groups', array( 'id' => $id ) );
+
+        $table_name = $wpdb->prefix . 'epp_header_groups';
+        $table_name_headers = $wpdb->prefix . 'epp_headers';
+        $header_delete = $wpdb->delete( $table_name, array( 'id' => $id ) );
         if ($header_delete === false) {
             return array("error" => "Datenbank-Fehler: Tabellengruppe konnte nicht gelöscht werden!");
         }
-        $result = $wpdb->update("wp_epp_headers", array(
+        $result = $wpdb->update($table_name_headers, array(
             'group_id' => null
         ), array('group_id' => $id));
         if ($wpdb->last_error) {
@@ -300,7 +332,9 @@ class DatabaseActions {
 
     public function getAllHeaderFootnotes() {
         global $wpdb;
-        $query = "SELECT * FROM `wp_epp_header_footnotes`";
+
+        $table_name = $wpdb->prefix . 'epp_header_footnotes';
+        $query = "SELECT * FROM $table_name";
         $list = $wpdb->get_results($query);
         return $list;
     }
@@ -308,7 +342,8 @@ class DatabaseActions {
     public function addHeaderFootnote($parameters) {
         global $wpdb;
 
-        $result = $wpdb->insert("wp_epp_header_footnotes", array(
+        $table_name = $wpdb->prefix . 'epp_header_footnotes';
+        $result = $wpdb->insert($table_name, array(
             'text' => $parameters["text"],
             'header_id' => $parameters["header_id"]
         ));
@@ -321,7 +356,9 @@ class DatabaseActions {
 
     public function updateHeaderFootnote($parameters) {
         global $wpdb;  
-        $result = $wpdb->update("wp_epp_header_footnotes", array(
+
+        $table_name = $wpdb->prefix . 'epp_header_footnotes';
+        $result = $wpdb->update($table_name, array(
             'text' => $parameters["text"],
             'header_id' => $parameters["header_id"]
         ), array('id' => $parameters["id"]));
@@ -334,7 +371,9 @@ class DatabaseActions {
 
     public function deleteHeaderFootnote($id) {
         global $wpdb;
-        $result = $wpdb->delete( 'wp_epp_header_footnotes', array( 'id' => $id ) );
+
+        $table_name = $wpdb->prefix . 'epp_header_footnotes';
+        $result = $wpdb->delete( $table_name, array( 'id' => $id ) );
         if ($wpdb->last_error) {
             return array("error" => $wpdb->last_error);
         }

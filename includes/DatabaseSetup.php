@@ -12,6 +12,9 @@ function epp_install() {
     $charset_collate = $wpdb->get_charset_collate();
 
     $table_name = $wpdb->prefix . 'epp_config';
+    $sql = "DROP TABLE $table_name;";
+    dbDelta( $sql );
+
     $sql = "CREATE TABLE $table_name (
 		id mediumint(9) NOT NULL AUTO_INCREMENT,
 		name varchar(50) NOT NULL,
@@ -21,7 +24,7 @@ function epp_install() {
     dbDelta( $sql );
 
     $table_name = $wpdb->prefix . 'epp_events';
-    $sql = "CREATE TABLE $table_name (
+    $sql = "CREATE TABLE $table_name IF NOT EXISTS (
 		id mediumint(9) NOT NULL AUTO_INCREMENT,
 		created timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 		PRIMARY KEY  (id)
@@ -29,7 +32,7 @@ function epp_install() {
     dbDelta( $sql );
 
     $table_name = $wpdb->prefix . 'epp_events2headers';
-    $sql = "CREATE TABLE $table_name (
+    $sql = "CREATE TABLE $table_name IF NOT EXISTS (
 		event_id mediumint(9) NOT NULL,
 		header_id mediumint(9) NOT NULL,
 		content text NOT NULL,
@@ -38,7 +41,7 @@ function epp_install() {
     dbDelta( $sql );
 
     $table_name = $wpdb->prefix . 'epp_headers';
-    $sql = "CREATE TABLE $table_name (
+    $sql = "CREATE TABLE $table_name IF NOT EXISTS (
 		id mediumint(9) NOT NULL AUTO_INCREMENT,
 		name varchar(200) NOT NULL,
 		order_id int(10) NOT NULL,
@@ -51,7 +54,7 @@ function epp_install() {
     dbDelta( $sql );
 
     $table_name = $wpdb->prefix . 'epp_header_groups';
-    $sql = "CREATE TABLE $table_name (
+    $sql = "CREATE TABLE $table_name IF NOT EXISTS (
 		id mediumint(9) NOT NULL AUTO_INCREMENT,
 		name varchar(50) NOT NULL,
 		PRIMARY KEY  (id)
@@ -59,7 +62,7 @@ function epp_install() {
     dbDelta( $sql );
 
     $table_name = $wpdb->prefix . 'epp_header_footnotes';
-    $sql = "CREATE TABLE $table_name (
+    $sql = "CREATE TABLE $table_name IF NOT EXISTS (
 		id mediumint(9) NOT NULL AUTO_INCREMENT,
 		header_id mediumint(9),
 		text varchar(500) NOT NULL,
