@@ -80,6 +80,7 @@ export default {
             if (apiResult && apiResult.error) {
                 alert(`Beim Bearbeiten ist ein Fehler aufgetreten: ${apiResult.error}`);
             }
+            this.$emit("cellUpdate", {rowId: this.row.id, headId: this.head.id, content: this.cellContent});
         }
     }
 };

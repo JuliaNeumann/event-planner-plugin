@@ -11,7 +11,8 @@
                    :rows="[row]"
                    :heads="heads.slice(1)"
                    :groups="groups"
-                   @deleteRow="deleteRow" />
+                   @deleteRow="deleteRow"
+                   @cellUpdate="handleCellUpdate" />
     </article>
 </template>
 
@@ -58,6 +59,9 @@ export default {
         },
         deleteRow: function(rowId) {
             this.$emit("deleteRow", rowId);
+        },
+        handleCellUpdate: function(updateEvent) {
+            this.$emit("cellUpdate", updateEvent);
         }
     }
 };

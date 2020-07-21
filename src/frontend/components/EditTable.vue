@@ -10,14 +10,16 @@
                       :heads="heads"
                       :groups="groups"
                       :index="rowIndex"
-                      @deleteRow="deleteRow" />
+                      @deleteRow="deleteRow"
+                      @cellUpdate="handleCellUpdate" />
         </div>
         <TableView v-else-if="loaded"
                    :paginate="true"
                    :heads="heads"
                    :rows="rows"
                    :groups="groups"
-                   @deleteRow="deleteRow" />
+                   @deleteRow="deleteRow"
+                   @cellUpdate="handleCellUpdate" />
         <AddButton v-if="loaded"
                    @addDate="addRow" />
         <FootnoteList :heads="getActiveHeads" />
@@ -123,6 +125,17 @@ export default {
                 }
                 alert("Beim Löschen ist ein unbekannter Fehler aufgetreten");
             }
+        },
+        handleCellUpdate: function(updateEvent) {
+            // update the local state to reflect the change which has been saved to the DB on cell update:
+            let row;
+            for (let i = 0; i < this.rows.length; i++) {
+                if (this.rows[i].id === updateEvent.rowId) {
+                    row = this.rows[i];
+                    break;
+                }
+            }
+            row.fields[updateEvent.headId] = updateEvent.content;
         }
     }
 };

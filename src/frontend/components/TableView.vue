@@ -22,7 +22,8 @@
                         <TableCell v-for="(row, rowIndex) in rowsToShow"
                                    :key="`row_${row.id}_${rowIndex}`"
                                    :head="head"
-                                   :row="row" />
+                                   :row="row"
+                                   @cellUpdate="handleCellUpdate" />
                     </tr>
                 </template>
                 <tr v-if="showActions"
@@ -155,6 +156,9 @@ export default {
         },
         deleteRow: function(rowId) {
             this.$emit("deleteRow", rowId);
+        },
+        handleCellUpdate: function(updateEvent) {
+            this.$emit("cellUpdate", updateEvent);
         }
     }
 };
