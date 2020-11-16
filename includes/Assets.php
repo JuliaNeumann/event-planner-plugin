@@ -77,9 +77,9 @@ class Assets {
                 'in_footer' => true
             ],
             'eventplanner-frontend' => [
-                'src'       => EVENTPLANNER_ASSETS . '/js/frontend.js',
+                'src'       => EVENTPLANNER_ASSETS . '/js/eppfrontend.js',
                 'deps'      => [ 'jquery', 'eventplanner-vendor', 'eventplanner-runtime' ],
-                'version'   => filemtime( EVENTPLANNER_PATH . '/assets/js/frontend.js' ),
+                'version'   => filemtime( EVENTPLANNER_PATH . '/assets/js/eppfrontend.js' ),
                 'in_footer' => true
             ],
             'eventplanner-admin' => [
@@ -104,7 +104,7 @@ class Assets {
                 'src' =>  EVENTPLANNER_ASSETS . '/css/style.css'
             ],
             'eventplanner-frontend' => [
-                'src' =>  EVENTPLANNER_ASSETS . '/css/frontend.css'
+                'src' =>  EVENTPLANNER_ASSETS . '/css/eppfrontend.css'
             ],
             'eventplanner-admin' => [
                 'src' =>  EVENTPLANNER_ASSETS . '/css/admin.css'

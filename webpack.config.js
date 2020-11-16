@@ -13,7 +13,7 @@ const devMode = process.env.NODE_ENV !== 'production';
 // Naming and path settings
 var appName = 'app';
 var entryPoint = {
-  frontend: './src/frontend/main.js',
+  eppfrontend: './src/frontend/main.js',
   admin: './src/admin/main.js',
   style: './assets/less/style.less',
 };
@@ -66,7 +66,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': path.resolve('./src/'),
-      'frontend': path.resolve('./src/frontend/'),
+      'eppfrontend': path.resolve('./src/frontend/'),
       'admin': path.resolve('./src/admin/'),
     },
     modules: [

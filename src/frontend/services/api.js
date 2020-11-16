@@ -155,6 +155,9 @@ export function getConfig(data) {
 
 async function safeRequest(axiosConfig) {
     try {
+        axiosConfig.params = axiosConfig.params || {};
+        // add timestamp for cache invalidation:
+        axiosConfig.params.timestamp = Date.now();
         const response = await axios(axiosConfig);
         return response.data;
     } catch(e) {
