@@ -75,7 +75,7 @@ class Frontend {
 
         $autofillWeekday = $db->getConfigValue($db->config_autofill_weekday);
         $date = new \DateTime();
-        if (date('l') !== strtolower($autofillWeekday)) { // today is not the weekday in question
+        if (strtolower(date('l')) !== strtolower($autofillWeekday)) { // today is not the weekday in question
             $date->modify('next ' . $autofillWeekday);
         }
         
