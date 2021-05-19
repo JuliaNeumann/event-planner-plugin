@@ -17,7 +17,7 @@
                 den Shortcode <strong>[eventplanner]</strong> ein.
             </li>
             <li>
-                Die so erzeugte Tabelle kan von jedem Besucher der Seite
+                Die so erzeugte Tabelle kan von jedem eingeloggten Besucher der Seite
                 per Klick auf die Tabellenfelder bearbeitet werden
                 - sie sollte also nur den Leuten zugänglich gemacht werden, die dazu berechtigt sind.
             </li>

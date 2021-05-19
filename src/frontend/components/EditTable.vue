@@ -3,7 +3,10 @@
         <RowFilters v-show="loaded"
                     v-model="activeHeads"
                     :heads="heads" />
-        <div v-if="mobile && loaded">
+        <div v-if="loaded && rows.length < 1">
+            <em>Es gibt aktuell keine Veranstaltungen.</em>
+        </div>
+        <div v-else-if="mobile && loaded">
             <CardView v-for="(row, rowIndex) in rows"
                       :key="rowIndex"
                       :row="row"
