@@ -27,6 +27,10 @@
                 Hier können zusätzlich ein oder mehrere Jahre angegeben werden, für die Daten angezeigt werden sollen,
                 z.B. [eventplanner static="true" years="2020,2021"].
             </li>
+            <li>
+                Unter "Teaser" kannst du einen Text angeben, der per Shortcode <strong>[eventplanner_current]</strong>
+                z.B. auf deiner Startseite eingebunden werden kann, um die regelmäßig stattfindende Veranstaltung zu bewerben.
+            </li>
         </ul>
     </div>
 </template>

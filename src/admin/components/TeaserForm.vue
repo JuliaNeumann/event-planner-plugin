@@ -47,7 +47,8 @@
                 </select>
             </p>
             <p class="teaser-form__text">
-                <label for="cancel-icon">Gib hier den Namen des entsprechenden Icons an (Fontawesome Icon Name):</label>
+                <label for="cancel-icon">Gib hier den Namen des entsprechenden Icons an 
+                    (<a target="_blank" href="https://fontawesome.com/icons?d=gallery&m=free">Fontawesome Icon Name</a>):</label>
                 <input id="cancel-icon"
                        v-model="modelCancelIcon"
                        type="text">
