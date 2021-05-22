@@ -151,16 +151,16 @@ final class Event_Planner {
      */
     public function activate() {
 
-        $installed = get_option( 'eventplanner_installed' );
+        $installed = get_option( 'epp_installed' );
 
         if ( ! $installed ) {
             include_once( plugin_dir_path( __FILE__ ) . 'includes/DatabaseSetup.php' );
             epp_install();
             epp_install_data();
-            update_option( 'eventplanner_installed', time() );
+            update_option( 'epp_installed', time() );
         }
 
-        update_option( 'eventplanner_version', EVENTPLANNER_VERSION );
+        update_option( 'epp_version', EVENTPLANNER_VERSION );
     }
 
     /**
