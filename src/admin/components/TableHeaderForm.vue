@@ -49,7 +49,7 @@
                    class="table-header-form__input"
                    type="number"
                    :disabled="isPreconfigured"
-                   :min="isPreconfigured ? 1 : 2"
+                   :min="isPreconfigured ? 1 : 3"
                    step="1">
         </div>
         <div class="table-header-form__field table-header-form__field--block">
