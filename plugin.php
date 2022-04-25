@@ -53,7 +53,7 @@ final class Event_Planner {
      *
      * @var string
      */
-    public $version = '0.1.0';
+    public $version = '0.2.0';
 
     /**
      * Holds various class instances
