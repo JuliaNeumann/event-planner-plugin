@@ -13,6 +13,7 @@ class DatabaseActions {
     public function __construct() {
         $this->config_last_filled_year = "last_filled_year";
         $this->config_autofill_weekday = "autofill_weekday";
+        $this->config_autofill_time = "autofill_time";
         $this->config_header_for_widget = "header_for_widget";
         $this->config_icon_for_cancel = "icon_for_cancel";
         $this->config_teaser_main_text = "teaser_main_text";
@@ -107,7 +108,7 @@ class DatabaseActions {
         }
     }
 
-    public function addEventByDate($date) {
+    public function addEventByDate($date, $time) {
         global $wpdb;
 
         if ($this->checkIfDateExists($date)) {
@@ -124,6 +125,8 @@ class DatabaseActions {
             $new_id = $id_result[0]->{"LAST_INSERT_ID()"};
             $date_query = "INSERT INTO $table_name_headers (header_id, event_id, content) values(1, %s, %s)";
             $wpdb->get_results($wpdb->prepare($date_query, $new_id, $date));
+            $time_query = "INSERT INTO $table_name_headers (header_id, event_id, content) values(2, %s, %s)";
+            $wpdb->get_results($wpdb->prepare($time_query, $new_id, $time));
             if ($wpdb->last_error) {
                 return array("error" => $wpdb->last_error);
             }

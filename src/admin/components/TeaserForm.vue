@@ -7,7 +7,7 @@
                 nächste regelmäßig stattfindende Veranstaltung (z.B. den nächsten Gottesdienst) informiert
                 (z.B. zur Anzeige auf der Startseite).
                 Hier kann der Text dafür eingegeben werden
-                (Verwende %date% an der Stelle, wo das Datum erscheinen soll):
+                (Verwende %date% bzw. %time% an der Stelle, wo das Datum bzw. die Uhrzeit erscheinen soll):
             </p>
             <textarea id="editor-main-text"
                       v-model="mainText"
@@ -18,7 +18,7 @@
         <div class="teaser-form__field">
             <p class="teaser-form__text">
                 Hier kann ein anderer Text angegeben werden, der erscheinen soll, wenn die Veranstaltung ausfällt
-                (Verwende auch hier %date% an der Stelle, wo das Datum erscheinen soll):
+                (Du kannst auch hier %date% bzw. %time% verwenden):
             </p>
             <textarea id="editor-cancel-text"
                       v-model="cancelText"

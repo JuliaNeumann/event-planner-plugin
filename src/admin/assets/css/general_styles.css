@@ -1,0 +1,7 @@
+/* Timepicker */
+
+.vue__time-picker input[type="text"].display-time {
+    background-color: white;  
+    border: 1px solid #8c8f94;
+    border-radius: 3px;
+  }

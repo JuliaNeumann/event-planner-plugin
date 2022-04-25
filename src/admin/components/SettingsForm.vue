@@ -22,7 +22,7 @@
             </tr>
             <tr>
                 <th scope="row">
-                    <label for="epp-weekday">Wochentag
+                    <label for="epp-weekday">Wochentag & Uhrzeit
                     </label>
                 </th>
                 <td>
@@ -50,13 +50,15 @@
                             Samstag
                         </option>
                     </select>
+                    <vue-timepicker v-model="modelTime"
+                                    :minute-interval="5" />
                     <p class="description">
-                        Wähle hier aus, an welchem Wochentag deine regelmäßige Veranstaltung
+                        Wähle hier aus, an welchem Wochentag und zu welcher Uhrzeit deine regelmäßige Veranstaltung
                         (z.B. Gottesdienst) stattfindet.
                     </p>
                     <p class="description">
-                        Diese Einstellung wird für das automatische Befüllen der Tabelle
-                        verwendet und für die Anzeige des Teasers.
+                        Diese Einstellungen werden für das automatische Befüllen der Tabelle
+                        und für die Anzeige des Teasers verwendet.
                     </p>
                 </td>
             </tr>
@@ -114,13 +116,20 @@
 
 <script>
 import { getConfig, updateConfig, getHeaders } from "../services/api";
+import VueTimepicker from "vue2-timepicker";
+import "vue2-timepicker/dist/VueTimepicker.css";
 
 export default {
     name: "SettingsForm",
 
+    components: {
+        VueTimepicker
+    },
+
     data() {
         return {
             modelWeekday: "sunday",
+            modelTime: "--:--",
             modelHeaders: [],
             config: [],
             headers: [],
@@ -133,6 +142,7 @@ export default {
         this.config = await getConfig();
         this.headers = await getHeaders();
         this.modelWeekday = this.getConfigValue("autofill_weekday");
+        this.modelTime = this.getConfigValue("autofill_time");
         this.modelAutofill = this.getConfigValue("use_autofill") === "1";
         this.modelFontawesome = this.getConfigValue("use_fontawesome") === "1";
         const initialHeaders = this.getConfigValue("static_fields");
@@ -145,6 +155,7 @@ export default {
         async save() {
             const apiResult = await updateConfig({
                 autofill_weekday: this.modelWeekday,
+                autofill_time: this.modelTime,
                 static_fields: JSON.stringify(this.modelHeaders),
                 use_autofill: this.modelAutofill,
                 use_fontawesome: this.modelFontawesome

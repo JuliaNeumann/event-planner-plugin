@@ -93,13 +93,13 @@ export function getRowsForYear(data, year) {
     return eventsByQuarter;
 }
 
-export async function addEvent(newDate) {
-    if (newDate) {
-        const formattedDate = formatDate(newDate);
+export async function addEvent(data) {
+    if (data) {
+        const formattedDate = formatDate(data.date);
         return await safeRequest({
             method: "post",
             url: `${baseUrl}add-event`,
-            data: {date: formattedDate}
+            data: {date: formattedDate, time: data.time}
         });
     }
 }

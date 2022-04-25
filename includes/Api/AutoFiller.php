@@ -9,6 +9,7 @@ class AutoFiller {
     private $start_year;
     private $end_year;
     private $weekday;
+    private $time;
     private $db_actions;
 
     /**
@@ -18,6 +19,7 @@ class AutoFiller {
         $this->includes();
         $this->db_actions = new DatabaseActions();
         $this->weekday = $this->db_actions->getConfigValue($this->db_actions->config_autofill_weekday);
+        $this->time = $this->db_actions->getConfigValue($this->db_actions->config_autofill_time);
         $last_year = $this->db_actions->getConfigValue($this->db_actions->config_last_filled_year);
         $current_year = date("Y");
         if (empty($last_year) || $last_year < $current_year) {
@@ -47,7 +49,7 @@ class AutoFiller {
         }
         $datePeriod = $this->getAllDatesToAutoFill();
         foreach($datePeriod as $date){
-            $result = $this->db_actions->addEventByDate($date->format('Y-m-d'));
+            $result = $this->db_actions->addEventByDate($date->format('Y-m-d'), $this->time);
             if (!empty($result["error"])) {
                 trigger_error($result["error"]);
             }

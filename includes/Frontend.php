@@ -33,6 +33,7 @@ class Frontend {
      */
     public function render_frontend( $atts = [], $content = '' ) {
         wp_enqueue_style( 'eventplanner-frontend' );
+        wp_enqueue_style( 'eventplanner-vendors' );
         wp_enqueue_script( 'eventplanner-frontend' );
 
         $db = new Api\DatabaseActions();
@@ -81,6 +82,7 @@ class Frontend {
         
         $headerId = $db->getConfigValue($db->config_header_for_widget);
         $eventInfo = $db->getEventInfoByDateAndHeader($date->format('Y-m-d'), $headerId);
+        $time = $db->getEventInfoByDateAndHeader($date->format('Y-m-d'), 2);
         $mainText = $db->getConfigValue($db->config_teaser_main_text);
         $cancelText = $db->getConfigValue($db->config_teaser_cancel_text);
         $banIcon = $db->getConfigValue($db->config_icon_for_cancel);
@@ -94,9 +96,11 @@ class Frontend {
 
         if (!empty($eventInfo) &&  (count($features) > 0) && in_array($banIcon, $features)) {
             $text = str_replace("%date%", $date->format('d.m.'), $cancelText);
+            $text = str_replace("%time%", $time, $text);
         }
         else {
             $text = str_replace("%date%", $date->format('d.m.'), $mainText);
+            $text = str_replace("%time%", $time, $text);
             if (!empty($eventInfo) &&  (count($features) > 0) && $teaserShowIcons === "1") {
                 $header = $db->getHeaderById($headerId);
 

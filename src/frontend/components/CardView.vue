@@ -38,8 +38,8 @@ export default {
             default: () => []
         },
         groups: {
-            type: Array,
-            default: () => []
+            type: Object,
+            default: () => {}
         },
         index: {
             type: Number,

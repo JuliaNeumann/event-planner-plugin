@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import "./assets/css/general_styles.css";
+
 export default {
     name: "App"
 };

@@ -105,6 +105,14 @@ function epp_install_data() {
     $wpdb->insert(
         $wpdb->prefix . 'epp_config',
         array(
+            'name' => 'autofill_time',
+            'data' => '17:00',
+        )
+    );
+
+    $wpdb->insert(
+        $wpdb->prefix . 'epp_config',
+        array(
             'name' => 'header_for_widget',
             'data' => '',
         )
@@ -174,6 +182,15 @@ function epp_install_data() {
             'name' => 'Datum',
             'order_id' => 1,
             'type' => 'date'
+        )
+    );
+
+    $wpdb->insert(
+        $wpdb->prefix . 'epp_headers',
+        array(
+            'name' => 'Uhrzeit',
+            'order_id' => 2,
+            'type' => 'time'
         )
     );
 }

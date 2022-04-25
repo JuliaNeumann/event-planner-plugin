@@ -68,6 +68,7 @@ class Admin {
      */
     public function enqueue_scripts() {
         wp_enqueue_style( 'eventplanner-admin' );
+        wp_enqueue_style( 'eventplanner-vendors' );
         wp_enqueue_script( 'eventplanner-admin' );
 
         $db = new Api\DatabaseActions();

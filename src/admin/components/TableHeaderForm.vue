@@ -1,9 +1,9 @@
 <template>
     <form class="table-header-form">
-        <div v-if="isFirst"
+        <div v-if="isPreconfigured"
              class="table-header-form__field table-header-form__field--block">
             <i class="fa fa-info-circle" />&nbsp;
-            <strong>Der erste Tabellenkopf muss immer das Datum der Veranstaltung enthalten.
+            <strong>Dieser Tabellenkopf muss für jede Veranstaltung angegeben werden.
                 Deswegen kann hier nur der Name und die Beschreibung geändert werden.</strong>
         </div>
         <div class="table-header-form__field">
@@ -23,9 +23,12 @@
             <select :id="`header_type_${id}`"
                     v-model="modelType"
                     class="table-header-form__input"
-                    :disabled="isFirst">
+                    :disabled="isPreconfigured">
                 <option value="date">
                     Datum
+                </option>
+                <option value="time">
+                    Uhrzeit
                 </option>
                 <option value="text">
                     Text
@@ -45,8 +48,8 @@
                    v-model="modelOrderId"
                    class="table-header-form__input"
                    type="number"
-                   :disabled="isFirst"
-                   :min="isFirst ? 1 : 2"
+                   :disabled="isPreconfigured"
+                   :min="isPreconfigured ? 1 : 2"
                    step="1">
         </div>
         <div class="table-header-form__field table-header-form__field--block">
@@ -71,7 +74,7 @@
         <div class="table-header-form__field table-header-form__field--block">
             <SaveButton class="table-header-form__button"
                         @click.native="saveHeader" />
-            <DeleteButton v-if="!isFirst"
+            <DeleteButton v-if="!isPreconfigured"
                           class="table-header-form__button"
                           @click.native="deleteHeader" />
         </div>
@@ -90,7 +93,7 @@ export default {
     },
 
     props: {
-        isFirst: {
+        isPreconfigured: {
             type: Boolean,
             default: false
         },

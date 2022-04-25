@@ -98,8 +98,8 @@ export default {
     },
 
     methods: {
-        addRow: async function(addDate) {
-            const apiResult = await addEvent(addDate);
+        addRow: async function(data) {
+            const apiResult = await addEvent(data);
             if (apiResult && apiResult.success) {
                 const data = await getData();
                 this.rows = await getRowsForEdit(data);

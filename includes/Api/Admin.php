@@ -187,12 +187,19 @@ class Admin extends WP_REST_Controller {
 
     public function handle_update_config($data) {
         $parameters = $data->get_params();
+        $db = new DatabaseActions();
+        $config = $db->getConfig();
+        $config_names = [];
+        foreach ($config as $config_entry) {
+            $config_names[] = $config_entry->name;
+        }
         if (sizeof($parameters) > 0) {
-            $db = new DatabaseActions();
             foreach ($parameters as $key => $value) {
-                $result = $db->updateConfig($key, $value);
-                if (!$result) {
-                    return array("error" => "Fehler während des Speicherns der Konfiguration.");
+                if (in_array($key, $config_names)) {
+                    $result = $db->updateConfig($key, $value);
+                    if (!$result) {
+                        return array("error" => "Fehler während des Speicherns der Konfiguration.");
+                    }
                 }
             }
             return array("success" => "Konfiguration erfolgreich gespeichert.");

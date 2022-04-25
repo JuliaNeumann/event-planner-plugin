@@ -158,11 +158,11 @@ class Frontend extends WP_REST_Controller {
     public function handle_add_event($data)
     {
         $parameters = $data->get_params();
-        if ($parameters["date"]) {
+        if ($parameters["date"] && $parameters["time"]) {
             $db = new DatabaseActions();
-            return $db->addEventByDate($parameters["date"]);
+            return $db->addEventByDate($parameters["date"], $parameters["time"]);
         }
-        return array("error" => "Bitte geben Sie ein Datum an!");
+        return array("error" => "Bitte geben Sie ein Datum und eine Uhrzeit an!");
     }
     
     public function handle_update_event($data)

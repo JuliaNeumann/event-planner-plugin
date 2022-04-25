@@ -14,6 +14,11 @@
                 <div class="add__date">
                     {{ formatDate }}
                 </div>
+                Bitte Uhrzeit auswählen:
+                <br>
+                <vue-timepicker v-model="time"
+                                :minute-interval="5"
+                                hide-clear-button />
                 <button class="add__button"
                         :disabled="date ? false : 'disabled'"
                         @click="addDate">
@@ -31,13 +36,15 @@
 
 <script>
 import Datepicker from "vuejs-datepicker";
+import VueTimepicker from "vue2-timepicker";
 import de from "../../../node_modules/vuejs-datepicker/src/locale/translations/de";
 
 export default {
     name: "AddButton",
 
     components: {
-        Datepicker
+        Datepicker,
+        VueTimepicker
     },
 
     data: function() {
@@ -45,6 +52,7 @@ export default {
             datepickerTranslations: de,
             showOverlay: false,
             date: "",
+            time: "",
             lastDate: new Date()
         };
     },
@@ -61,13 +69,15 @@ export default {
 
     methods: {
         addDate() {
-            this.$emit("addDate", this.date);
+            this.$emit("addDate", {date: this.date, time: this.time});
             this.lastDate = this.date;
             this.date = "";
+            this.time = "";
         },
         addDateAndClose() {
             this.addDate();
             this.date = "";
+            this.time = "";
             this.showOverlay = false;
         }
     }

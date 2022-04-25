@@ -109,6 +109,9 @@ class Assets {
             'eventplanner-admin' => [
                 'src' =>  EVENTPLANNER_ASSETS . '/css/admin.css'
             ],
+            'eventplanner-vendors' => [
+                'src' =>  EVENTPLANNER_ASSETS . '/css/vendors.css'
+            ],
             'eventplanner-fa' => [
                 'src' => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css"
             ]

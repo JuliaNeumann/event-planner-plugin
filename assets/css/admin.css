@@ -1,8 +1,1 @@
-
-.footnotes-form {
-  border: 1px solid gray;
-  padding: 10px;
-  margin-bottom: 15px;
-  max-width: 1000px;
-}
-
+.vue__time-picker input[type=text].display-time{background-color:#fff;border:1px solid #8c8f94;border-radius:3px}

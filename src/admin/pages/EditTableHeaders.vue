@@ -4,7 +4,7 @@
         <TableHeaderForm v-for="header in orderedHeaders"
                          :key="`header_${header.id}`"
                          v-bind="header"
-                         :is-first="header.order_id === '1'"
+                         :is-preconfigured="header.order_id === '1' || header.order_id === '2'"
                          @delete="loadHeaders"
                          @update="loadHeaders" />
         <AddButton class="edit-table-headers__add"
