@@ -95,8 +95,23 @@ class Frontend extends WP_REST_Controller {
     /****************************************************************************************
      * API ACCESS PERMISSION CHECKS
      ****************************************************************************************/
-    public function check_permission() {
-        return current_user_can( 'read' );
+    public function check_permission($request) {
+        // logged-in user:
+        if (current_user_can( 'read' )) {
+            return true;
+        };
+
+        // password-protected:
+        if (isset($_COOKIE['wp-postpass_'. COOKIEHASH] )) {
+            $pageId = intval($request->get_param( 'pageId' ));
+            $post = get_post($pageId);
+            if ( empty( $post->post_password ) ) {
+                return false;
+            }
+            return !post_password_required($pageId);
+        };
+        
+        return false;
     }
     
     public function check_admin() {

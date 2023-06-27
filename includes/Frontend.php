@@ -43,10 +43,12 @@ class Frontend {
         }
 
         // localize data for script
+        global $wp_query;
         wp_localize_script( 'eventplanner-frontend', 'eventPlannerApp', array(
             'rest_url' => esc_url_raw( rest_url() ),
             'nonce' => wp_create_nonce( 'wp_rest' ),
-            'admin' => current_user_can('administrator')
+            'admin' => current_user_can('administrator'),
+            'pageId' => $wp_query->post->ID
         ));
 
         $attributes = shortcode_atts( array(

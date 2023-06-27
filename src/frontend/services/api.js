@@ -158,6 +158,7 @@ async function safeRequest(axiosConfig) {
         axiosConfig.params = axiosConfig.params || {};
         // add timestamp for cache invalidation:
         axiosConfig.params.timestamp = Date.now();
+        axiosConfig.params.pageId = window.eventPlannerApp.pageId;
         const response = await axios(axiosConfig);
         return response.data;
     } catch(e) {
